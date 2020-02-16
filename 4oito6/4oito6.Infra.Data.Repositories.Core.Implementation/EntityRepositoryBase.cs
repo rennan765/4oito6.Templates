@@ -1,0 +1,94 @@
+﻿using _4oito6.Infra.Data.Model.Core;
+using _4oito6.Infra.Data.Repositories.Core.Contracts;
+using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Threading.Tasks;
+
+namespace _4oito6.Infra.Data.Repositories.Core.Implementation
+{
+    public abstract class EntityRepositoryBase<TEntity, TId> : IEntityRepositoryBase<TEntity, TId>
+        where TEntity : DataModelBase
+        where TId : struct
+    {
+        private bool _disposedValue;
+
+        protected DbContext Context { get; private set; }
+
+        protected EntityRepositoryBase(DbContext context)
+        {
+            _disposedValue = false;
+            Context = context;
+        }
+
+        public Task<TEntity> DeleteAsync(TEntity entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<TEntity> GetAsync(Expression<Func<TEntity, bool>> where = null)
+        {
+            var dbSet = Context.Set<TEntity>();
+
+            return await
+            (
+                where == null ?
+                dbSet.FirstOrDefaultAsync() :
+                dbSet.FirstOrDefaultAsync(where)
+            ).ConfigureAwait(false);
+        }
+
+        public async Task<TEntity> GetByIdAsync(TId id)
+            => await Context.Set<TEntity>().FindAsync(id).ConfigureAwait(false);
+
+        public async Task<TEntity> InsertAsync(TEntity entity)
+        {
+            await Context.Set<TEntity>().AddAsync(entity).ConfigureAwait(false);
+            return entity;
+        }
+
+        public async Task<IEnumerable<TEntity>> ListAsync(Expression<Func<TEntity, bool>> where = null)
+        {
+            var dbSet = Context.Set<TEntity>();
+
+            return await
+            (
+                where == null ?
+                dbSet.ToListAsync() :
+                dbSet.Where(where).ToListAsync()
+            ).ConfigureAwait(false);
+        }
+
+        public Task<TEntity> UpdateAsync(TEntity entity)
+        {
+            throw new NotImplementedException();
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!_disposedValue)
+            {
+                if (disposing)
+                {
+                    Context?.Dispose();
+                    Context = null;
+                }
+
+                _disposedValue = true;
+            }
+        }
+
+        ~EntityRepositoryBase()
+        {
+            Dispose(false);
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+    }
+}
