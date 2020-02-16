@@ -16,6 +16,7 @@ namespace _4oito6.Domain.Services.Core.Implementation.Base
         {
             _repositories = repositories;
             _businessSpecs = new List<IBusinessSpec>();
+            _disposedValue = false;
         }
 
         protected virtual void Dispose(bool disposing)
