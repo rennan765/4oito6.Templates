@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "4oito6.Infra.Data.Model.Cor
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "4oito6.Infra.Data.Repositories.Core.Implementation", "4oito6.Infra.Data.Repositories.Core.Implementation\4oito6.Infra.Data.Repositories.Core.Implementation.csproj", "{0AA98713-6A45-4B54-B70A-DF99F5241A38}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "4oito6.Domain.Specs.Core", "4oito6.Domain.Specs.Core\4oito6.Domain.Specs.Core.csproj", "{1D572190-03A9-49BC-BCE6-BE1E9ABC3411}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{0AA98713-6A45-4B54-B70A-DF99F5241A38}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0AA98713-6A45-4B54-B70A-DF99F5241A38}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0AA98713-6A45-4B54-B70A-DF99F5241A38}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1D572190-03A9-49BC-BCE6-BE1E9ABC3411}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D572190-03A9-49BC-BCE6-BE1E9ABC3411}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D572190-03A9-49BC-BCE6-BE1E9ABC3411}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D572190-03A9-49BC-BCE6-BE1E9ABC3411}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
