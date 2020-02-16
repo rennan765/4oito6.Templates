@@ -7,11 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "4oito6.Infra.Data.Repositor
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "4oito6.Domain.Model.Core", "4oito6.Domain.Model.Core\4oito6.Domain.Model.Core.csproj", "{7E2F443E-C250-4E2F-A8AA-515460518669}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "4oito6.Infra.Data.Model.Core", "4oito6.Infra.Data.Model.Core\4oito6.Infra.Data.Model.Core.csproj", "{48422444-10BF-4962-9813-4E8C696231B0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "4oito6.Infra.Data.Model.Core", "4oito6.Infra.Data.Model.Core\4oito6.Infra.Data.Model.Core.csproj", "{48422444-10BF-4962-9813-4E8C696231B0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "4oito6.Infra.Data.Repositories.Core.Implementation", "4oito6.Infra.Data.Repositories.Core.Implementation\4oito6.Infra.Data.Repositories.Core.Implementation.csproj", "{0AA98713-6A45-4B54-B70A-DF99F5241A38}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "4oito6.Infra.Data.Repositories.Core.Implementation", "4oito6.Infra.Data.Repositories.Core.Implementation\4oito6.Infra.Data.Repositories.Core.Implementation.csproj", "{0AA98713-6A45-4B54-B70A-DF99F5241A38}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "4oito6.Domain.Specs.Core", "4oito6.Domain.Specs.Core\4oito6.Domain.Specs.Core.csproj", "{1D572190-03A9-49BC-BCE6-BE1E9ABC3411}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "4oito6.Domain.Specs.Core", "4oito6.Domain.Specs.Core\4oito6.Domain.Specs.Core.csproj", "{1D572190-03A9-49BC-BCE6-BE1E9ABC3411}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1- Presentation", "1- Presentation", "{71E14305-C3C2-4F1C-B066-EC454720B889}"
 EndProject
@@ -28,6 +28,12 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{1ACC78CD-6B8F-4C7C-B369-ADE608D774D0}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{1E33E426-1486-4604-BAA2-2D0D14087FE6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{E5217754-82F8-4A8C-9824-784982C06CA5}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "4oito6.Domain.Services.Core.Contracts", "4oito6.Domain.Services.Core.Contracts\4oito6.Domain.Services.Core.Contracts.csproj", "{1D60FAB8-CFB6-44F1-A81C-0622EC4D1335}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "4oito6.Domain.Services.Core.Implementation", "4oito6.Domain.Services.Core.Implementation\4oito6.Domain.Services.Core.Implementation.csproj", "{1983ED93-C3D7-4F89-A86E-727EE341C2F5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -55,6 +61,14 @@ Global
 		{1D572190-03A9-49BC-BCE6-BE1E9ABC3411}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1D572190-03A9-49BC-BCE6-BE1E9ABC3411}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1D572190-03A9-49BC-BCE6-BE1E9ABC3411}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1D60FAB8-CFB6-44F1-A81C-0622EC4D1335}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D60FAB8-CFB6-44F1-A81C-0622EC4D1335}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D60FAB8-CFB6-44F1-A81C-0622EC4D1335}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D60FAB8-CFB6-44F1-A81C-0622EC4D1335}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1983ED93-C3D7-4F89-A86E-727EE341C2F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1983ED93-C3D7-4F89-A86E-727EE341C2F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1983ED93-C3D7-4F89-A86E-727EE341C2F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1983ED93-C3D7-4F89-A86E-727EE341C2F5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -68,6 +82,9 @@ Global
 		{D2CA4D1E-CDAC-4108-8347-25184B9EF1E6} = {5667FC19-CABE-4811-AF4F-4B4FCDFC9FFD}
 		{1ACC78CD-6B8F-4C7C-B369-ADE608D774D0} = {D2CA4D1E-CDAC-4108-8347-25184B9EF1E6}
 		{1E33E426-1486-4604-BAA2-2D0D14087FE6} = {D958CB54-7AB2-45D1-B0A8-4BDC2D72219B}
+		{E5217754-82F8-4A8C-9824-784982C06CA5} = {DB8261BA-BCB2-4974-B19A-66DBC77CADD5}
+		{1D60FAB8-CFB6-44F1-A81C-0622EC4D1335} = {E5217754-82F8-4A8C-9824-784982C06CA5}
+		{1983ED93-C3D7-4F89-A86E-727EE341C2F5} = {E5217754-82F8-4A8C-9824-784982C06CA5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {42819E7B-74A7-4FDD-8346-3B0D5B39A789}
