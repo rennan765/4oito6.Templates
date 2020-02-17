@@ -1,4 +1,4 @@
-﻿namespace _4oito6.Infra.CrossCutting.Configuration.Token
+﻿namespace _4oito6.Infra.CrossCutting.Configuration.Token.Interfaces
 {
     public interface ITokenConfiguration
     {

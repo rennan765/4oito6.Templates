@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <RootNamespace>_4oito6.Infra.CrossCutting.IoC.Token</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.0.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Authorization" Version="3.1.1" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\4oito6.Infra.CrossCutting.Configuration.Token\4oito6.Infra.CrossCutting.Configuration.Token.csproj" />
+    <ProjectReference Include="..\4oito6.Infra.CrossCutting.Token\4oito6.Infra.CrossCutting.Token.csproj" />
+  </ItemGroup>
+
+</Project>
