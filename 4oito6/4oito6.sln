@@ -59,6 +59,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IoC", "IoC", "{B261FC16-19B
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "4oito6.Infra.CrossCutting.Extensions", "4oito6.Infra.CrossCutting.Extensions\4oito6.Infra.CrossCutting.Extensions.csproj", "{BA25D67F-D1DA-473C-B009-04D387720251}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "4oito6.Infra.Data.Core", "4oito6.Infra.Data.Core\4oito6.Infra.Data.Core.csproj", "{0B8A5846-B800-426A-AA4F-EC48555E00F3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -121,6 +123,10 @@ Global
 		{BA25D67F-D1DA-473C-B009-04D387720251}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BA25D67F-D1DA-473C-B009-04D387720251}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BA25D67F-D1DA-473C-B009-04D387720251}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0B8A5846-B800-426A-AA4F-EC48555E00F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B8A5846-B800-426A-AA4F-EC48555E00F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B8A5846-B800-426A-AA4F-EC48555E00F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B8A5846-B800-426A-AA4F-EC48555E00F3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -149,6 +155,7 @@ Global
 		{5DC71D06-48AA-40B4-99C2-AD16D74F0992} = {B261FC16-19BE-43A7-8E31-EA5F535ADA4B}
 		{B261FC16-19BE-43A7-8E31-EA5F535ADA4B} = {9DCFD68A-0A59-46A8-83D3-7BF0767DF9FF}
 		{BA25D67F-D1DA-473C-B009-04D387720251} = {9DCFD68A-0A59-46A8-83D3-7BF0767DF9FF}
+		{0B8A5846-B800-426A-AA4F-EC48555E00F3} = {1ACC78CD-6B8F-4C7C-B369-ADE608D774D0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {42819E7B-74A7-4FDD-8346-3B0D5B39A789}

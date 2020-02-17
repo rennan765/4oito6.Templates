@@ -1,6 +1,6 @@
-﻿using _4oito6.Infra.Data.Repositories.Core.Contracts;
+﻿using _4oito6.Infra.Data.Core.Connection;
+using _4oito6.Infra.Data.Repositories.Core.Contracts;
 using System;
-using System.Data;
 
 namespace _4oito6.Infra.Data.Repositories.Core.Implementation
 {
@@ -8,9 +8,9 @@ namespace _4oito6.Infra.Data.Repositories.Core.Implementation
     {
         private bool _disposedValue;
 
-        protected IDbConnection Connection { get; private set; }
+        protected IAsyncDbConnection Connection { get; private set; }
 
-        protected QueryRepositoryBase(IDbConnection connection)
+        protected QueryRepositoryBase(IAsyncDbConnection connection)
         {
             _disposedValue = false;
             Connection = connection;
