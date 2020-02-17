@@ -45,17 +45,19 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CrossCutting", "CrossCuttin
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Configuration", "Configuration", "{2E250027-753C-4AA7-B619-0ED605F2CB9E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "4oito6.Infra.CrossCutting.Configuration.Connection", "4oito6.Infra.CrossCutting.Configuration.Connection\4oito6.Infra.CrossCutting.Configuration.Connection.csproj", "{E2A1E0BC-24F6-4C30-8A41-3C357082E7BF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "4oito6.Infra.CrossCutting.Configuration.Connection", "4oito6.Infra.CrossCutting.Configuration.Connection\4oito6.Infra.CrossCutting.Configuration.Connection.csproj", "{E2A1E0BC-24F6-4C30-8A41-3C357082E7BF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "4oito6.Infra.CrossCutting.Configuration.Token", "4oito6.Infra.CrossCutting.Configuration.Token\4oito6.Infra.CrossCutting.Configuration.Token.csproj", "{8C4D68B5-D2D7-4603-BF7A-D8001F75BAE7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "4oito6.Infra.CrossCutting.Configuration.Token", "4oito6.Infra.CrossCutting.Configuration.Token\4oito6.Infra.CrossCutting.Configuration.Token.csproj", "{8C4D68B5-D2D7-4603-BF7A-D8001F75BAE7}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Token", "Token", "{BECD80B5-192D-44F2-A297-7103B9FE5E10}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "4oito6.Infra.CrossCutting.Token", "4oito6.Infra.CrossCutting.Token\4oito6.Infra.CrossCutting.Token.csproj", "{FBC50E61-9666-46B2-A96C-23EAAE1302EB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "4oito6.Infra.CrossCutting.Token", "4oito6.Infra.CrossCutting.Token\4oito6.Infra.CrossCutting.Token.csproj", "{FBC50E61-9666-46B2-A96C-23EAAE1302EB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "4oito6.Infra.CrossCutting.IoC.Token", "4oito6.Infra.CrossCutting.IoC.Token\4oito6.Infra.CrossCutting.IoC.Token.csproj", "{5DC71D06-48AA-40B4-99C2-AD16D74F0992}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "4oito6.Infra.CrossCutting.IoC.Token", "4oito6.Infra.CrossCutting.IoC.Token\4oito6.Infra.CrossCutting.IoC.Token.csproj", "{5DC71D06-48AA-40B4-99C2-AD16D74F0992}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "IoC", "IoC", "{B261FC16-19BE-43A7-8E31-EA5F535ADA4B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "4oito6.Infra.CrossCutting.Extensions", "4oito6.Infra.CrossCutting.Extensions\4oito6.Infra.CrossCutting.Extensions.csproj", "{BA25D67F-D1DA-473C-B009-04D387720251}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -115,6 +117,10 @@ Global
 		{5DC71D06-48AA-40B4-99C2-AD16D74F0992}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5DC71D06-48AA-40B4-99C2-AD16D74F0992}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5DC71D06-48AA-40B4-99C2-AD16D74F0992}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BA25D67F-D1DA-473C-B009-04D387720251}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA25D67F-D1DA-473C-B009-04D387720251}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA25D67F-D1DA-473C-B009-04D387720251}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA25D67F-D1DA-473C-B009-04D387720251}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -142,6 +148,7 @@ Global
 		{FBC50E61-9666-46B2-A96C-23EAAE1302EB} = {BECD80B5-192D-44F2-A297-7103B9FE5E10}
 		{5DC71D06-48AA-40B4-99C2-AD16D74F0992} = {B261FC16-19BE-43A7-8E31-EA5F535ADA4B}
 		{B261FC16-19BE-43A7-8E31-EA5F535ADA4B} = {9DCFD68A-0A59-46A8-83D3-7BF0767DF9FF}
+		{BA25D67F-D1DA-473C-B009-04D387720251} = {9DCFD68A-0A59-46A8-83D3-7BF0767DF9FF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {42819E7B-74A7-4FDD-8346-3B0D5B39A789}
