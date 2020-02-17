@@ -13,7 +13,7 @@ namespace _4oito6.Infra.Data.Core.Connection
 
         public AsyncDbConnection(IDbConnection conn)
         {
-            _conn = conn;
+            _conn = conn ?? throw new ArgumentNullException(nameof(conn));
             _disposedValue = false;
         }
 

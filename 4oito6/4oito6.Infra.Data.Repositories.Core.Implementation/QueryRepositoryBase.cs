@@ -13,7 +13,7 @@ namespace _4oito6.Infra.Data.Repositories.Core.Implementation
         protected QueryRepositoryBase(IAsyncDbConnection connection)
         {
             _disposedValue = false;
-            Connection = connection;
+            Connection = connection ?? throw new ArgumentNullException(nameof(connection));
         }
 
         protected virtual void Dispose(bool disposing)

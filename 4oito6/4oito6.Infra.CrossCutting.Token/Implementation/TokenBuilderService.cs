@@ -20,9 +20,9 @@ namespace _4oito6.Infra.CrossCutting.Token.Implementation
 
         public TokenBuilderService(IHttpContextAccessor httpContextAccessor, ITokenConfiguration tokenConfiguration, ISigningConfiguration signingConfiguration)
         {
-            _httpContextAccessor = httpContextAccessor;
-            _tokenConfiguration = tokenConfiguration;
-            _signingConfiguration = signingConfiguration;
+            _httpContextAccessor = httpContextAccessor ?? throw new ArgumentNullException(nameof(httpContextAccessor));
+            _tokenConfiguration = tokenConfiguration ?? throw new ArgumentNullException(nameof(tokenConfiguration));
+            _signingConfiguration = signingConfiguration ?? throw new ArgumentNullException(nameof(signingConfiguration));
         }
 
         private string GenerateRefreshToken()
@@ -77,7 +77,7 @@ namespace _4oito6.Infra.CrossCutting.Token.Implementation
             return handler.WriteToken(securityToken);
         }
 
-        public RefreshTokenModel BuildRefreshToken(int id, string email, string image) 
+        public RefreshTokenModel BuildRefreshToken(int id, string email, string image)
             => new RefreshTokenModel
             (
                 refreshToken: GenerateRefreshToken(),

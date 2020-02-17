@@ -20,7 +20,7 @@ namespace _4oito6.Infra.Data.Repositories.Core.Implementation
         protected EntityRepositoryBase(DbContext context)
         {
             _disposedValue = false;
-            Context = context;
+            Context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
         public Task<TEntity> DeleteAsync(TEntity entity)
