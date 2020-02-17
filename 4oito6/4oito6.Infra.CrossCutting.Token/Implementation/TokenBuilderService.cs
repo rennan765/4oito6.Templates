@@ -89,5 +89,21 @@ namespace _4oito6.Infra.CrossCutting.Token.Implementation
                     expiresOn: DateTime.UtcNow.AddSeconds(_tokenConfiguration.RefreshTokenTime)
                 )
             );
+
+        public TokenModel GetToken()
+        {
+            if (_httpContextAccessor.HttpContext.Items[typeof(TokenModel).ToString()] == null)
+            {
+                var user = _httpContextAccessor.HttpContext.User.FindFirst(typeof(TokenModel).ToString());
+
+                if (user != null)
+                {
+                    if (_httpContextAccessor.HttpContext.Items[typeof(TokenModel).ToString()] is null)
+                        _httpContextAccessor.HttpContext.Items[typeof(TokenModel).ToString()] = JsonConvert.DeserializeObject<TokenModel>(user.Value);
+                }
+            }
+
+            return (TokenModel)_httpContextAccessor.HttpContext.Items[typeof(TokenModel).ToString()];
+        }
     }
 }

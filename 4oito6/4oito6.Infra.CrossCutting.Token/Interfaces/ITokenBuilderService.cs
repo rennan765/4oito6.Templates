@@ -7,5 +7,7 @@ namespace _4oito6.Infra.CrossCutting.Token.Interfaces
         object BuildToken(int id, string email, string image);
 
         RefreshTokenModel BuildRefreshToken(int id, string email, string image);
+
+        TokenModel GetToken();
     }
 }
