@@ -10,7 +10,9 @@ namespace _4oito6.Infra.Data.Repositories.Core.Contracts
         where TEntity : DataModelBase
         where TId : struct
     {
-        Task<IEnumerable<TEntity>> ListAsync(Expression<Func<TEntity, bool>> where = null);
+        Task<TEntity> DeleteAsync(TEntity entity);
+
+        Task<bool> ExistsAsync(Expression<Func<TEntity, bool>> where);
 
         Task<TEntity> GetByIdAsync(TId id);
 
@@ -18,8 +20,8 @@ namespace _4oito6.Infra.Data.Repositories.Core.Contracts
 
         Task<TEntity> InsertAsync(TEntity entity);
 
-        Task<TEntity> UpdateAsync(TEntity entity);
+        Task<IEnumerable<TEntity>> ListAsync(Expression<Func<TEntity, bool>> where = null);
 
-        Task<TEntity> DeleteAsync(TEntity entity);
+        Task<TEntity> UpdateAsync(TEntity entity);
     }
 }

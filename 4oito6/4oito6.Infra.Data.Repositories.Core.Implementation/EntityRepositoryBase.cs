@@ -25,8 +25,12 @@ namespace _4oito6.Infra.Data.Repositories.Core.Implementation
 
         public Task<TEntity> DeleteAsync(TEntity entity)
         {
-            throw new NotImplementedException();
+            Context.Set<TEntity>().Remove(entity);
+            return Task.FromResult(entity);
         }
+
+        public async Task<bool> ExistsAsync(Expression<Func<TEntity, bool>> where)
+            => await Context.Set<TEntity>().AnyAsync(where).ConfigureAwait(false);
 
         public async Task<TEntity> GetAsync(Expression<Func<TEntity, bool>> where = null)
         {
@@ -63,7 +67,8 @@ namespace _4oito6.Infra.Data.Repositories.Core.Implementation
 
         public Task<TEntity> UpdateAsync(TEntity entity)
         {
-            throw new NotImplementedException();
+            Context.Set<TEntity>().Update(entity);
+            return Task.FromResult(entity);
         }
 
         protected virtual void Dispose(bool disposing)
