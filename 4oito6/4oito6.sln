@@ -35,17 +35,19 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "4oito6.Domain.Services.Core
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "4oito6.Domain.Services.Core.Implementation", "4oito6.Domain.Services.Core.Implementation\4oito6.Domain.Services.Core.Implementation.csproj", "{1983ED93-C3D7-4F89-A86E-727EE341C2F5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "4oito6.Domain.Application.Core.Contracts", "4oito6.Domain.Application.Core.Contracts\4oito6.Domain.Application.Core.Contracts.csproj", "{A36F8A07-6035-472F-934F-81158CF1D4F0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "4oito6.Domain.Application.Core.Contracts", "4oito6.Domain.Application.Core.Contracts\4oito6.Domain.Application.Core.Contracts.csproj", "{A36F8A07-6035-472F-934F-81158CF1D4F0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "4oito6.Domain.Application.Core.Implementation", "4oito6.Domain.Application.Core.Implementation\4oito6.Domain.Application.Core.Implementation.csproj", "{BC85AE31-F34B-45E9-9C68-90A59CDA4E47}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "4oito6.Domain.Application.Core.Implementation", "4oito6.Domain.Application.Core.Implementation\4oito6.Domain.Application.Core.Implementation.csproj", "{BC85AE31-F34B-45E9-9C68-90A59CDA4E47}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{363FA2AD-4BCA-4680-98A2-64D2F22D696E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CrossCutting", "CrossCutting", "{9DCFD68A-0A59-46A8-83D3-7BF0767DF9FF}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{2E250027-753C-4AA7-B619-0ED605F2CB9E}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Configuration", "Configuration", "{2E250027-753C-4AA7-B619-0ED605F2CB9E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "4oito6.Infra.CrossCutting.Configuration.Core", "4oito6.Infra.CrossCutting.Configuration.Core\4oito6.Infra.CrossCutting.Configuration.Core.csproj", "{5CB1220D-0C6C-4E14-81C2-A7DA354F2889}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "4oito6.Infra.CrossCutting.Configuration.Connection", "4oito6.Infra.CrossCutting.Configuration.Connection\4oito6.Infra.CrossCutting.Configuration.Connection.csproj", "{E2A1E0BC-24F6-4C30-8A41-3C357082E7BF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "4oito6.Infra.CrossCutting.Configuration.Token", "4oito6.Infra.CrossCutting.Configuration.Token\4oito6.Infra.CrossCutting.Configuration.Token.csproj", "{8C4D68B5-D2D7-4603-BF7A-D8001F75BAE7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -89,10 +91,14 @@ Global
 		{BC85AE31-F34B-45E9-9C68-90A59CDA4E47}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BC85AE31-F34B-45E9-9C68-90A59CDA4E47}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BC85AE31-F34B-45E9-9C68-90A59CDA4E47}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5CB1220D-0C6C-4E14-81C2-A7DA354F2889}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5CB1220D-0C6C-4E14-81C2-A7DA354F2889}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5CB1220D-0C6C-4E14-81C2-A7DA354F2889}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5CB1220D-0C6C-4E14-81C2-A7DA354F2889}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E2A1E0BC-24F6-4C30-8A41-3C357082E7BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E2A1E0BC-24F6-4C30-8A41-3C357082E7BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E2A1E0BC-24F6-4C30-8A41-3C357082E7BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E2A1E0BC-24F6-4C30-8A41-3C357082E7BF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8C4D68B5-D2D7-4603-BF7A-D8001F75BAE7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C4D68B5-D2D7-4603-BF7A-D8001F75BAE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8C4D68B5-D2D7-4603-BF7A-D8001F75BAE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8C4D68B5-D2D7-4603-BF7A-D8001F75BAE7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -114,7 +120,8 @@ Global
 		{363FA2AD-4BCA-4680-98A2-64D2F22D696E} = {09EAF23D-9A47-4F17-8B2A-CBBE4F2FD687}
 		{9DCFD68A-0A59-46A8-83D3-7BF0767DF9FF} = {5667FC19-CABE-4811-AF4F-4B4FCDFC9FFD}
 		{2E250027-753C-4AA7-B619-0ED605F2CB9E} = {9DCFD68A-0A59-46A8-83D3-7BF0767DF9FF}
-		{5CB1220D-0C6C-4E14-81C2-A7DA354F2889} = {2E250027-753C-4AA7-B619-0ED605F2CB9E}
+		{E2A1E0BC-24F6-4C30-8A41-3C357082E7BF} = {2E250027-753C-4AA7-B619-0ED605F2CB9E}
+		{8C4D68B5-D2D7-4603-BF7A-D8001F75BAE7} = {2E250027-753C-4AA7-B619-0ED605F2CB9E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {42819E7B-74A7-4FDD-8346-3B0D5B39A789}
