@@ -61,6 +61,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "4oito6.Infra.CrossCutting.E
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "4oito6.Infra.Data.Core", "4oito6.Infra.Data.Core\4oito6.Infra.Data.Core.csproj", "{0B8A5846-B800-426A-AA4F-EC48555E00F3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "4oito6.Middleware.Core", "4oito6.Middleware.Core\4oito6.Middleware.Core.csproj", "{55AB73FF-2826-4FFC-BB5E-87120E3DE3A0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Middleware", "Middleware", "{9DF9053B-0943-4286-ABB4-C543AB67C268}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -127,6 +131,10 @@ Global
 		{0B8A5846-B800-426A-AA4F-EC48555E00F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0B8A5846-B800-426A-AA4F-EC48555E00F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0B8A5846-B800-426A-AA4F-EC48555E00F3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{55AB73FF-2826-4FFC-BB5E-87120E3DE3A0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{55AB73FF-2826-4FFC-BB5E-87120E3DE3A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{55AB73FF-2826-4FFC-BB5E-87120E3DE3A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{55AB73FF-2826-4FFC-BB5E-87120E3DE3A0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -156,6 +164,8 @@ Global
 		{B261FC16-19BE-43A7-8E31-EA5F535ADA4B} = {9DCFD68A-0A59-46A8-83D3-7BF0767DF9FF}
 		{BA25D67F-D1DA-473C-B009-04D387720251} = {9DCFD68A-0A59-46A8-83D3-7BF0767DF9FF}
 		{0B8A5846-B800-426A-AA4F-EC48555E00F3} = {1ACC78CD-6B8F-4C7C-B369-ADE608D774D0}
+		{55AB73FF-2826-4FFC-BB5E-87120E3DE3A0} = {9DF9053B-0943-4286-ABB4-C543AB67C268}
+		{9DF9053B-0943-4286-ABB4-C543AB67C268} = {71E14305-C3C2-4F1C-B066-EC454720B889}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {42819E7B-74A7-4FDD-8346-3B0D5B39A789}
