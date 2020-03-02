@@ -19,7 +19,7 @@ namespace _4oito6.Middleware.Core
             {
                 await _next(context).ConfigureAwait(false);
             }
-            catch (Exception ex)
+            catch
             {
                 throw;
             }
