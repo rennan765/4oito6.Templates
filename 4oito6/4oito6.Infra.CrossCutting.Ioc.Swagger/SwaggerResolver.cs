@@ -2,9 +2,8 @@
 using _4oito6.Infra.CrossCutting.Configuration.Swagger.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.PlatformAbstractions;
-using Swashbuckle.AspNetCore.Swagger;
+using Microsoft.OpenApi.Models;
 using System;
-using System.Collections.Generic;
 using System.IO;
 
 namespace _4oito6.Infra.CrossCutting.Ioc.Swagger
@@ -28,8 +27,8 @@ namespace _4oito6.Infra.CrossCutting.Ioc.Swagger
             //Applying swagger doc
             services.AddSwaggerGen(x =>
             {
-                //Documentation data
-                var info = new Info
+                ////Documentation data
+                var info = new OpenApiInfo
                 {
                     Title = config.Title ?? throw new ArgumentNullException(nameof(config.Title)),
                     Version = config.Version ?? throw new ArgumentNullException(nameof(config.Version)),
@@ -37,32 +36,39 @@ namespace _4oito6.Infra.CrossCutting.Ioc.Swagger
                 };
 
                 if (!string.IsNullOrEmpty(config.ContactName))
-                    info.Contact = new Contact
-                    {
-                        Name = config.ContactName,
-                        Email = config.ContactEmail,
-                        Url = config.ContactUrl
-                    };
+                {
+                    info.Contact.Name = config.ContactName;
+                    info.Contact.Email = config.ContactEmail;
+                    info.Contact.Url = new Uri(config.ContactUrl);
+                }
 
                 x.SwaggerDoc("v1", info);
 
                 //Insert token
-                //Swagger 2.+ support
-                var security = new Dictionary<string, IEnumerable<string>>
+                x.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {
-                    {"Bearer", new string[] { }},
-                };
+                    Name = "Authorization",
+                    Type = SecuritySchemeType.ApiKey,
+                    Scheme = "Bearer",
+                    BearerFormat = "JWT",
+                    In = ParameterLocation.Header,
+                    Description = "Json Web Token (JWT) Authorization header using the Bearer scheme."
+                });
 
-                x.AddSecurityDefinition("Bearer",
-                    new ApiKeyScheme
+                x.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
                     {
-                        In = "header",
-                        Description = "Autenticação baseada em Json Web Token (JWT)",
-                        Name = "Authorization",
-                        Type = "apiKey"
-                    });
-
-                x.AddSecurityRequirement(security);
+                    new OpenApiSecurityScheme
+                    {
+                        Reference = new OpenApiReference
+                        {
+                            Type = ReferenceType.SecurityScheme,
+                            Id = "Bearer"
+                        }
+                    },
+                    new string[] {}
+                    }
+                });
 
                 //Insert comment's XML
                 var xmlDocumentPath = Path.Combine(PlatformServices.Default.Application.ApplicationBasePath, $"{PlatformServices.Default.Application.ApplicationName}.xml");
@@ -71,8 +77,6 @@ namespace _4oito6.Infra.CrossCutting.Ioc.Swagger
                 {
                     x.IncludeXmlComments(xmlDocumentPath);
                 }
-
-                x.DescribeAllEnumsAsStrings();
             });
 
             return services;
