@@ -27,7 +27,7 @@ namespace _4oito6.Infra.CrossCutting.IoC.Token
             (
                 authOptions =>
                 {
-                    authOptions.DefaultAuthenticateScheme =
+                    authOptions.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                     authOptions.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
                 }
             )
