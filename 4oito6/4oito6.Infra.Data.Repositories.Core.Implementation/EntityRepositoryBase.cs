@@ -29,10 +29,10 @@ namespace _4oito6.Infra.Data.Repositories.Core.Implementation
             return Task.FromResult(entity);
         }
 
-        public async Task<bool> ExistsAsync(Expression<Func<TEntity, bool>> where)
+        public virtual async Task<bool> ExistsAsync(Expression<Func<TEntity, bool>> where)
             => await Context.Set<TEntity>().AnyAsync(where).ConfigureAwait(false);
 
-        public async Task<TEntity> GetAsync(Expression<Func<TEntity, bool>> where = null)
+        public virtual async Task<TEntity> GetAsync(Expression<Func<TEntity, bool>> where = null)
         {
             var dbSet = Context.Set<TEntity>();
 
@@ -44,16 +44,16 @@ namespace _4oito6.Infra.Data.Repositories.Core.Implementation
             ).ConfigureAwait(false);
         }
 
-        public async Task<TEntity> GetByIdAsync(TId id)
+        public virtual async Task<TEntity> GetByIdAsync(TId id)
             => await Context.Set<TEntity>().FindAsync(id).ConfigureAwait(false);
 
-        public async Task<TEntity> InsertAsync(TEntity entity)
+        public virtual async Task<TEntity> InsertAsync(TEntity entity)
         {
             await Context.Set<TEntity>().AddAsync(entity).ConfigureAwait(false);
             return entity;
         }
 
-        public async Task<IEnumerable<TEntity>> ListAsync(Expression<Func<TEntity, bool>> where = null)
+        public virtual async Task<IEnumerable<TEntity>> ListAsync(Expression<Func<TEntity, bool>> where = null)
         {
             var dbSet = Context.Set<TEntity>();
 
@@ -65,7 +65,7 @@ namespace _4oito6.Infra.Data.Repositories.Core.Implementation
             ).ConfigureAwait(false);
         }
 
-        public Task<TEntity> UpdateAsync(TEntity entity)
+        public virtual Task<TEntity> UpdateAsync(TEntity entity)
         {
             Context.Set<TEntity>().Update(entity);
             return Task.FromResult(entity);
