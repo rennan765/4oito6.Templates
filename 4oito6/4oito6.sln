@@ -73,6 +73,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "4oito6.Template.Infra.Data.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "4oito6.Template.Infra.Data.Context", "4oito6.Template.Infra.Data.Context\4oito6.Template.Infra.Data.Context.csproj", "{AF54A436-3B8A-41FD-B8D5-10B4EF660944}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Reporitories", "Reporitories", "{AF9DAC52-C0FA-4455-9226-D015E3546CDC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "4oito6.Template.Infra.Data.Repositories.Contracts", "4oito6.Template.Infra.Data.Repositories.Contracts\4oito6.Template.Infra.Data.Repositories.Contracts.csproj", "{EA826BA3-99C0-4CCD-BFA8-C4743A31BB51}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "4oito6.Template.Infra.Data.Repositories.Implementation", "4oito6.Template.Infra.Data.Repositories.Implementation\4oito6.Template.Infra.Data.Repositories.Implementation.csproj", "{E59BABA7-57B9-49E3-9C3E-36759E5CC7C8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -159,6 +165,14 @@ Global
 		{AF54A436-3B8A-41FD-B8D5-10B4EF660944}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AF54A436-3B8A-41FD-B8D5-10B4EF660944}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AF54A436-3B8A-41FD-B8D5-10B4EF660944}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EA826BA3-99C0-4CCD-BFA8-C4743A31BB51}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EA826BA3-99C0-4CCD-BFA8-C4743A31BB51}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EA826BA3-99C0-4CCD-BFA8-C4743A31BB51}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EA826BA3-99C0-4CCD-BFA8-C4743A31BB51}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E59BABA7-57B9-49E3-9C3E-36759E5CC7C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E59BABA7-57B9-49E3-9C3E-36759E5CC7C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E59BABA7-57B9-49E3-9C3E-36759E5CC7C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E59BABA7-57B9-49E3-9C3E-36759E5CC7C8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -194,6 +208,9 @@ Global
 		{406B57CE-80A8-4B49-B58C-5792824BD9EA} = {2E250027-753C-4AA7-B619-0ED605F2CB9E}
 		{6B16D12A-356A-42DE-A31B-CE8D18AF755F} = {D2CA4D1E-CDAC-4108-8347-25184B9EF1E6}
 		{AF54A436-3B8A-41FD-B8D5-10B4EF660944} = {D2CA4D1E-CDAC-4108-8347-25184B9EF1E6}
+		{AF9DAC52-C0FA-4455-9226-D015E3546CDC} = {D2CA4D1E-CDAC-4108-8347-25184B9EF1E6}
+		{EA826BA3-99C0-4CCD-BFA8-C4743A31BB51} = {AF9DAC52-C0FA-4455-9226-D015E3546CDC}
+		{E59BABA7-57B9-49E3-9C3E-36759E5CC7C8} = {AF9DAC52-C0FA-4455-9226-D015E3546CDC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {42819E7B-74A7-4FDD-8346-3B0D5B39A789}
