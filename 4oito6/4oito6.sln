@@ -71,13 +71,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "4oito6.Infra.CrossCutting.C
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "4oito6.Template.Infra.Data.Model", "4oito6.Template.Infra.Data.Model\4oito6.Template.Infra.Data.Model.csproj", "{6B16D12A-356A-42DE-A31B-CE8D18AF755F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "4oito6.Template.Infra.Data.Context", "4oito6.Template.Infra.Data.Context\4oito6.Template.Infra.Data.Context.csproj", "{AF54A436-3B8A-41FD-B8D5-10B4EF660944}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "4oito6.Template.Infra.Data.Context", "4oito6.Template.Infra.Data.Context\4oito6.Template.Infra.Data.Context.csproj", "{AF54A436-3B8A-41FD-B8D5-10B4EF660944}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Reporitories", "Reporitories", "{AF9DAC52-C0FA-4455-9226-D015E3546CDC}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Repositories", "Repositories", "{AF9DAC52-C0FA-4455-9226-D015E3546CDC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "4oito6.Template.Infra.Data.Repositories.Contracts", "4oito6.Template.Infra.Data.Repositories.Contracts\4oito6.Template.Infra.Data.Repositories.Contracts.csproj", "{EA826BA3-99C0-4CCD-BFA8-C4743A31BB51}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "4oito6.Template.Infra.Data.Repositories.Contracts", "4oito6.Template.Infra.Data.Repositories.Contracts\4oito6.Template.Infra.Data.Repositories.Contracts.csproj", "{EA826BA3-99C0-4CCD-BFA8-C4743A31BB51}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "4oito6.Template.Infra.Data.Repositories.Implementation", "4oito6.Template.Infra.Data.Repositories.Implementation\4oito6.Template.Infra.Data.Repositories.Implementation.csproj", "{E59BABA7-57B9-49E3-9C3E-36759E5CC7C8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "4oito6.Template.Infra.Data.Repositories.Implementation", "4oito6.Template.Infra.Data.Repositories.Implementation\4oito6.Template.Infra.Data.Repositories.Implementation.csproj", "{E59BABA7-57B9-49E3-9C3E-36759E5CC7C8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
