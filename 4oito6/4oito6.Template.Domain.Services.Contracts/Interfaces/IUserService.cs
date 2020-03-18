@@ -7,6 +7,6 @@ namespace _4oito6.Template.Domain.Services.Contracts.Interfaces
 {
     public interface IUserService : IServiceBase
     {
-        Task<UserResponse> CreateUser(UserRequest request);
+        Task<UserResponse> CreateUserAsync(UserRequest request);
     }
 }
