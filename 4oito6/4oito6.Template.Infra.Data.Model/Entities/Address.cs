@@ -33,5 +33,18 @@ namespace _4oito6.Template.Infra.Data.Model.Entities
             PostalCode = postalCode;
             Users = users;
         }
+
+        public Address(long id, string street, string number, string complement, string district, string city, string state, string postalCode)
+            : base()
+        {
+            Id = id;
+            Street = street;
+            Number = number;
+            Complement = complement;
+            District = district;
+            City = city;
+            State = state;
+            PostalCode = postalCode;
+        }
     }
 }

@@ -15,6 +15,24 @@ namespace _4oito6.Template.Domain.Model.Entities
 
         public IList<Phone> Phones { get; set; }
 
+        public User(int id, Name name, string email, string cpf, Address address, IList<Phone> phones)
+        {
+            Id = id;
+            Name = name;
+            Email = email;
+            Cpf = cpf;
+            Address = address;
+            Phones = phones;
+        }
+
+        public User(int id, Name name, string email, string cpf)
+        {
+            Id = id;
+            Name = name;
+            Email = email;
+            Cpf = cpf;
+        }
+
         public void ChangeAddress(Address address)
         {
             Address = address;

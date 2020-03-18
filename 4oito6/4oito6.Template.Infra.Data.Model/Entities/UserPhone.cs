@@ -28,5 +28,17 @@ namespace _4oito6.Template.Infra.Data.Model.Entities
             Phone = phone;
             User = user;
         }
+
+        public UserPhone(int idUser, long idPhone)
+        {
+            IdUser = idUser;
+            IdPhone = idPhone;
+        }
+
+        public UserPhone(Phone phone, User user)
+        {
+            Phone = phone;
+            User = user;
+        }
     }
 }
