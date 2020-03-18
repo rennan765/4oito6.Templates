@@ -1,16 +1,21 @@
-﻿using _4oito6.Domain.Specs.Core.Enum;
+﻿using _4oito6.Domain.Model.Core.Entities;
+using _4oito6.Domain.Specs.Core.Enum;
 using _4oito6.Domain.Specs.Core.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace _4oito6.Domain.Specs.Core.Models
 {
-    public abstract class BusinessSpec : IBusinessSpec
+    public abstract class BusinessSpec<TEntity> : IBusinessSpec<TEntity>
+        where TEntity : EntityBase
     {
+        protected TEntity Entity { get; private set; }
         public IList<BusinessSpecMessage> Messages { get; private set; }
 
-        protected BusinessSpec()
+        public BusinessSpec(TEntity entity)
         {
+            Entity = entity ?? throw new ArgumentNullException(nameof(TEntity));
             Messages = new List<BusinessSpecMessage>();
         }
 
