@@ -2,15 +2,8 @@
 {
     public abstract class DataModelBase
     {
-        public int Id { get; private set; }
-
         protected DataModelBase()
         {
-        }
-
-        protected DataModelBase(int id)
-        {
-            Id = id;
         }
     }
 }
