@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <RootNamespace>_4oito6.Template.Infra.Data.Bus.Implementation</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\4oito6.Template.Infra.Data.Bus.Contracts\4oito6.Template.Infra.Data.Bus.Contracts.csproj" />
+    <ProjectReference Include="..\4oito6.Template.Infra.Data.Repositories.Contracts\4oito6.Template.Infra.Data.Repositories.Contracts.csproj" />
+  </ItemGroup>
+
+</Project>
