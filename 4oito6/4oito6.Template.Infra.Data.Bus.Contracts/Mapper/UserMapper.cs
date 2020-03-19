@@ -10,7 +10,7 @@ namespace _4oito6.Template.Infra.Data.Bus.Contracts.Mapper
         public static DataModel.User ToDataModel(this DomainModel.User entity)
         {
             var phones = entity.Phones.ToDataModel(entity);
-            var address = entity.Address?.ToDomainModel();
+            var address = entity.Address?.ToDataModel();
 
             return new DataModel.User(entity.Id, entity.Name.FirstName, entity.Name.MiddleName, entity.Name.LastName, entity.Email, entity.Cpf, address.Id, address, phones);
         }

@@ -8,7 +8,7 @@ namespace _4oito6.Template.Infra.Data.Bus.Contracts.Mapper
         public static DomainModel.Address ToDomainModel(this DataModel.Address address)
             => new DomainModel.Address(address.Id, address.Street, address.Number, address.Complement, address.District, address.City, address.State, address.PostalCode);
 
-        public static DataModel.Address ToDomainModel(this DomainModel.Address address)
+        public static DataModel.Address ToDataModel(this DomainModel.Address address)
             => new DataModel.Address(address.Id, address.Street, address.Number, address.Complement, address.District, address.City, address.State, address.PostalCode);
     }
 }

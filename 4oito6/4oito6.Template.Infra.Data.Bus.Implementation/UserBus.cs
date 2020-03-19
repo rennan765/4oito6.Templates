@@ -1,4 +1,5 @@
-﻿using _4oito6.Template.Infra.Data.Bus.Contracts.Interfaces;
+﻿using _4oito6.Infra.Data.Bus.Core.Implementation;
+using _4oito6.Template.Infra.Data.Bus.Contracts.Interfaces;
 using _4oito6.Template.Infra.Data.Bus.Contracts.Mapper;
 using _4oito6.Template.Infra.Data.Repositories.Contracts.Entity;
 using System;
@@ -7,14 +8,14 @@ using DomainModel = _4oito6.Template.Domain.Model.Entities;
 
 namespace _4oito6.Template.Infra.Data.Bus.Implementation
 {
-    public class UserBus : IUserBus
+    public class UserBus : BusBase, IUserBus
     {
         private IUserRepository _userRepository;
         private IPhoneRepository _phoneRepository;
         private IAddressRepository _addressRepository;
-        private bool _disposedValue;
 
         public UserBus(IUserRepository userRepository, IPhoneRepository phoneRepository, IAddressRepository addressRepository)
+            : base(new IDisposable[] { userRepository, phoneRepository, addressRepository })
         {
             _userRepository = userRepository ?? throw new ArgumentNullException(nameof(userRepository));
             _phoneRepository = phoneRepository ?? throw new ArgumentNullException(nameof(phoneRepository));
@@ -27,36 +28,5 @@ namespace _4oito6.Template.Infra.Data.Bus.Implementation
 
         public async Task<bool> ExistsEmail(string email)
             => await _userRepository.ExistsAsync(u => u.Email == email).ConfigureAwait(false);
-
-        protected virtual void Dispose(bool disposing)
-        {
-            if (!_disposedValue)
-            {
-                if (disposing)
-                {
-                    _userRepository?.Dispose();
-                    _userRepository = null;
-
-                    _phoneRepository?.Dispose();
-                    _phoneRepository = null;
-
-                    _addressRepository?.Dispose();
-                    _addressRepository = null;
-                }
-
-                _disposedValue = true;
-            }
-        }
-
-        ~UserBus()
-        {
-            Dispose(false);
-        }
-
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
     }
 }
