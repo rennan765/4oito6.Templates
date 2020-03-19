@@ -11,12 +11,22 @@ namespace _4oito6.Template.Domain.Services.Implementation
     public class UserService : ServiceBase, IUserService
     {
         private readonly IUserBus _userBus;
+        private readonly IPhoneBus _phoneBus;
+        private readonly IAddressBus _addressBus;
 
-        public UserService(IUserBus userBus)
-            : base(new[] { userBus })
+        public UserService(IUserBus userBus, IPhoneBus phoneBus, IAddressBus addressBus)
+            : base(new[] { userBus, phoneBus, addressBus })
         {
             _userBus = userBus ?? throw new ArgumentNullException(nameof(userBus));
+            _phoneBus = phoneBus ?? throw new ArgumentNullException(nameof(phoneBus));
+            _addressBus = addressBus ?? throw new ArgumentNullException(nameof(addressBus));
         }
+
+        //public UserService(IUserBus userBus)
+        //    : base(new[] { userBus })
+        //{
+        //    _userBus = userBus ?? throw new ArgumentNullException(nameof(userBus));
+        //}
 
         public Task<UserResponse> CreateUserAsync(UserRequest request)
         {
