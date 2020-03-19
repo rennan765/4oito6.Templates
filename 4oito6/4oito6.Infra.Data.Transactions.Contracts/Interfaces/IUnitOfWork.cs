@@ -1,23 +1,21 @@
-﻿using _4oito6.Infra.Data.Core.Connection;
-using _4oito6.Infra.Data.Transactions.Contracts.Enum;
-using Microsoft.EntityFrameworkCore;
+﻿using _4oito6.Infra.Data.Transactions.Contracts.Enum;
 using System;
+using System.Threading.Tasks;
 
 namespace _4oito6.Infra.Data.Transactions.Contracts.Interfaces
 {
     public interface IUnitOfWork : IDisposable
     {
-        DbContext Context { get; }
-        IAsyncDbConnection Connection { get; }
-
         void BeginTransaction(DataSource dataSource);
 
         void Commit(DataSource dataSource);
 
         void Rollback(DataSource dataSource);
 
-        void OpenConnection(DataSource dataSource);
+        void OpenDapperConnection();
 
-        void CloseConnection(DataSource dataSource);
+        void CloseDapperConnection();
+
+        Task SaveEntityChangesAsync();
     }
 }
