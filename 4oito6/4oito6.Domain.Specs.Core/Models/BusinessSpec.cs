@@ -8,15 +8,14 @@ using System.Linq;
 
 namespace _4oito6.Domain.Specs.Core.Models
 {
-    public abstract class BusinessSpec<TEntity> : IBusinessSpec<TEntity>
-        where TEntity : EntityBase
+    public abstract class BusinessSpec : IBusinessSpec
     {
-        protected TEntity Entity { get; private set; }
+        protected EntityBase Entity { get; private set; }
         public IList<BusinessSpecMessage> Messages { get; private set; }
 
-        public BusinessSpec(TEntity entity) : this()
+        public BusinessSpec(EntityBase entity) : this()
         {
-            Entity = entity ?? throw new ArgumentNullException(nameof(TEntity));
+            Entity = entity ?? throw new ArgumentNullException(nameof(entity));
         }
 
         public BusinessSpec()
