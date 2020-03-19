@@ -25,6 +25,9 @@ namespace _4oito6.Template.Infra.Data.Bus.Implementation
             => (await _userRepository.InsertAsync(user.ToDataModel()).ConfigureAwait(false))
                 .ToDomainModel();
 
+        public async Task<bool> ExistsEmail(string email)
+            => await _userRepository.ExistsAsync(u => u.Email == email).ConfigureAwait(false);
+
         protected virtual void Dispose(bool disposing)
         {
             if (!_disposedValue)

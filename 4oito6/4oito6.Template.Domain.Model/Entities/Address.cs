@@ -24,5 +24,16 @@ namespace _4oito6.Template.Domain.Model.Entities
             State = state;
             PostalCode = postalCode;
         }
+
+        public Address(string street, string number, string complement, string district, string city, string state, string postalCode)
+        {
+            Street = street;
+            Number = number;
+            Complement = complement;
+            District = district;
+            City = city;
+            State = state;
+            PostalCode = postalCode;
+        }
     }
 }

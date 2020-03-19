@@ -8,6 +8,7 @@
   <ItemGroup>
     <ProjectReference Include="..\4oito6.Domain.Services.Core.Implementation\4oito6.Domain.Services.Core.Implementation.csproj" />
     <ProjectReference Include="..\4oito6.Template.Domain.Services.Contracts\4oito6.Template.Domain.Services.Contracts.csproj" />
+    <ProjectReference Include="..\4oito6.Template.Domain.Specs\4oito6.Template.Domain.Specs.csproj" />
     <ProjectReference Include="..\4oito6.Template.Infra.Data.Bus.Contracts\4oito6.Template.Infra.Data.Bus.Contracts.csproj" />
   </ItemGroup>
 
