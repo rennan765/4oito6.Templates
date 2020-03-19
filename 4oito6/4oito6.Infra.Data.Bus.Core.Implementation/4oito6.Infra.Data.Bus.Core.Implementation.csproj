@@ -1,12 +1,12 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.1</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
     <RootNamespace>_4oito6.Infra.Data.Bus.Core.Implementation</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\4oito6.Infra.Data.Bus.Core.Contracts\4oito6.Infra.Data.Bus.Core.Contracts.csproj" />
+    <ProjectReference Include="..\4oito6.Infra.Data.Transactions.Contracts\4oito6.Infra.Data.Transactions.Contracts.csproj" />
   </ItemGroup>
-
 </Project>
