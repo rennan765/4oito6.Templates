@@ -11,11 +11,11 @@ namespace _4oito6.Domain.Services.Core.Implementation.Base
     {
         private bool _disposedValue;
         private IList<IBusinessSpec<EntityBase>> _businessSpecs;
-        private IDisposable[] _repositories;
+        private IDisposable[] _bus;
 
-        public ServiceBase(IDisposable[] repositories)
+        public ServiceBase(IDisposable[] bus)
         {
-            _repositories = repositories;
+            _bus = bus;
             _businessSpecs = new List<IBusinessSpec<EntityBase>>();
             _disposedValue = false;
         }
@@ -26,13 +26,11 @@ namespace _4oito6.Domain.Services.Core.Implementation.Base
             {
                 if (disposing)
                 {
-                    _repositories.ToList().ForEach(r => r?.Dispose());
-
-                    _repositories = null;
+                    _bus.ToList().ForEach(r => r?.Dispose());
+                    _bus = null;
                 }
 
                 _businessSpecs = null;
-
                 _disposedValue = true;
             }
         }
