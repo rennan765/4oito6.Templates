@@ -1,4 +1,5 @@
 ﻿using _4oito6.Infra.Data.Bus.Core.Implementation;
+using _4oito6.Infra.Data.Transactions.Contracts.Interfaces;
 using _4oito6.Template.Infra.Data.Bus.Contracts.Interfaces;
 using _4oito6.Template.Infra.Data.Bus.Contracts.Mapper;
 using _4oito6.Template.Infra.Data.Repositories.Contracts.Entity;
@@ -14,8 +15,8 @@ namespace _4oito6.Template.Infra.Data.Bus.Implementation
         private IPhoneRepository _phoneRepository;
         private IAddressRepository _addressRepository;
 
-        public UserBus(IUserRepository userRepository, IPhoneRepository phoneRepository, IAddressRepository addressRepository)
-            : base(new IDisposable[] { userRepository, phoneRepository, addressRepository })
+        public UserBus(IUnitOfWork unit, IUserRepository userRepository, IPhoneRepository phoneRepository, IAddressRepository addressRepository)
+            : base(unit, new IDisposable[] { userRepository, phoneRepository, addressRepository })
         {
             _userRepository = userRepository ?? throw new ArgumentNullException(nameof(userRepository));
             _phoneRepository = phoneRepository ?? throw new ArgumentNullException(nameof(phoneRepository));
@@ -23,8 +24,13 @@ namespace _4oito6.Template.Infra.Data.Bus.Implementation
         }
 
         public async Task<DomainModel.User> CreateUserAsync(DomainModel.User user)
-            => (await _userRepository.InsertAsync(user.ToDataModel()).ConfigureAwait(false))
-                .ToDomainModel();
+        {
+            var newUser = await _userRepository.InsertAsync(user.ToDataModel()).ConfigureAwait(false);
+
+            await Unit.SaveEntityChangesAsync().ConfigureAwait(false);
+
+            return newUser.ToDomainModel();
+        }
 
         public async Task<bool> ExistsEmail(string email)
             => await _userRepository.ExistsAsync(u => u.Email == email).ConfigureAwait(false);

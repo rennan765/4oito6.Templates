@@ -1,4 +1,5 @@
 ﻿using _4oito6.Infra.Data.Bus.Core.Implementation;
+using _4oito6.Infra.Data.Transactions.Contracts.Interfaces;
 using _4oito6.Template.Domain.Model.Entities;
 using _4oito6.Template.Infra.Data.Bus.Contracts.Interfaces;
 using _4oito6.Template.Infra.Data.Bus.Contracts.Mapper;
@@ -12,8 +13,8 @@ namespace _4oito6.Template.Infra.Data.Bus.Implementation
     {
         private readonly IAddressRepository _addressRepository;
 
-        public AddressBus(IAddressRepository addressRepository)
-            : base(new IDisposable[] { addressRepository })
+        public AddressBus(IUnitOfWork unit, IAddressRepository addressRepository)
+            : base(unit, new IDisposable[] { addressRepository })
         {
             _addressRepository = addressRepository ?? throw new ArgumentNullException(nameof(addressRepository));
         }

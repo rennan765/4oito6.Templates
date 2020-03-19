@@ -1,4 +1,5 @@
 ﻿using _4oito6.Infra.Data.Bus.Core.Implementation;
+using _4oito6.Infra.Data.Transactions.Contracts.Interfaces;
 using _4oito6.Template.Domain.Model.Entities;
 using _4oito6.Template.Infra.Data.Bus.Contracts.Interfaces;
 using _4oito6.Template.Infra.Data.Bus.Contracts.Mapper;
@@ -14,8 +15,8 @@ namespace _4oito6.Template.Infra.Data.Bus.Implementation
     {
         private readonly IPhoneRepository _phoneRepository;
 
-        public PhoneBus(IPhoneRepository phoneRepository)
-            : base(new IDisposable[] { phoneRepository })
+        public PhoneBus(IUnitOfWork unit, IPhoneRepository phoneRepository)
+            : base(unit, new IDisposable[] { phoneRepository })
         {
             _phoneRepository = phoneRepository ?? throw new ArgumentNullException(nameof(phoneRepository));
         }
