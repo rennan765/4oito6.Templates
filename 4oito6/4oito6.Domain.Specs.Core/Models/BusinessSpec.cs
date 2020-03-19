@@ -14,9 +14,13 @@ namespace _4oito6.Domain.Specs.Core.Models
         protected TEntity Entity { get; private set; }
         public IList<BusinessSpecMessage> Messages { get; private set; }
 
-        public BusinessSpec(TEntity entity)
+        public BusinessSpec(TEntity entity) : this()
         {
             Entity = entity ?? throw new ArgumentNullException(nameof(TEntity));
+        }
+
+        public BusinessSpec()
+        {
             Messages = new List<BusinessSpecMessage>();
         }
 
