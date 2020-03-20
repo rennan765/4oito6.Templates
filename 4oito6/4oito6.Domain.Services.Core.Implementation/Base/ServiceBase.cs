@@ -64,6 +64,14 @@ namespace _4oito6.Domain.Services.Core.Implementation.Base
             return list.ToArray();
         }
 
-        public HttpStatusCode GetStatusCode() => _businessSpecs.ToHttpStatusCode();
+        public HttpStatusCode GetStatusCode()
+        {
+            var specs = _businessSpecs.Where(s => s.Messages.Any()).ToList();
+
+            if (specs.Any())
+                return specs.ToHttpStatusCode();
+
+            return HttpStatusCode.OK;
+        }
     }
 }
