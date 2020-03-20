@@ -111,5 +111,33 @@ namespace _4oito6.Template.Tests.Services.User
             Assert.True(comparison.Compare(serviceMock.GetMessages(), expectedMessages).AreEqual);
             mocker.Verify();
         }
+
+        [Fact(DisplayName = "CreateUserAsync_InvalidUser")]
+        [Trait("UserService", "Services Tests")]
+        public async Task CreateUserAsync_InvalidUser()
+        {
+            //Arrange
+            var comparison = new CompareLogic();
+            var mocker = new AutoMocker();
+            var serviceMock = mocker.CreateInstance<UserService>();
+
+            var request = GetRequest(TestCase.InvalidUser);
+            var expectedMessages = new string[] { "O primeiro nome é obrigatório." };
+
+            mocker.GetMock<IUserBus>()
+                .Setup(b => b.ExistsEmailAsync(request.Email))
+                .ReturnsAsync(false)
+                .Verifiable();
+
+            //Act
+            var response = await serviceMock.CreateUserAsync(request).ConfigureAwait(false);
+
+            //Assert
+            response.Should().BeNull();
+            serviceMock.IsSatisfied().Should().BeFalse();
+            Assert.True(serviceMock.GetStatusCode() == HttpStatusCode.BadRequest);
+            Assert.True(comparison.Compare(serviceMock.GetMessages(), expectedMessages).AreEqual);
+            mocker.Verify();
+        }
     }
 }
