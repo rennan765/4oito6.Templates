@@ -1,8 +1,10 @@
 ﻿using _4oito6.Domain.Services.Core.Contracts.Interfaces;
+using _4oito6.Domain.Specs.Core.Extensions;
 using _4oito6.Domain.Specs.Core.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 
 namespace _4oito6.Domain.Services.Core.Implementation.Base
 {
@@ -61,5 +63,7 @@ namespace _4oito6.Domain.Services.Core.Implementation.Base
 
             return list.ToArray();
         }
+
+        public HttpStatusCode GetStatusCode() => _businessSpecs.ToHttpStatusCode();
     }
 }
