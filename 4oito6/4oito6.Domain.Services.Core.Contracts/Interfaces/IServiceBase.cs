@@ -1,5 +1,6 @@
 ﻿using _4oito6.Domain.Specs.Core.Interfaces;
 using System;
+using System.Net;
 
 namespace _4oito6.Domain.Services.Core.Contracts.Interfaces
 {
@@ -10,5 +11,7 @@ namespace _4oito6.Domain.Services.Core.Contracts.Interfaces
         bool IsSatisfied();
 
         string[] GetMessages();
+
+        HttpStatusCode GetStatusCode();
     }
 }
