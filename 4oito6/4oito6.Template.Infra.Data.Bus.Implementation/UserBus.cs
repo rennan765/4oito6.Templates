@@ -32,7 +32,7 @@ namespace _4oito6.Template.Infra.Data.Bus.Implementation
             return newUser.ToDomainModel();
         }
 
-        public async Task<bool> ExistsEmail(string email)
+        public async Task<bool> ExistsEmailAsync(string email)
             => await _userRepository.ExistsAsync(u => u.Email == email).ConfigureAwait(false);
     }
 }

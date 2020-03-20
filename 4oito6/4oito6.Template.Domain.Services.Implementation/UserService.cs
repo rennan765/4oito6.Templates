@@ -31,7 +31,7 @@ namespace _4oito6.Template.Domain.Services.Implementation
 
         public async Task<UserResponse> CreateUserAsync(UserRequest request)
         {
-            if (await _userBus.ExistsEmail(request.Email).ConfigureAwait(false))
+            if (await _userBus.ExistsEmailAsync(request.Email).ConfigureAwait(false))
             {
                 var spec = new CreateUserSpec();
                 spec.AddMessage(BusinessSpecStatus.Conflict, "E-mail já cadastrado.");
