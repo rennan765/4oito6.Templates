@@ -15,13 +15,13 @@ namespace _4oito6.Template.Domain.Specs
             if (!string.IsNullOrEmpty(entity.Number) && !entity.Number.IsNumeric())
                 AddMessage(BusinessSpecStatus.InvalidInputs, "Existe algum caractere não numérico no campo número.");
 
-            if (!string.IsNullOrEmpty(entity.District))
+            if (string.IsNullOrEmpty(entity.District))
                 AddMessage(BusinessSpecStatus.InvalidInputs, "O bairro é obrigátório.");
 
-            if (!string.IsNullOrEmpty(entity.City))
+            if (string.IsNullOrEmpty(entity.City))
                 AddMessage(BusinessSpecStatus.InvalidInputs, "A cidade é obrigátória.");
 
-            if (!string.IsNullOrEmpty(entity.State))
+            if (string.IsNullOrEmpty(entity.State))
                 AddMessage(BusinessSpecStatus.InvalidInputs, "O estado é obrigátório.");
             else if (entity.State.Length != 2)
                 AddMessage(BusinessSpecStatus.InvalidInputs, "O estado deve ser informado no  formato de sigla.");
