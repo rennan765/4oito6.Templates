@@ -15,7 +15,6 @@ namespace _4oito6.Template.Domain.Services.Contracts.Arguments.Request
 
         public UserRequest()
         {
-            Address = new AddressRequest();
             Phones = new List<UserPhoneRequest>();
         }
     }

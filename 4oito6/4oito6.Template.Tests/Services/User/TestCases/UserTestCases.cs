@@ -18,6 +18,9 @@ namespace _4oito6.Template.Tests.Services.User.TestCases
 
         private static UserRequest GetAddress(UserRequest request, bool isValid = true)
         {
+            if (request.Address == null)
+                request.Address = new AddressRequest();
+
             request.Address.Street = "Avenida Rio Branco";
             request.Address.Number = "156";
             request.Address.Complement = "Loja 1";
