@@ -51,5 +51,15 @@ namespace _4oito6.Domain.Services.Core.Implementation.Base
         }
 
         public bool IsSatisfied() => !_businessSpecs.Any(b => !b.IsSatisfied());
+
+        public string[] GetMessages()
+        {
+            var list = new List<string>();
+
+            foreach (var spec in _businessSpecs)
+                list.Concat(spec.Messages.Select(m => m.Message));
+
+            return list.ToArray();
+        }
     }
 }
