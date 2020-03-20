@@ -2,9 +2,11 @@
 using _4oito6.Domain.Specs.Core.Enum;
 using _4oito6.Domain.Specs.Core.Extensions;
 using _4oito6.Domain.Specs.Core.Interfaces;
+using _4oito6.Infra.CrossCutting.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 
 namespace _4oito6.Domain.Specs.Core.Models
 {
@@ -40,5 +42,8 @@ namespace _4oito6.Domain.Specs.Core.Models
                                   m.Status.FirstCodeNumber() == 5
                           );
         }
+
+        public HttpStatusCode GetStatusCode()
+            => Messages.Select(m => m.Status).ToList().ToMajorStatus().ToHttpStatusCode();
     }
 }
