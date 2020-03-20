@@ -1,5 +1,6 @@
 ﻿using _4oito6.Domain.Application.Core.Contracts.Arguments;
 using _4oito6.Domain.Application.Core.Implementation.Base;
+using _4oito6.Infra.Data.Transactions.Contracts.Enum;
 using _4oito6.Infra.Data.Transactions.Contracts.Interfaces;
 using _4oito6.Template.Domain.Application.Contracts.Interfaces;
 using _4oito6.Template.Domain.Services.Contracts.Arguments.Request;
@@ -22,6 +23,8 @@ namespace _4oito6.Template.Domain.Application.Implementation
 
         public async Task<ResponseMessage<UserResponse>> CreateUserAsync(UserRequest request)
         {
+            Unit.BeginTransaction(DataSource.EntityFramework);
+
             var response = await _userService.CreateUserAsync(request).ConfigureAwait(false);
 
             var message = new ResponseMessage<UserResponse>
@@ -32,6 +35,11 @@ namespace _4oito6.Template.Domain.Application.Implementation
 
             if (!_userService.IsSatisfied())
                 message.Errors = _userService.GetMessages();
+
+            if (_userService.IsSatisfied())
+                Unit.Commit(DataSource.EntityFramework);
+            else
+                Unit.Rollback(DataSource.EntityFramework);
 
             return message;
         }
