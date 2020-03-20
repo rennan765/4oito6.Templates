@@ -8,5 +8,7 @@ namespace _4oito6.Domain.Services.Core.Contracts.Interfaces
         void AddSpec(IBusinessSpec businessSpec);
 
         bool IsSatisfied();
+
+        string[] GetMessages();
     }
 }
