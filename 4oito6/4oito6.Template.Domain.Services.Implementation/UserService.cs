@@ -10,6 +10,7 @@ using _4oito6.Template.Domain.Specs;
 using _4oito6.Template.Domain.Specs.User;
 using _4oito6.Template.Infra.Data.Bus.Contracts.Interfaces;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -45,7 +46,8 @@ namespace _4oito6.Template.Domain.Services.Implementation
             if (request.Address != null)
             {
                 address = await _addressBus
-                .GetByInfoAsync(request.Address.Street, request.Address.Number, request.Address.Complement, request.Address.District, request.Address.City, request.Address.State, request.Address.PostalCode).ConfigureAwait(false);
+                    .GetByInfoAsync(request.Address.Street, request.Address.Number, request.Address.Complement, request.Address.District, request.Address.City, request.Address.State, request.Address.PostalCode)
+                    .ConfigureAwait(false);
 
                 if (address == null)
                 {
@@ -54,25 +56,30 @@ namespace _4oito6.Template.Domain.Services.Implementation
                 }
             }
 
-            var phones = await _phoneBus
-                .GetByNumbersAsync
-                (
-                    request.Phones
-                        .Select(phone => new Tuple<string, string>(phone.LocalCode, phone.Number))
-                        .ToList()
-                )
-                .ConfigureAwait(false);
+            IList<Phone> phones = new List<Phone>();
 
-            request.Phones
-                .Where(phone => !phones.Any(p => p.LocalCode == phone.LocalCode && p.Number == p.Number))
-                .ToList()
-                .ForEach(p =>
-                {
-                    var newPhone = new Phone(p.LocalCode, p.Number);
-                    AddSpec(new PhoneSpecs(newPhone));
+            if (request.Phones.Any())
+            {
+                phones = await _phoneBus
+                    .GetByNumbersAsync
+                    (
+                        request.Phones
+                            .Select(phone => new Tuple<string, string>(phone.LocalCode, phone.Number))
+                            .ToList()
+                    )
+                    .ConfigureAwait(false);
 
-                    phones.Add(newPhone);
-                });
+                request.Phones
+                    .Where(phone => !phones.Any(p => p.LocalCode == phone.LocalCode && p.Number == p.Number))
+                    .ToList()
+                    .ForEach(p =>
+                    {
+                        var newPhone = new Phone(p.LocalCode, p.Number);
+                        AddSpec(new PhoneSpecs(newPhone));
+
+                        phones.Add(newPhone);
+                    });
+            }
 
             var user = new User(new Name(request.FirstName, request.MiddleName, request.LastName), request.Email, request.Cpf, address, phones);
             AddSpec(new UserSpec(user));
