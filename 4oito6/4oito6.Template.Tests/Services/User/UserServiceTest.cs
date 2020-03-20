@@ -1,6 +1,7 @@
 ﻿using _4oito6.Template.Domain.Services.Contracts.Arguments.Request;
 using _4oito6.Template.Domain.Services.Implementation;
 using _4oito6.Template.Infra.Data.Bus.Contracts.Interfaces;
+using _4oito6.Template.Tests.Services.User.TestCases;
 using FluentAssertions;
 using KellermanSoftware.CompareNetObjects;
 using Moq;
@@ -8,6 +9,7 @@ using Moq.AutoMock;
 using System.Net;
 using System.Threading.Tasks;
 using Xunit;
+using static _4oito6.Template.Tests.Services.User.TestCases.UserTestCases;
 
 namespace _4oito6.Template.Tests.Services.User
 {
@@ -22,10 +24,7 @@ namespace _4oito6.Template.Tests.Services.User
             var mocker = new AutoMocker();
             var serviceMock = mocker.CreateInstance<UserService>();
 
-            var request = new UserRequest
-            {
-                Email = "teste@teste.com"
-            };
+            var request = GetRequest(TestCase.EmailExists);
             var expectedMessages = new string[] { "E-mail já cadastrado." };
 
             mocker.GetMock<IUserBus>()

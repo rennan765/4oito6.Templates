@@ -12,5 +12,11 @@ namespace _4oito6.Template.Domain.Services.Contracts.Arguments.Request
         public string Cpf { get; set; }
         public AddressRequest Address { get; set; }
         public IList<UserPhoneRequest> Phones { get; set; }
+
+        public UserRequest()
+        {
+            Address = new AddressRequest();
+            Phones = new List<UserPhoneRequest>();
+        }
     }
 }
