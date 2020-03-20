@@ -59,7 +59,7 @@ namespace _4oito6.Domain.Services.Core.Implementation.Base
             var list = new List<string>();
 
             foreach (var spec in _businessSpecs)
-                list.Concat(spec.Messages.Select(m => m.Message));
+                list = list.Concat(spec.Messages.Select(m => m.Message)).ToList();
 
             return list.ToArray();
         }
