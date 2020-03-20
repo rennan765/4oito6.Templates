@@ -6,7 +6,6 @@ using _4oito6.Template.Domain.Services.Contracts.Arguments.Request;
 using _4oito6.Template.Domain.Services.Contracts.Arguments.Response;
 using _4oito6.Template.Domain.Services.Contracts.Interfaces;
 using System;
-using System.Net;
 using System.Threading.Tasks;
 
 namespace _4oito6.Template.Domain.Application.Implementation
@@ -28,12 +27,10 @@ namespace _4oito6.Template.Domain.Application.Implementation
             var message = new ResponseMessage<UserResponse>
             {
                 Data = response,
-                StatusCode = (int)(_userService.IsSatisfied() ? HttpStatusCode.OK : HttpStatusCode.BadRequest)
+                StatusCode = (int)_userService.GetStatusCode()
             };
 
-            if (_userService.IsSatisfied())
-                message.Message = string.Concat(_userService.GetMessages());
-            else
+            if (!_userService.IsSatisfied())
                 message.Errors = _userService.GetMessages();
 
             return message;
