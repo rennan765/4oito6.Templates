@@ -40,13 +40,18 @@ namespace _4oito6.Template.Domain.Services.Implementation
                 return null;
             }
 
-            var address = await _addressBus
-                .GetByInfoAsync(request.Street, request.Number, request.Complement, request.District, request.City, request.State, request.PostalCode).ConfigureAwait(false);
+            Address address = null;
 
-            if (address == null)
+            if (request.Address != null)
             {
-                address = new Address(request.Street, request.Number, request.Complement, request.District, request.City, request.State, request.PostalCode);
-                AddSpec(new AddressSpec(address));
+                address = await _addressBus
+                .GetByInfoAsync(request.Address.Street, request.Address.Number, request.Address.Complement, request.Address.District, request.Address.City, request.Address.State, request.Address.PostalCode).ConfigureAwait(false);
+
+                if (address == null)
+                {
+                    address = new Address(request.Address.Street, request.Address.Number, request.Address.Complement, request.Address.District, request.Address.City, request.Address.State, request.Address.PostalCode);
+                    AddSpec(new AddressSpec(address));
+                }
             }
 
             var phones = await _phoneBus
