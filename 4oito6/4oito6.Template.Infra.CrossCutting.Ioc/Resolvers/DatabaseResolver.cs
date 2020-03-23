@@ -11,14 +11,15 @@ namespace _4oito6.Template.Infra.CrossCutting.Ioc.Resolvers
     {
         public static IServiceCollection ResolveDatabase(this IServiceCollection services)
         {
-            IConnectionConfiguration config = null;
+            var config = services.BuildServiceProvider()?.GetService<IConnectionConfiguration>();
 
             return services
                 .AddScoped<IAsyncDbConnection>
                 (
                     (sp) =>
                     {
-                        config = sp.GetService<IConnectionConfiguration>();
+                        if (config == null)
+                            config = sp.GetService<IConnectionConfiguration>();
 
                         return new AsyncDbConnection(new NpgsqlConnection(config.DbConnectionString));
                     }
