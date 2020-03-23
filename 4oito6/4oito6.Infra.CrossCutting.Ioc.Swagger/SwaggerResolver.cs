@@ -36,11 +36,12 @@ namespace _4oito6.Infra.CrossCutting.Ioc.Swagger
                 };
 
                 if (!string.IsNullOrEmpty(config.ContactName))
-                {
-                    info.Contact.Name = config.ContactName;
-                    info.Contact.Email = config.ContactEmail;
-                    info.Contact.Url = new Uri(config.ContactUrl);
-                }
+                    info.Contact = new OpenApiContact
+                    {
+                        Name = config.ContactName,
+                        Email = config.ContactEmail,
+                        Url = new Uri(config.ContactUrl)
+                    };
 
                 x.SwaggerDoc("v1", info);
 
