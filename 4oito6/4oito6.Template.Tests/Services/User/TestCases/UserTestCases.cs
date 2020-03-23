@@ -101,10 +101,23 @@ namespace _4oito6.Template.Tests.Services.User.TestCases
             return request;
         }
 
-        internal static Entities.User GetUserByRequest(UserRequest request)
+        internal static Entities.User GetUserByRequest(UserRequest request, IList<Entities.Phone> phones = null, Entities.Address address = null)
         {
-            var address = new Entities.Address(request.Address.Street, request.Address.Number, request.Address.Complement, request.Address.District, request.Address.City, request.Address.State, request.Address.PostalCode);
-            var phones = request.Phones.Select(p => new Entities.Phone(p.LocalCode, p.Number)).ToList();
+            if (address == null)
+                address = new Entities.Address(request.Address.Street, request.Address.Number, request.Address.Complement, request.Address.District, request.Address.City, request.Address.State, request.Address.PostalCode);
+
+            if (phones == null)
+                phones = new List<Entities.Phone>();
+
+            var list =
+                (
+                    phones.Any() ?
+                        request.Phones.Where(p => !phones.Any(db => db.LocalCode == p.LocalCode & db.Number == p.Number)) :
+                        request.Phones
+                )
+                .Select(p => new Entities.Phone(p.LocalCode, p.Number)).ToList();
+
+            list.ForEach(p => phones.Add(p));
 
             return new Entities.User(new Name(request.FirstName, request.MiddleName, request.LastName), request.Email, request.Cpf, address, phones);
         }
@@ -114,5 +127,21 @@ namespace _4oito6.Template.Tests.Services.User.TestCases
 
         internal static UserResponse GetResponseByUser(Entities.User user)
             => new UserResponse { Id = user.Id };
+
+        internal static IList<Entities.Phone> GetPhonesFromDb(UserRequest request)
+        {
+            if (!request.Phones.Any())
+                return null;
+
+            var phoneRequest = request.Phones.FirstOrDefault();
+
+            return new List<Entities.Phone>
+            {
+                new Entities.Phone(33, phoneRequest.LocalCode, phoneRequest.Number)
+            };
+        }
+
+        internal static Entities.Address GetAddressFromDb(UserRequest request)
+            => new Entities.Address(84, request.Address.Street, request.Address.Number, request.Address.Complement, request.Address.District, request.Address.City, request.Address.State, request.Address.PostalCode);
     }
 }
