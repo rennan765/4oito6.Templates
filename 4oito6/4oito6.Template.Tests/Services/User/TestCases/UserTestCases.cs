@@ -1,5 +1,9 @@
-﻿using _4oito6.Template.Domain.Services.Contracts.Arguments.Request;
+﻿using _4oito6.Template.Domain.Model.ValueObjects;
+using _4oito6.Template.Domain.Services.Contracts.Arguments.Request;
+using _4oito6.Template.Domain.Services.Contracts.Arguments.Response;
 using System.Collections.Generic;
+using System.Linq;
+using Entities = _4oito6.Template.Domain.Model.Entities;
 
 namespace _4oito6.Template.Tests.Services.User.TestCases
 {
@@ -96,5 +100,19 @@ namespace _4oito6.Template.Tests.Services.User.TestCases
 
             return request;
         }
+
+        internal static Entities.User GetUserByRequest(UserRequest request)
+        {
+            var address = new Entities.Address(request.Address.Street, request.Address.Number, request.Address.Complement, request.Address.District, request.Address.City, request.Address.State, request.Address.PostalCode);
+            var phones = request.Phones.Select(p => new Entities.Phone(p.LocalCode, p.Number)).ToList();
+
+            return new Entities.User(new Name(request.FirstName, request.MiddleName, request.LastName), request.Email, request.Cpf, address, phones);
+        }
+
+        internal static Entities.User GetUserWithId(Entities.User user)
+            => new Entities.User(50, user.Name, user.Email, user.Cpf, user.Address, user.Phones);
+
+        internal static UserResponse GetResponseByUser(Entities.User user)
+            => new UserResponse { Id = user.Id };
     }
 }

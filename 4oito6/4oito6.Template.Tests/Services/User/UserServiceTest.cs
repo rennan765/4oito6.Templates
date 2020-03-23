@@ -1,5 +1,4 @@
-﻿using _4oito6.Template.Domain.Model.Entities;
-using _4oito6.Template.Domain.Services.Implementation;
+﻿using _4oito6.Template.Domain.Services.Implementation;
 using _4oito6.Template.Infra.Data.Bus.Contracts.Interfaces;
 using FluentAssertions;
 using KellermanSoftware.CompareNetObjects;
@@ -12,6 +11,7 @@ using System.Net;
 using System.Threading.Tasks;
 using Xunit;
 using static _4oito6.Template.Tests.Services.User.TestCases.UserTestCases;
+using Entities = _4oito6.Template.Domain.Model.Entities;
 
 namespace _4oito6.Template.Tests.Services.User
 {
@@ -64,7 +64,7 @@ namespace _4oito6.Template.Tests.Services.User
 
             mocker.GetMock<IAddressBus>()
                 .Setup(b => b.GetByInfoAsync(request.Address.Street, request.Address.Number, request.Address.Complement, request.Address.District, request.Address.City, request.Address.State, request.Address.PostalCode))
-                .ReturnsAsync((Address)null)
+                .ReturnsAsync((Entities.Address)null)
                 .Verifiable();
 
             //Act
@@ -98,7 +98,7 @@ namespace _4oito6.Template.Tests.Services.User
 
             mocker.GetMock<IPhoneBus>()
                 .Setup(b => b.GetByNumbersAsync(It.Is<IList<Tuple<string, string>>>(ts => comparison.Compare(ts, tuples).AreEqual)))
-                .ReturnsAsync(new List<Phone>())
+                .ReturnsAsync(new List<Entities.Phone>())
                 .Verifiable();
 
             //Act
@@ -137,6 +137,59 @@ namespace _4oito6.Template.Tests.Services.User
             serviceMock.IsSatisfied().Should().BeFalse();
             Assert.True(serviceMock.GetStatusCode() == HttpStatusCode.BadRequest);
             Assert.True(comparison.Compare(serviceMock.GetMessages(), expectedMessages).AreEqual);
+            mocker.Verify();
+        }
+
+        [Fact(DisplayName = "CreateUserAsync_PerfectWay_NoPhonesOrAddressInDb")]
+        [Trait("UserService", "Services Tests")]
+        public async Task CreateUserAsync_PerfectWay_NoPhonesOrAddressInDb()
+        {
+            //Arrange
+            var comparison = new CompareLogic();
+            var mocker = new AutoMocker();
+            var serviceMock = mocker.CreateInstance<UserService>();
+
+            var request = GetRequest(TestCase.PerfectWay);
+            var user = GetUserByRequest(request);
+
+            var userWithId = GetUserWithId(user);
+            var expectedResult = GetResponseByUser(userWithId);
+
+            var phones = request.Phones
+                .Select(phone => new Tuple<string, string>(phone.LocalCode, phone.Number))
+                .ToList();
+
+            mocker.GetMock<IUserBus>()
+                .Setup(b => b.ExistsEmailAsync(request.Email))
+                .ReturnsAsync(false)
+                .Verifiable();
+
+            mocker.GetMock<IAddressBus>()
+                .Setup(b => b.GetByInfoAsync(request.Address.Street, request.Address.Number, request.Address.Complement, request.Address.District, request.Address.City, request.Address.State, request.Address.PostalCode))
+                .ReturnsAsync((Entities.Address)null)
+                .Verifiable();
+
+            mocker.GetMock<IPhoneBus>()
+                .Setup
+                (
+                    b => b.GetByNumbersAsync
+                    (
+                        It.Is<IList<Tuple<string, string>>>(p => comparison.Compare(p, phones).AreEqual)
+                    )
+                )
+                .ReturnsAsync(new List<Entities.Phone>())
+                .Verifiable();
+
+            mocker.GetMock<IUserBus>()
+                .Setup(b => b.CreateUserAsync(It.Is<Entities.User>(u => comparison.Compare(u, user).AreEqual)))
+                .ReturnsAsync(userWithId)
+                .Verifiable();
+
+            //Act
+            var result = await serviceMock.CreateUserAsync(request).ConfigureAwait(false);
+
+            //Assert
+            Assert.True(comparison.Compare(expectedResult, result).AreEqual);
             mocker.Verify();
         }
     }
