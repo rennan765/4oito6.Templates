@@ -43,5 +43,28 @@ namespace _4oito6.Template.Domain.Application.Implementation
 
             return message;
         }
+
+        public async Task<ResponseMessage<UserResponse>> UpdateUserAsync(UserRequest request)
+        {
+            Unit.BeginTransaction(DataSource.EntityFramework);
+
+            var response = await _userService.UpdateUserAsync(request).ConfigureAwait(false);
+
+            var message = new ResponseMessage<UserResponse>
+            {
+                Data = response,
+                StatusCode = (int)_userService.GetStatusCode()
+            };
+
+            if (!_userService.IsSatisfied())
+                message.Errors = _userService.GetMessages();
+
+            if (_userService.IsSatisfied())
+                Unit.Commit(DataSource.EntityFramework);
+            else
+                Unit.Rollback(DataSource.EntityFramework);
+
+            return message;
+        }
     }
 }

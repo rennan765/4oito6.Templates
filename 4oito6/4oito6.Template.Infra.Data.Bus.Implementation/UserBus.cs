@@ -32,7 +32,22 @@ namespace _4oito6.Template.Infra.Data.Bus.Implementation
             return newUser.ToDomainModel();
         }
 
-        public async Task<bool> ExistsEmailAsync(string email)
-            => await _userRepository.ExistsAsync(u => u.Email == email).ConfigureAwait(false);
+        public async Task<bool> ExistsEmailAsync(string email, int? idUser = null)
+            => idUser == null ?
+                await _userRepository.ExistsAsync(u => u.Email == email).ConfigureAwait(false) :
+                await _userRepository.ExistsAsync(u => u.Email == email && u.Id != idUser).ConfigureAwait(false);
+
+        public async Task<DomainModel.User> GetByIdAsync(int id)
+            => (await _userRepository.GetByIdAsync(id).ConfigureAwait(false))
+                .ToDomainModel();
+
+        public async Task<DomainModel.User> UpdateUserAsync(DomainModel.User user)
+        {
+            var updatedUser = await _userRepository.UpdateAsync(user.ToDataModel()).ConfigureAwait(false);
+
+            await Unit.SaveEntityChangesAsync().ConfigureAwait(false);
+
+            return updatedUser.ToDomainModel();
+        }
     }
 }

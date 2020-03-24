@@ -1,5 +1,6 @@
 ﻿using _4oito6.Domain.Model.Core.Entities;
 using _4oito6.Template.Domain.Model.ValueObjects;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -50,34 +51,21 @@ namespace _4oito6.Template.Domain.Model.Entities
             Phones = phones;
         }
 
+        public void Update(string firstName, string middleName, string lastName, string email, string cpf)
+        {
+            Name = new Name(firstName, middleName, lastName);
+            Email = email;
+            Cpf = cpf;
+        }
+
         public void ChangeAddress(Address address)
         {
             Address = address;
         }
 
-        public void AddPhone(string localCode, string number)
+        public void ChangePhones(IList<Phone> phones)
         {
-            if (!Phones.Any(p => p.LocalCode == localCode && p.Number == number))
-                Phones.Add(new Phone(localCode, number));
-        }
-
-        public void RemovePhone(string localCode, string number)
-        {
-            var phone = Phones.FirstOrDefault(p => p.LocalCode == localCode && p.Number == number);
-
-            if (phone != null)
-                Phones.Remove(phone);
-        }
-
-        public void ChangePhone(string oldLocalCode, string oldNumber, string newLocalCode, string newNumber)
-        {
-            var oldPhone = Phones.FirstOrDefault(p => p.LocalCode == oldLocalCode && p.Number == oldNumber); ;
-
-            if (oldPhone != null)
-                Phones.Remove(oldPhone);
-
-            if (!Phones.Any(p => p.LocalCode == newLocalCode && p.Number == newNumber))
-                Phones.Add(new Phone(newLocalCode, newNumber));
+            Phones = phones;
         }
     }
 }

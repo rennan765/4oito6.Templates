@@ -2,7 +2,7 @@
 
 namespace _4oito6.Template.Domain.Specs.User
 {
-    public class CreateUserSpec : BusinessSpec
+    public class UpdateUserSpec : BusinessSpec
     {
     }
 }

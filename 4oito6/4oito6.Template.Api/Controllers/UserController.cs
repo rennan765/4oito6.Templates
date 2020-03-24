@@ -39,5 +39,23 @@ namespace _4oito6.Template.Api.Controllers
             var response = await _userAppService.CreateUserAsync(request).ConfigureAwait(false);
             return StatusCode(response.StatusCode, response);
         }
+
+        /// <summary>
+        /// Atualiza um usuário existente, informando o Id no request. O Id informado deve referir-se a um usuário cadastrado. As regras de validação dos dados são as mesmas utilizadas para criar um novo usuário.
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        [ProducesResponseType(typeof(ResponseMessage<UserResponse>), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(ResponseMessage<UserResponse>), (int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType(typeof(ResponseMessage<UserResponse>), (int)HttpStatusCode.NotFound)]
+        [ProducesResponseType(typeof(ResponseMessage<UserResponse>), (int)HttpStatusCode.Conflict)]
+        [ProducesResponseType(typeof(ResponseMessage), (int)HttpStatusCode.InternalServerError)]
+        [HttpPut]
+        [AllowAnonymous]
+        public async Task<IActionResult> UpdateUserAsync([FromBody]UserRequest request)
+        {
+            var response = await _userAppService.UpdateUserAsync(request).ConfigureAwait(false);
+            return StatusCode(response.StatusCode, response);
+        }
     }
 }

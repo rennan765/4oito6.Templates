@@ -9,5 +9,7 @@ namespace _4oito6.Template.Domain.Application.Contracts.Interfaces
     public interface IUserAppService : IAppServiceBase
     {
         Task<ResponseMessage<UserResponse>> CreateUserAsync(UserRequest request);
+
+        Task<ResponseMessage<UserResponse>> UpdateUserAsync(UserRequest request);
     }
 }

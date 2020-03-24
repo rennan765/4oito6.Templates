@@ -91,5 +91,82 @@ namespace _4oito6.Template.Domain.Services.Implementation
 
             return user.ToResponse();
         }
+
+        public async Task<UserResponse> UpdateUserAsync(UserRequest request)
+        {
+            var user = await _userBus.GetByIdAsync(request.Id ?? 0).ConfigureAwait(false);
+
+            if (user == null)
+            {
+                var spec = new CreateUserSpec();
+                spec.AddMessage(BusinessSpecStatus.ResourceNotFound, "Usuário não encontrado.");
+
+                AddSpec(spec);
+                return null;
+            }
+
+            if (await _userBus.ExistsEmailAsync(request.Email, request.Id).ConfigureAwait(false))
+            {
+                var spec = new CreateUserSpec();
+                spec.AddMessage(BusinessSpecStatus.Conflict, "E-mail já cadastrado.");
+
+                AddSpec(spec);
+                return null;
+            }
+
+            Address address = null;
+
+            if (request.Address != null)
+            {
+                address = await _addressBus
+                    .GetByInfoAsync(request.Address.Street, request.Address.Number, request.Address.Complement, request.Address.District, request.Address.City, request.Address.State, request.Address.PostalCode)
+                    .ConfigureAwait(false);
+
+                if (address == null)
+                {
+                    address = new Address(request.Address.Street, request.Address.Number, request.Address.Complement, request.Address.District, request.Address.City, request.Address.State, request.Address.PostalCode);
+                    AddSpec(new AddressSpec(address));
+
+                    user.ChangeAddress(address);
+                }
+            }
+
+            IList<Phone> phones = new List<Phone>();
+
+            if (request.Phones.Any())
+            {
+                phones = await _phoneBus
+                    .GetByNumbersAsync
+                    (
+                        request.Phones
+                            .Select(phone => new Tuple<string, string>(phone.LocalCode, phone.Number))
+                            .ToList()
+                    )
+                    .ConfigureAwait(false);
+
+                request.Phones
+                    .Where(phone => !phones.Any(p => p.LocalCode == phone.LocalCode && p.Number == p.Number))
+                    .ToList()
+                    .ForEach(p =>
+                    {
+                        var newPhone = new Phone(p.LocalCode, p.Number);
+                        AddSpec(new PhoneSpecs(newPhone));
+
+                        phones.Add(newPhone);
+                    });
+
+                user.ChangePhones(phones);
+            }
+
+            user.Update(request.FirstName, request.MiddleName, request.LastName, request.Email, request.Cpf);
+            AddSpec(new UserSpec(user));
+
+            if (!IsSatisfied())
+                return null;
+
+            await _userBus.UpdateUserAsync(user).ConfigureAwait(false);
+
+            return new UserResponse { Id = user.Id };
+        }
     }
 }

@@ -8,6 +8,10 @@ namespace _4oito6.Template.Infra.Data.Bus.Contracts.Interfaces
     {
         Task<User> CreateUserAsync(User user);
 
-        Task<bool> ExistsEmailAsync(string email);
+        Task<User> UpdateUserAsync(User user);
+
+        Task<bool> ExistsEmailAsync(string email, int? idUser = null);
+
+        Task<User> GetByIdAsync(int id);
     }
 }
