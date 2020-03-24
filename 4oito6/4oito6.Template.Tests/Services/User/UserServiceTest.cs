@@ -30,7 +30,7 @@ namespace _4oito6.Template.Tests.Services.User
             var expectedMessages = new string[] { "E-mail já cadastrado." };
 
             mocker.GetMock<IUserBus>()
-                .Setup(b => b.ExistsEmailAsync(request.Email))
+                .Setup(b => b.ExistsEmailAsync(request.Email, null))
                 .ReturnsAsync(true)
                 .Verifiable();
 
@@ -58,7 +58,7 @@ namespace _4oito6.Template.Tests.Services.User
             var expectedMessages = new string[] { "O bairro é obrigátório.", "O estado deve ser informado no  formato de sigla." };
 
             mocker.GetMock<IUserBus>()
-                .Setup(b => b.ExistsEmailAsync(request.Email))
+                .Setup(b => b.ExistsEmailAsync(request.Email, null))
                 .ReturnsAsync(false)
                 .Verifiable();
 
@@ -92,7 +92,7 @@ namespace _4oito6.Template.Tests.Services.User
             var expectedMessages = new string[] { "O DDD precisa ter 2 caracteres.", "O DDD precisa ter 8 ou 9 caracteres.", "O DDD precisa ter 2 caracteres.", "O DDD precisa ter 8 ou 9 caracteres." };
 
             mocker.GetMock<IUserBus>()
-                .Setup(b => b.ExistsEmailAsync(request.Email))
+                .Setup(b => b.ExistsEmailAsync(request.Email, null))
                 .ReturnsAsync(false)
                 .Verifiable();
 
@@ -125,7 +125,7 @@ namespace _4oito6.Template.Tests.Services.User
             var expectedMessages = new string[] { "O primeiro nome é obrigatório." };
 
             mocker.GetMock<IUserBus>()
-                .Setup(b => b.ExistsEmailAsync(request.Email))
+                .Setup(b => b.ExistsEmailAsync(request.Email, null))
                 .ReturnsAsync(false)
                 .Verifiable();
 
@@ -160,7 +160,7 @@ namespace _4oito6.Template.Tests.Services.User
                 .ToList();
 
             mocker.GetMock<IUserBus>()
-                .Setup(b => b.ExistsEmailAsync(request.Email))
+                .Setup(b => b.ExistsEmailAsync(request.Email, null))
                 .ReturnsAsync(false)
                 .Verifiable();
 
@@ -213,7 +213,7 @@ namespace _4oito6.Template.Tests.Services.User
             var expectedResult = GetResponseByUser(userWithId);
 
             mocker.GetMock<IUserBus>()
-                .Setup(b => b.ExistsEmailAsync(request.Email))
+                .Setup(b => b.ExistsEmailAsync(request.Email, null))
                 .ReturnsAsync(false)
                 .Verifiable();
 
@@ -266,7 +266,7 @@ namespace _4oito6.Template.Tests.Services.User
             var expectedResult = GetResponseByUser(userWithId);
 
             mocker.GetMock<IUserBus>()
-                .Setup(b => b.ExistsEmailAsync(request.Email))
+                .Setup(b => b.ExistsEmailAsync(request.Email, null))
                 .ReturnsAsync(false)
                 .Verifiable();
 
@@ -320,7 +320,7 @@ namespace _4oito6.Template.Tests.Services.User
             var expectedResult = GetResponseByUser(userWithId);
 
             mocker.GetMock<IUserBus>()
-                .Setup(b => b.ExistsEmailAsync(request.Email))
+                .Setup(b => b.ExistsEmailAsync(request.Email, null))
                 .ReturnsAsync(false)
                 .Verifiable();
 
