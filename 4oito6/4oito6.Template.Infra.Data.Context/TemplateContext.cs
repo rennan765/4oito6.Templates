@@ -22,9 +22,9 @@ namespace _4oito6.Template.Infra.Data.Context
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            //TODO: Remove hardcoded connection string.
-            if (!optionsBuilder.IsConfigured)
-                optionsBuilder.UseNpgsql("host=hansken.db.elephantsql.com;Port=5432;Database=phtujmgl;Username=phtujmgl;Password=tp1WmFVb_X2nRvG4eXLU2S418Wdet6zz");
+#if DEBUG
+            optionsBuilder.EnableSensitiveDataLogging();
+#endif
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
