@@ -29,9 +29,9 @@ namespace _4oito6.Template.Api.Controllers
         /// <param name="request"></param>
         /// <returns></returns>
         [ProducesResponseType(typeof(ResponseMessage<UserResponse>), (int)HttpStatusCode.OK)]
-        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
-        [ProducesResponseType((int)HttpStatusCode.Conflict)]
-        [ProducesResponseType((int)HttpStatusCode.InternalServerError)]
+        [ProducesResponseType(typeof(ResponseMessage<UserResponse>), (int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType(typeof(ResponseMessage<UserResponse>), (int)HttpStatusCode.Conflict)]
+        [ProducesResponseType(typeof(ResponseMessage), (int)HttpStatusCode.InternalServerError)]
         [HttpPost]
         [AllowAnonymous]
         public async Task<IActionResult> CreateUserAsync([FromBody]UserRequest request)
