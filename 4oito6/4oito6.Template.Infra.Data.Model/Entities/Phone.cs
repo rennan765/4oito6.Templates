@@ -23,5 +23,18 @@ namespace _4oito6.Template.Infra.Data.Model.Entities
             Number = number;
             Users = users;
         }
+
+        public Phone(long id, string localCode, string number)
+        {
+            Id = id;
+            LocalCode = localCode;
+            Number = number;
+        }
+
+        public Phone(string localCode, string number)
+        {
+            LocalCode = localCode;
+            Number = number;
+        }
     }
 }

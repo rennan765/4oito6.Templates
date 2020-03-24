@@ -16,7 +16,29 @@ namespace _4oito6.Template.Infra.Data.Model.Entities
         public virtual Address Address { get; private set; }
         public virtual IList<UserPhone> Phones { get; private set; }
 
-        public User(int id, string firstName, string middleName, string lastName, string email, string cpf, long? idAddress, Address address, IList<UserPhone> phones)
+        public User(int id, string firstName, string middleName, string lastName, string email, string cpf, Address address, IList<UserPhone> phones)
+        {
+            Id = id;
+            FirstName = firstName;
+            MiddleName = middleName;
+            LastName = lastName;
+            Email = email;
+            Cpf = cpf;
+            Phones = phones;
+
+            if (address != null)
+            {
+                IdAddress = address.Id;
+                Address = address;
+            }
+        }
+
+        protected User()
+        {
+            Phones = new List<UserPhone>();
+        }
+
+        public User(int id, string firstName, string middleName, string lastName, string email, string cpf, long? idAddress)
         {
             Id = id;
             FirstName = firstName;
@@ -25,13 +47,6 @@ namespace _4oito6.Template.Infra.Data.Model.Entities
             Email = email;
             Cpf = cpf;
             IdAddress = idAddress;
-            Address = address;
-            Phones = phones;
-        }
-
-        protected User()
-        {
-            Phones = new List<UserPhone>();
         }
     }
 }
