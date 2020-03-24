@@ -415,5 +415,121 @@ namespace _4oito6.Template.Tests.Services.User
             Assert.True(comparison.Compare(serviceMock.GetMessages(), expectedMessages).AreEqual);
             mocker.Verify();
         }
+
+        [Fact(DisplayName = "UpdateUserAsync_InvalidAddress")]
+        [Trait("UpdateUserAsync", "UserService")]
+        public async Task UpdateUserAsync_InvalidAddress()
+        {
+            //Arrange
+            var comparison = new CompareLogic();
+            var mocker = new AutoMocker();
+            var serviceMock = mocker.CreateInstance<UserService>();
+
+            var request = GetRequestToUpdate(TestCase.InvalidAddress);
+            var userDb = GetUserToUpdate(TestCase.InvalidAddress);
+            var expectedMessages = new string[] { "O bairro é obrigátório.", "O estado deve ser informado no  formato de sigla." };
+
+            mocker.GetMock<IUserBus>()
+                .Setup(b => b.GetByIdAsync(request.Id ?? 0))
+                .ReturnsAsync(userDb)
+                .Verifiable();
+
+            mocker.GetMock<IUserBus>()
+                .Setup(b => b.ExistsEmailAsync(request.Email, request.Id))
+                .ReturnsAsync(false)
+                .Verifiable();
+
+            mocker.GetMock<IAddressBus>()
+                .Setup(b => b.GetByInfoAsync(request.Address.Street, request.Address.Number, request.Address.Complement, request.Address.District, request.Address.City, request.Address.State, request.Address.PostalCode))
+                .ReturnsAsync((Entities.Address)null)
+                .Verifiable();
+
+            //Act
+            var response = await serviceMock.UpdateUserAsync(request).ConfigureAwait(false);
+
+            //Assert
+            response.Should().BeNull();
+            serviceMock.IsSatisfied().Should().BeFalse();
+            Assert.True(serviceMock.GetStatusCode() == HttpStatusCode.BadRequest);
+            Assert.True(comparison.Compare(serviceMock.GetMessages(), expectedMessages).AreEqual);
+            mocker.Verify();
+        }
+
+        [Fact(DisplayName = "UpdateUserAsync_InvalidPhone")]
+        [Trait("UpdateUserAsync", "UserService")]
+        public async Task UpdateUserAsync_InvalidPhone()
+        {
+            //Arrange
+            var comparison = new CompareLogic();
+            var mocker = new AutoMocker();
+            var serviceMock = mocker.CreateInstance<UserService>();
+
+            var request = GetRequestToUpdate(TestCase.InvalidPhone);
+            var userDb = GetUserToUpdate(TestCase.InvalidPhone);
+
+            var tuples = request.Phones.Select(phone => new Tuple<string, string>(phone.LocalCode, phone.Number)).ToList();
+            var expectedMessages = new string[] { "O DDD precisa ter 2 caracteres.", "O DDD precisa ter 8 ou 9 caracteres.", "O DDD precisa ter 2 caracteres.", "O DDD precisa ter 8 ou 9 caracteres." };
+
+            mocker.GetMock<IUserBus>()
+                .Setup(b => b.GetByIdAsync(request.Id ?? 0))
+                .ReturnsAsync(userDb)
+                .Verifiable();
+
+            mocker.GetMock<IUserBus>()
+                .Setup(b => b.ExistsEmailAsync(request.Email, request.Id))
+                .ReturnsAsync(false)
+                .Verifiable();
+
+            mocker.GetMock<IPhoneBus>()
+                .Setup(b => b.GetByNumbersAsync(It.Is<IList<Tuple<string, string>>>(ts => comparison.Compare(ts, tuples).AreEqual)))
+                .ReturnsAsync(new List<Entities.Phone>())
+                .Verifiable();
+
+            //Act
+            var response = await serviceMock.UpdateUserAsync(request).ConfigureAwait(false);
+
+            //Assert
+            response.Should().BeNull();
+            serviceMock.IsSatisfied().Should().BeFalse();
+            Assert.True(serviceMock.GetStatusCode() == HttpStatusCode.BadRequest);
+            Assert.True(comparison.Compare(serviceMock.GetMessages(), expectedMessages).AreEqual);
+            mocker.Verify();
+        }
+
+        [Fact(DisplayName = "UpdateUserAsync_InvalidUser")]
+        [Trait("UpdateUserAsync", "UserService")]
+        public async Task UpdateUserAsync_InvalidUser()
+        {
+            //Arrange
+            var comparison = new CompareLogic();
+            var mocker = new AutoMocker();
+            var serviceMock = mocker.CreateInstance<UserService>();
+
+            var request = GetRequestToUpdate(TestCase.InvalidUser);
+            var userDb = GetUserToUpdate(TestCase.InvalidUser);
+
+            var tuples = request.Phones.Select(phone => new Tuple<string, string>(phone.LocalCode, phone.Number)).ToList();
+            var expectedMessages = new string[] { "O primeiro nome é obrigatório." };
+
+            mocker.GetMock<IUserBus>()
+                .Setup(b => b.GetByIdAsync(request.Id ?? 0))
+                .ReturnsAsync(userDb)
+                .Verifiable();
+
+            mocker.GetMock<IUserBus>()
+                .Setup(b => b.ExistsEmailAsync(request.Email, request.Id))
+                .ReturnsAsync(false)
+                .Verifiable();
+
+            //Act
+            var response = await serviceMock.UpdateUserAsync(request).ConfigureAwait(false);
+
+            //Assert
+            response.Should().BeNull();
+            serviceMock.IsSatisfied().Should().BeFalse();
+            Assert.True(serviceMock.GetStatusCode() == HttpStatusCode.BadRequest);
+            Assert.True(comparison.Compare(serviceMock.GetMessages(), expectedMessages).AreEqual);
+            mocker.Verify();
+        }
     }
 }
