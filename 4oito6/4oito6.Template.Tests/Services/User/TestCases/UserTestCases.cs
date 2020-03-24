@@ -143,5 +143,45 @@ namespace _4oito6.Template.Tests.Services.User.TestCases
 
         internal static Entities.Address GetAddressFromDb(UserRequest request)
             => new Entities.Address(84, request.Address.Street, request.Address.Number, request.Address.Complement, request.Address.District, request.Address.City, request.Address.State, request.Address.PostalCode);
+
+        internal static UserRequest GetRequestToUpdate(TestCase testCase)
+        {
+            var request = GetRequest(testCase);
+            request.Id = 8;
+
+            return request;
+        }
+
+        internal static Entities.User GetUserToUpdate(TestCase testCase)
+        {
+            var request = GetRequestToUpdate(testCase);
+
+            Entities.Address address = null;
+
+            if (request.Address != null)
+                address = new Entities.Address
+                (
+                    90,
+                    request.Address.Street,
+                    request.Address.Number,
+                    request.Address.Complement,
+                    request.Address.District,
+                    request.Address.City,
+                    request.Address.State,
+                    request.Address.PostalCode
+                );
+
+            var idPhone = 88;
+
+            return new Entities.User
+                (
+                    request.Id ?? 0,
+                    new Name(request.FirstName, request.MiddleName, request.LastName),
+                    request.Email,
+                    request.Cpf,
+                    address,
+                    request.Phones.Select(r => new Entities.Phone(++idPhone, r.LocalCode, r.Number)).ToList()
+                );
+        }
     }
 }

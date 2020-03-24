@@ -353,5 +353,67 @@ namespace _4oito6.Template.Tests.Services.User
             Assert.True(comparison.Compare(expectedResult, result).AreEqual);
             mocker.Verify();
         }
+
+        [Fact(DisplayName = "UpdateUserAsync_UserNotFount")]
+        [Trait("UpdateUserAsync", "UserService")]
+        public async Task UpdateUserAsync_UserNotFount()
+        {
+            //Arrange
+            var comparison = new CompareLogic();
+            var mocker = new AutoMocker();
+            var serviceMock = mocker.CreateInstance<UserService>();
+
+            var request = GetRequestToUpdate(TestCase.EmailExists);
+            var expectedMessages = new string[] { "Usuário não encontrado." };
+
+            mocker.GetMock<IUserBus>()
+                .Setup(b => b.GetByIdAsync(request.Id ?? 0))
+                .ReturnsAsync((Entities.User)null)
+                .Verifiable();
+
+            //Act
+            var response = await serviceMock.UpdateUserAsync(request).ConfigureAwait(false);
+
+            //Assert
+            response.Should().BeNull();
+            serviceMock.IsSatisfied().Should().BeFalse();
+            Assert.True(serviceMock.GetStatusCode() == HttpStatusCode.NotFound);
+            Assert.True(comparison.Compare(serviceMock.GetMessages(), expectedMessages).AreEqual);
+            mocker.Verify();
+        }
+
+        [Fact(DisplayName = "UpdateUserAsync_EmailExists")]
+        [Trait("UpdateUserAsync", "UserService")]
+        public async Task UpdateUserAsync_EmailExists()
+        {
+            //Arrange
+            var comparison = new CompareLogic();
+            var mocker = new AutoMocker();
+            var serviceMock = mocker.CreateInstance<UserService>();
+
+            var request = GetRequestToUpdate(TestCase.EmailExists);
+            var userDb = GetUserToUpdate(TestCase.EmailExists);
+            var expectedMessages = new string[] { "E-mail já cadastrado." };
+
+            mocker.GetMock<IUserBus>()
+                .Setup(b => b.GetByIdAsync(request.Id ?? 0))
+                .ReturnsAsync(userDb)
+                .Verifiable();
+
+            mocker.GetMock<IUserBus>()
+                .Setup(b => b.ExistsEmailAsync(request.Email, request.Id))
+                .ReturnsAsync(true)
+                .Verifiable();
+
+            //Act
+            var response = await serviceMock.UpdateUserAsync(request).ConfigureAwait(false);
+
+            //Assert
+            response.Should().BeNull();
+            serviceMock.IsSatisfied().Should().BeFalse();
+            Assert.True(serviceMock.GetStatusCode() == HttpStatusCode.Conflict);
+            Assert.True(comparison.Compare(serviceMock.GetMessages(), expectedMessages).AreEqual);
+            mocker.Verify();
+        }
     }
 }
