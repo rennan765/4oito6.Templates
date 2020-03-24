@@ -15,15 +15,37 @@ namespace _4oito6.Template.Infra.Data.Bus.Contracts.Mapper
         public static IList<DataModel.UserPhone> ToDataModel(this IList<DomainModel.Phone> phones, DomainModel.User user)
         {
             var list = new List<DataModel.UserPhone>();
-            var dmUser = new DataModel.User(user.Id, user.Name.FirstName, user.Name.MiddleName, user.Name.LastName, user.Email, user.Cpf, user.Address.ToDataModel(), null);
+            var dmUser = new DataModel.User
+            {
+                FirstName = user.Name.FirstName,
+                MiddleName = user.Name.MiddleName,
+                LastName = user.Name.LastName,
+                Email = user.Email,
+                Cpf = user.Cpf
+            };
+
+            if (user.Id > 0)
+                dmUser.Id = user.Id;
 
             foreach (var p in phones)
             {
-                var phone = p.Id > 0 ?
-                    new DataModel.Phone(p.Id, p.LocalCode, p.Number) :
-                    new DataModel.Phone(p.LocalCode, p.Number);
+                var up = new DataModel.UserPhone();
 
-                list.Add(new DataModel.UserPhone(phone, dmUser));
+                if (p.Id > 0)
+                    up.IdPhone = p.Id;
+                else
+                    up.Phone = new DataModel.Phone
+                    {
+                        LocalCode = p.LocalCode,
+                        Number = p.Number
+                    };
+
+                if (user.Id > 0)
+                    up.IdUser = user.Id;
+                else
+                    up.User = dmUser;
+
+                list.Add(up);
             }
 
             return list;

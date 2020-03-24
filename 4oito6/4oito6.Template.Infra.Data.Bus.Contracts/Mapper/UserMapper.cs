@@ -12,7 +12,23 @@ namespace _4oito6.Template.Infra.Data.Bus.Contracts.Mapper
             var phones = entity.Phones.ToDataModel(entity);
             var address = entity.Address?.ToDataModel();
 
-            return new DataModel.User(entity.Id, entity.Name.FirstName, entity.Name.MiddleName, entity.Name.LastName, entity.Email, entity.Cpf, address, phones);
+            var user = new DataModel.User
+            {
+                Id = entity.Id,
+                FirstName = entity.Name.FirstName,
+                MiddleName = entity.Name.MiddleName,
+                LastName = entity.Name.LastName,
+                Email = entity.Email,
+                Cpf = entity.Cpf,
+                Phones = phones
+            };
+
+            if ((address?.Id ?? 0) > 0)
+                user.IdAddress = address?.Id;
+            else
+                user.Address = address;
+
+            return user;
         }
 
         public static DomainModel.User ToDomainModel(this DataModel.User dataModel)
