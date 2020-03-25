@@ -587,5 +587,131 @@ namespace _4oito6.Template.Tests.Services.User
             Assert.True(comparison.Compare(expectedResult, result).AreEqual);
             mocker.Verify();
         }
+
+        [Fact(DisplayName = "UpdateUserAsync_PerfectWay_HavePhoneInDb")]
+        [Trait("UpdateUserAsync", "UserService")]
+        public async Task UpdateUserAsync_PerfectWay_HavePhoneInDb()
+        {
+            //Arrange
+            var comparison = new CompareLogic();
+            var mocker = new AutoMocker();
+            var serviceMock = mocker.CreateInstance<UserService>();
+
+            var request = GetRequestToUpdate(TestCase.PerfectWay);
+            var userDb = GetUserToUpdate(TestCase.PerfectWay);
+
+            var phonesDb = GetPhonesFromDb(request);
+            var expectedResult = GetResponseByUser(userDb);
+
+            userDb.ChangePhones
+            (
+                request.Phones
+                    .Where(p => !phonesDb.Any(db => db.LocalCode == p.LocalCode & db.Number == p.Number))
+                    .Select(p => new Entities.Phone(p.LocalCode, p.Number))
+                    .Concat(phonesDb)
+                    .ToList()
+            );
+
+            var phones = request.Phones
+                .Select(phone => new Tuple<string, string>(phone.LocalCode, phone.Number))
+                .ToList();
+
+            mocker.GetMock<IUserBus>()
+                .Setup(b => b.GetByIdAsync(request.Id ?? 0))
+                .ReturnsAsync(userDb)
+                .Verifiable();
+
+            mocker.GetMock<IUserBus>()
+                .Setup(b => b.ExistsEmailAsync(request.Email, request.Id))
+                .ReturnsAsync(false)
+                .Verifiable();
+
+            mocker.GetMock<IAddressBus>()
+                .Setup(b => b.GetByInfoAsync(request.Address.Street, request.Address.Number, request.Address.Complement, request.Address.District, request.Address.City, request.Address.State, request.Address.PostalCode))
+                .ReturnsAsync((Entities.Address)null)
+                .Verifiable();
+
+            mocker.GetMock<IPhoneBus>()
+                .Setup
+                (
+                    b => b.GetByNumbersAsync
+                    (
+                        It.Is<IList<Tuple<string, string>>>(p => comparison.Compare(p, phones).AreEqual)
+                    )
+                )
+                .ReturnsAsync(phonesDb)
+                .Verifiable();
+
+            mocker.GetMock<IUserBus>()
+                .Setup(b => b.UpdateUserAsync(It.Is<Entities.User>(u => comparison.Compare(u, userDb).AreEqual)))
+                .Verifiable();
+
+            //Act
+            var result = await serviceMock.UpdateUserAsync(request).ConfigureAwait(false);
+
+            //Assert
+            serviceMock.IsSatisfied().Should().BeTrue();
+            Assert.True(comparison.Compare(expectedResult, result).AreEqual);
+            mocker.Verify();
+        }
+
+        [Fact(DisplayName = "UpdateUserAsync_PerfectWay_HaveAddressInDb")]
+        [Trait("UpdateUserAsync", "UserService")]
+        public async Task UpdateUserAsync_PerfectWay_HaveAddressInDb()
+        {
+            //Arrange
+            var comparison = new CompareLogic();
+            var mocker = new AutoMocker();
+            var serviceMock = mocker.CreateInstance<UserService>();
+
+            var request = GetRequestToUpdate(TestCase.PerfectWay);
+            var userDb = GetUserToUpdate(TestCase.PerfectWay);
+
+            var addressDb = GetAddressFromDb(request);
+            userDb.ChangeAddress(addressDb);
+            var expectedResult = GetResponseByUser(userDb);
+
+            var phones = request.Phones
+                .Select(phone => new Tuple<string, string>(phone.LocalCode, phone.Number))
+                .ToList();
+
+            mocker.GetMock<IUserBus>()
+                .Setup(b => b.GetByIdAsync(request.Id ?? 0))
+                .ReturnsAsync(userDb)
+                .Verifiable();
+
+            mocker.GetMock<IUserBus>()
+                .Setup(b => b.ExistsEmailAsync(request.Email, request.Id))
+                .ReturnsAsync(false)
+                .Verifiable();
+
+            mocker.GetMock<IAddressBus>()
+                .Setup(b => b.GetByInfoAsync(request.Address.Street, request.Address.Number, request.Address.Complement, request.Address.District, request.Address.City, request.Address.State, request.Address.PostalCode))
+                .ReturnsAsync(addressDb)
+                .Verifiable();
+
+            mocker.GetMock<IPhoneBus>()
+                .Setup
+                (
+                    b => b.GetByNumbersAsync
+                    (
+                        It.Is<IList<Tuple<string, string>>>(p => comparison.Compare(p, phones).AreEqual)
+                    )
+                )
+                .ReturnsAsync(new List<Entities.Phone>())
+                .Verifiable();
+
+            mocker.GetMock<IUserBus>()
+                .Setup(b => b.UpdateUserAsync(It.Is<Entities.User>(u => comparison.Compare(u, userDb).AreEqual)))
+                .Verifiable();
+
+            //Act
+            var result = await serviceMock.UpdateUserAsync(request).ConfigureAwait(false);
+
+            //Assert
+            serviceMock.IsSatisfied().Should().BeTrue();
+            Assert.True(comparison.Compare(expectedResult, result).AreEqual);
+            mocker.Verify();
+        }
     }
 }
