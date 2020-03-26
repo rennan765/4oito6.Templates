@@ -46,6 +46,13 @@ namespace _4oito6.Template.Infra.Data.Bus.Implementation
         {
             var userDb = await _userRepository.GetByIdAsync(user.Id).ConfigureAwait(false);
 
+            userDb.FirstName = user.Name.FirstName;
+            userDb.MiddleName = user.Name.MiddleName;
+            userDb.LastName = user.Name.LastName;
+
+            userDb.Email = user.Email;
+            userDb.Cpf = user.Cpf;
+
             if (user.Address != null)
             {
                 if (userDb.IdAddress != user.Address.Id)
@@ -73,7 +80,7 @@ namespace _4oito6.Template.Infra.Data.Bus.Implementation
                 .ToList().ToDataModel(user).ToList()
                 .ForEach(up => userDb.Phones.Add(up));
 
-            var updatedUser = await _userRepository.UpdateAsync(user.ToDataModel()).ConfigureAwait(false);
+            var updatedUser = await _userRepository.UpdateAsync(userDb).ConfigureAwait(false);
 
             await Unit.SaveEntityChangesAsync().ConfigureAwait(false);
 
