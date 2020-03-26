@@ -130,6 +130,10 @@ namespace _4oito6.Template.Domain.Services.Implementation
                     user.ChangeAddress(address);
                 }
             }
+            else
+            {
+                user.RemoveAddress();
+            }
 
             IList<Phone> phones = new List<Phone>();
 
@@ -156,6 +160,10 @@ namespace _4oito6.Template.Domain.Services.Implementation
                     });
 
                 user.ChangePhones(phones);
+            }
+            else
+            {
+                user.RemovePhones();
             }
 
             user.Update(request.FirstName, request.MiddleName, request.LastName, request.Email, request.Cpf);

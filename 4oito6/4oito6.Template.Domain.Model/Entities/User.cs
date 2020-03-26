@@ -1,8 +1,6 @@
 ﻿using _4oito6.Domain.Model.Core.Entities;
 using _4oito6.Template.Domain.Model.ValueObjects;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace _4oito6.Template.Domain.Model.Entities
 {
@@ -66,6 +64,16 @@ namespace _4oito6.Template.Domain.Model.Entities
         public void ChangePhones(IList<Phone> phones)
         {
             Phones = phones;
+        }
+
+        public void RemoveAddress()
+        {
+            Address = null;
+        }
+
+        public void RemovePhones()
+        {
+            Phones = new List<Phone>();
         }
     }
 }
