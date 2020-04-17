@@ -1,4 +1,5 @@
-﻿using _4oito6.Infra.Data.Bus.Core.Implementation;
+﻿using _4oito6.Infra.CrossCutting.Token.Interfaces;
+using _4oito6.Infra.Data.Bus.Core.Implementation;
 using _4oito6.Infra.Data.Transactions.Contracts.Interfaces;
 using _4oito6.Template.Infra.Data.Bus.Contracts.Interfaces;
 using _4oito6.Template.Infra.Data.Bus.Contracts.Mapper;
@@ -15,13 +16,15 @@ namespace _4oito6.Template.Infra.Data.Bus.Implementation
         private IUserRepository _userRepository;
         private IPhoneRepository _phoneRepository;
         private IAddressRepository _addressRepository;
+        private ITokenBuilderService _tokenBuilderService;
 
-        public UserBus(IUnitOfWork unit, IUserRepository userRepository, IPhoneRepository phoneRepository, IAddressRepository addressRepository)
+        public UserBus(IUnitOfWork unit, IUserRepository userRepository, IPhoneRepository phoneRepository, IAddressRepository addressRepository, ITokenBuilderService tokenBuilderService)
             : base(unit, new IDisposable[] { userRepository, phoneRepository, addressRepository })
         {
             _userRepository = userRepository ?? throw new ArgumentNullException(nameof(userRepository));
             _phoneRepository = phoneRepository ?? throw new ArgumentNullException(nameof(phoneRepository));
             _addressRepository = addressRepository ?? throw new ArgumentNullException(nameof(addressRepository));
+            _tokenBuilderService = tokenBuilderService ?? throw new ArgumentNullException(nameof(tokenBuilderService));
         }
 
         public async Task<DomainModel.User> CreateUserAsync(DomainModel.User user)
@@ -38,9 +41,27 @@ namespace _4oito6.Template.Infra.Data.Bus.Implementation
                 await _userRepository.ExistsAsync(u => u.Email == email).ConfigureAwait(false) :
                 await _userRepository.ExistsAsync(u => u.Email == email && u.Id != idUser).ConfigureAwait(false);
 
+        public async Task<DomainModel.User> GetByEmailAsync(string email)
+        {
+            var dataModelUser = await _userRepository.GetAsync(u => u.Email == email).ConfigureAwait(false);
+
+            if (dataModelUser == null)
+                return null;
+
+            return dataModelUser.ToDomainModel();
+        }
+
         public async Task<DomainModel.User> GetByIdAsync(int id)
             => (await _userRepository.GetByIdAsync(id).ConfigureAwait(false))
                 .ToDomainModel();
+
+        public Task<DomainModel.TokenModel> LoginAsync(DomainModel.User user)
+        {
+            var token = _tokenBuilderService.BuildToken(user.Id, user.Email, string.Empty);
+            var tokenModel = _tokenBuilderService.GetToken();
+
+            return Task.FromResult(new DomainModel.TokenModel(tokenModel.Id, tokenModel.Email, token));
+        }
 
         public async Task<DomainModel.User> UpdateUserAsync(DomainModel.User user)
         {

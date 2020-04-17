@@ -176,5 +176,23 @@ namespace _4oito6.Template.Domain.Services.Implementation
 
             return new UserResponse { Id = user.Id };
         }
+
+        public async Task<LoginResponse> LoginAsync(LoginRequest request)
+        {
+            var user = await _userBus.GetByEmailAsync(request.Email).ConfigureAwait(false);
+
+            if (user == null)
+            {
+                var spec = new LoginSpec();
+                spec.AddMessage(BusinessSpecStatus.Forbidden, "Nome de usuário inválido.");
+
+                AddSpec(spec);
+                return null;
+            }
+
+            var token = await _userBus.LoginAsync(user).ConfigureAwait(false);
+
+            return new LoginResponse(token.Token, token.IdUser, token.Email);
+        }
     }
 }

@@ -13,5 +13,9 @@ namespace _4oito6.Template.Infra.Data.Bus.Contracts.Interfaces
         Task<bool> ExistsEmailAsync(string email, int? idUser = null);
 
         Task<User> GetByIdAsync(int id);
+
+        Task<User> GetByEmailAsync(string email);
+
+        Task<TokenModel> LoginAsync(User user);
     }
 }

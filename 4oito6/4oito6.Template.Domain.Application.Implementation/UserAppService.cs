@@ -44,6 +44,24 @@ namespace _4oito6.Template.Domain.Application.Implementation
             return message;
         }
 
+        public async Task<ResponseMessage<LoginResponse>> LoginAsync(LoginRequest request)
+        {
+            Unit.BeginTransaction(DataSource.EntityFramework);
+
+            var response = await _userService.LoginAsync(request).ConfigureAwait(false);
+
+            var message = new ResponseMessage<LoginResponse>
+            {
+                Data = response,
+                StatusCode = (int)_userService.GetStatusCode()
+            };
+
+            if (!_userService.IsSatisfied())
+                message.Errors = _userService.GetMessages();
+
+            return message;
+        }
+
         public async Task<ResponseMessage<UserResponse>> UpdateUserAsync(UserRequest request)
         {
             Unit.BeginTransaction(DataSource.EntityFramework);

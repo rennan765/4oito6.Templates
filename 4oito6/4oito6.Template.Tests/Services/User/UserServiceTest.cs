@@ -1,4 +1,6 @@
-﻿using _4oito6.Template.Domain.Services.Implementation;
+﻿using _4oito6.Template.Domain.Services.Contracts.Arguments.Request;
+using _4oito6.Template.Domain.Services.Contracts.Arguments.Response;
+using _4oito6.Template.Domain.Services.Implementation;
 using _4oito6.Template.Infra.Data.Bus.Contracts.Interfaces;
 using FluentAssertions;
 using KellermanSoftware.CompareNetObjects;
@@ -779,6 +781,71 @@ namespace _4oito6.Template.Tests.Services.User
             //Assert
             serviceMock.IsSatisfied().Should().BeTrue();
             Assert.True(comparison.Compare(expectedResult, result).AreEqual);
+            mocker.Verify();
+        }
+
+        [Fact(DisplayName = "LoginAsync_ShouldReturnNull_DueToInvalidEmail")]
+        [Trait("LoginAsync", "UserService")]
+        public async Task LoginAsync_ShouldReturnNull_DueToInvalidEmail()
+        {
+            //Assert
+            var mocker = new AutoMocker();
+            var service = mocker.CreateInstance<UserService>();
+
+            var request = new LoginRequest
+            {
+                Email = "teste@teste.com"
+            };
+
+            mocker.GetMock<IUserBus>()
+                .Setup(b => b.GetByEmailAsync(request.Email))
+                .ReturnsAsync((Entities.User)null)
+                .Verifiable();
+
+            //Act
+            var result = await service.LoginAsync(request).ConfigureAwait(false);
+
+            //Assert
+            service.IsSatisfied().Should().BeFalse();
+            result.Should().BeNull();
+            mocker.Verify();
+        }
+
+        [Fact(DisplayName = "LoginAsync_ShouldExecuteSuccessfully")]
+        [Trait("LoginAsync", "UserService")]
+        public async Task LoginAsync_ShouldExecuteSuccessfully()
+        {
+            //Assert
+            var comparison = new CompareLogic();
+            var mocker = new AutoMocker();
+            var service = mocker.CreateInstance<UserService>();
+
+            var request = new LoginRequest
+            {
+                Email = "teste@teste.com"
+            };
+
+            var user = GetUserToLogin(request.Email);
+            var tokenModel = GetTokenFromUser(user);
+
+            var expectedResult = new LoginResponse(tokenModel.Token, tokenModel.IdUser, tokenModel.Email);
+
+            mocker.GetMock<IUserBus>()
+                .Setup(b => b.GetByEmailAsync(request.Email))
+                .ReturnsAsync(user)
+                .Verifiable();
+
+            mocker.GetMock<IUserBus>()
+                .Setup(b => b.LoginAsync(It.Is<Entities.User>(u => comparison.Compare(u, user).AreEqual)))
+                .ReturnsAsync(tokenModel)
+                .Verifiable();
+
+            //Act
+            var result = await service.LoginAsync(request).ConfigureAwait(false);
+
+            //Assert
+            service.IsSatisfied().Should().BeTrue();
+            comparison.Compare(expectedResult, result).AreEqual.Should().BeTrue();
             mocker.Verify();
         }
     }

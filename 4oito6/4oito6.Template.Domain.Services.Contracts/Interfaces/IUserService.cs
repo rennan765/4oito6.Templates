@@ -10,5 +10,7 @@ namespace _4oito6.Template.Domain.Services.Contracts.Interfaces
         Task<UserResponse> CreateUserAsync(UserRequest request);
 
         Task<UserResponse> UpdateUserAsync(UserRequest request);
+
+        Task<LoginResponse> LoginAsync(LoginRequest request);
     }
 }

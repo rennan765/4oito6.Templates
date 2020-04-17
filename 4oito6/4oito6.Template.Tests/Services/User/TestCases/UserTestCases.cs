@@ -1,6 +1,7 @@
 ﻿using _4oito6.Template.Domain.Model.ValueObjects;
 using _4oito6.Template.Domain.Services.Contracts.Arguments.Request;
 using _4oito6.Template.Domain.Services.Contracts.Arguments.Response;
+using Bogus;
 using System.Collections.Generic;
 using System.Linq;
 using Entities = _4oito6.Template.Domain.Model.Entities;
@@ -183,5 +184,25 @@ namespace _4oito6.Template.Tests.Services.User.TestCases
                     request.Phones.Select(r => new Entities.Phone(++idPhone, r.LocalCode, r.Number)).ToList()
                 );
         }
+
+        internal static Entities.User GetUserToLogin(string email)
+            => new Faker<Entities.User>()
+                .CustomInstantiator(f =>
+                    new Entities.User
+                    (
+                        f.Random.Int(1, 99),
+                        new Name(f.Random.String(), f.Random.String(), f.Random.String()),
+                        email,
+                        f.Random.Long(111111111111, 666666666666).ToString()
+                    )
+                )
+                .Generate(1)
+                .First();
+
+        internal static Entities.TokenModel GetTokenFromUser(Entities.User user)
+            => new Faker<Entities.TokenModel>()
+                .CustomInstantiator(f => new Entities.TokenModel(user.Id, user.Email, f.Random.String()))
+                .Generate(1)
+                .First();
     }
 }
