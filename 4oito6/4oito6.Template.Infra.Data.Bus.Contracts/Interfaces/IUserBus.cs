@@ -17,5 +17,7 @@ namespace _4oito6.Template.Infra.Data.Bus.Contracts.Interfaces
         Task<User> GetByEmailAsync(string email);
 
         Task<TokenModel> LoginAsync(User user);
+
+        Task<TokenModel> GetTokenAsync();
     }
 }

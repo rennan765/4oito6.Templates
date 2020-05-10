@@ -105,6 +105,17 @@ namespace _4oito6.Template.Domain.Services.Implementation
                 return null;
             }
 
+            var token = await _userBus.GetTokenAsync().ConfigureAwait(false);
+
+            if (token?.Email != user.Email)
+            {
+                var spec = new CreateUserSpec();
+                spec.AddMessage(BusinessSpecStatus.Forbidden, "Só é possível editar o próprio usuário.");
+
+                AddSpec(spec);
+                return null;
+            }
+
             if (await _userBus.ExistsEmailAsync(request.Email, request.Id).ConfigureAwait(false))
             {
                 var spec = new CreateUserSpec();

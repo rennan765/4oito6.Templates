@@ -47,6 +47,7 @@ namespace _4oito6.Template.Api.Controllers
         /// <returns></returns>
         [ProducesResponseType(typeof(ResponseMessage<UserResponse>), (int)HttpStatusCode.OK)]
         [ProducesResponseType(typeof(ResponseMessage<UserResponse>), (int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType(typeof(ResponseMessage<UserResponse>), (int)HttpStatusCode.Forbidden)]
         [ProducesResponseType(typeof(ResponseMessage<UserResponse>), (int)HttpStatusCode.NotFound)]
         [ProducesResponseType(typeof(ResponseMessage<UserResponse>), (int)HttpStatusCode.Conflict)]
         [ProducesResponseType(typeof(ResponseMessage), (int)HttpStatusCode.InternalServerError)]

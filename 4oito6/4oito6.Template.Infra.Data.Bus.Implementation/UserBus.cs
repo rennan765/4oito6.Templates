@@ -55,6 +55,13 @@ namespace _4oito6.Template.Infra.Data.Bus.Implementation
             => (await _userRepository.GetByIdAsync(id).ConfigureAwait(false))
                 .ToDomainModel();
 
+        public Task<DomainModel.TokenModel> GetTokenAsync()
+        {
+            var tokenModel = _tokenBuilderService.GetToken();
+
+            return Task.FromResult(new DomainModel.TokenModel(tokenModel.Id, tokenModel.Email, null));
+        }
+
         public Task<DomainModel.TokenModel> LoginAsync(DomainModel.User user)
         {
             var token = _tokenBuilderService.BuildToken(user.Id, user.Email, string.Empty);
