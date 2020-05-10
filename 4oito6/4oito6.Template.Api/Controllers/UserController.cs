@@ -51,7 +51,6 @@ namespace _4oito6.Template.Api.Controllers
         [ProducesResponseType(typeof(ResponseMessage<UserResponse>), (int)HttpStatusCode.Conflict)]
         [ProducesResponseType(typeof(ResponseMessage), (int)HttpStatusCode.InternalServerError)]
         [HttpPut]
-        [AllowAnonymous]
         public async Task<IActionResult> UpdateUserAsync([FromBody]UserRequest request)
         {
             var response = await _userAppService.UpdateUserAsync(request).ConfigureAwait(false);
