@@ -356,9 +356,9 @@ namespace _4oito6.Template.Tests.Services.User
             mocker.Verify();
         }
 
-        [Fact(DisplayName = "UpdateUserAsync_UserNotFount")]
+        [Fact(DisplayName = "UpdateUserAsync_UserNotFound")]
         [Trait("UpdateUserAsync", "UserService")]
-        public async Task UpdateUserAsync_UserNotFount()
+        public async Task UpdateUserAsync_UserNotFound()
         {
             //Arrange
             var comparison = new CompareLogic();
@@ -384,6 +384,43 @@ namespace _4oito6.Template.Tests.Services.User
             mocker.Verify();
         }
 
+        [Fact(DisplayName = "UpdateUserAsync_NotLoggedUser")]
+        [Trait("UpdateUserAsync", "UserService")]
+        public async Task UpdateUserAsync_NotLoggedUser()
+        {
+            //Arrange
+            var comparison = new CompareLogic();
+            var mocker = new AutoMocker();
+            var serviceMock = mocker.CreateInstance<UserService>();
+
+            var request = GetRequestToUpdate(TestCase.EmailExists);
+            var userDb = GetUserToUpdate(TestCase.EmailExists);
+
+            mocker.GetMock<IUserBus>()
+                .Setup(b => b.GetByIdAsync(request.Id ?? 0))
+                .ReturnsAsync(userDb)
+                .Verifiable();
+
+            var token = new Entities.TokenModel(userDb.Id + 1, "another@e.mail", null);
+
+            mocker.GetMock<IUserBus>()
+                .Setup(b => b.GetTokenAsync())
+                .ReturnsAsync(token)
+                .Verifiable();
+
+            var expectedMessages = new string[] { "Só é possível editar o próprio usuário." };
+
+            //Act
+            var response = await serviceMock.UpdateUserAsync(request).ConfigureAwait(false);
+
+            //Assert
+            response.Should().BeNull();
+            serviceMock.IsSatisfied().Should().BeFalse();
+            (serviceMock.GetStatusCode() == HttpStatusCode.Forbidden).Should().BeTrue();
+            comparison.Compare(serviceMock.GetMessages(), expectedMessages).AreEqual.Should().BeTrue();
+            mocker.Verify();
+        }
+
         [Fact(DisplayName = "UpdateUserAsync_EmailExists")]
         [Trait("UpdateUserAsync", "UserService")]
         public async Task UpdateUserAsync_EmailExists()
@@ -400,6 +437,13 @@ namespace _4oito6.Template.Tests.Services.User
             mocker.GetMock<IUserBus>()
                 .Setup(b => b.GetByIdAsync(request.Id ?? 0))
                 .ReturnsAsync(userDb)
+                .Verifiable();
+
+            var token = new Entities.TokenModel(userDb.Id, userDb.Email, null);
+
+            mocker.GetMock<IUserBus>()
+                .Setup(b => b.GetTokenAsync())
+                .ReturnsAsync(token)
                 .Verifiable();
 
             mocker.GetMock<IUserBus>()
@@ -434,6 +478,13 @@ namespace _4oito6.Template.Tests.Services.User
             mocker.GetMock<IUserBus>()
                 .Setup(b => b.GetByIdAsync(request.Id ?? 0))
                 .ReturnsAsync(userDb)
+                .Verifiable();
+
+            var token = new Entities.TokenModel(userDb.Id, userDb.Email, null);
+
+            mocker.GetMock<IUserBus>()
+                .Setup(b => b.GetTokenAsync())
+                .ReturnsAsync(token)
                 .Verifiable();
 
             mocker.GetMock<IUserBus>()
@@ -477,6 +528,13 @@ namespace _4oito6.Template.Tests.Services.User
                 .ReturnsAsync(userDb)
                 .Verifiable();
 
+            var token = new Entities.TokenModel(userDb.Id, userDb.Email, null);
+
+            mocker.GetMock<IUserBus>()
+                .Setup(b => b.GetTokenAsync())
+                .ReturnsAsync(token)
+                .Verifiable();
+
             mocker.GetMock<IUserBus>()
                 .Setup(b => b.ExistsEmailAsync(request.Email, request.Id))
                 .ReturnsAsync(false)
@@ -518,6 +576,13 @@ namespace _4oito6.Template.Tests.Services.User
                 .ReturnsAsync(userDb)
                 .Verifiable();
 
+            var token = new Entities.TokenModel(userDb.Id, userDb.Email, null);
+
+            mocker.GetMock<IUserBus>()
+                .Setup(b => b.GetTokenAsync())
+                .ReturnsAsync(token)
+                .Verifiable();
+
             mocker.GetMock<IUserBus>()
                 .Setup(b => b.ExistsEmailAsync(request.Email, request.Id))
                 .ReturnsAsync(false)
@@ -554,6 +619,13 @@ namespace _4oito6.Template.Tests.Services.User
             mocker.GetMock<IUserBus>()
                 .Setup(b => b.GetByIdAsync(request.Id ?? 0))
                 .ReturnsAsync(userDb)
+                .Verifiable();
+
+            var token = new Entities.TokenModel(userDb.Id, userDb.Email, null);
+
+            mocker.GetMock<IUserBus>()
+                .Setup(b => b.GetTokenAsync())
+                .ReturnsAsync(token)
                 .Verifiable();
 
             mocker.GetMock<IUserBus>()
@@ -623,6 +695,13 @@ namespace _4oito6.Template.Tests.Services.User
                 .ReturnsAsync(userDb)
                 .Verifiable();
 
+            var token = new Entities.TokenModel(userDb.Id, userDb.Email, null);
+
+            mocker.GetMock<IUserBus>()
+                .Setup(b => b.GetTokenAsync())
+                .ReturnsAsync(token)
+                .Verifiable();
+
             mocker.GetMock<IUserBus>()
                 .Setup(b => b.ExistsEmailAsync(request.Email, request.Id))
                 .ReturnsAsync(false)
@@ -680,6 +759,13 @@ namespace _4oito6.Template.Tests.Services.User
             mocker.GetMock<IUserBus>()
                 .Setup(b => b.GetByIdAsync(request.Id ?? 0))
                 .ReturnsAsync(userDb)
+                .Verifiable();
+
+            var token = new Entities.TokenModel(userDb.Id, userDb.Email, null);
+
+            mocker.GetMock<IUserBus>()
+                .Setup(b => b.GetTokenAsync())
+                .ReturnsAsync(token)
                 .Verifiable();
 
             mocker.GetMock<IUserBus>()
@@ -748,6 +834,13 @@ namespace _4oito6.Template.Tests.Services.User
             mocker.GetMock<IUserBus>()
                 .Setup(b => b.GetByIdAsync(request.Id ?? 0))
                 .ReturnsAsync(userDb)
+                .Verifiable();
+
+            var token = new Entities.TokenModel(userDb.Id, userDb.Email, null);
+
+            mocker.GetMock<IUserBus>()
+                .Setup(b => b.GetTokenAsync())
+                .ReturnsAsync(token)
                 .Verifiable();
 
             mocker.GetMock<IUserBus>()

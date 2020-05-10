@@ -107,7 +107,7 @@ namespace _4oito6.Template.Domain.Services.Implementation
 
             var token = await _userBus.GetTokenAsync().ConfigureAwait(false);
 
-            if (token?.Email != user.Email)
+            if (token?.IdUser != user.Id)
             {
                 var spec = new CreateUserSpec();
                 spec.AddMessage(BusinessSpecStatus.Forbidden, "Só é possível editar o próprio usuário.");
