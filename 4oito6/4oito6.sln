@@ -125,11 +125,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "4oito6.Template.Api", "4oit
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Contact", "Contact", "{10BBC3B5-C262-4DD9-9A40-B668340D2C8A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "4oito6.Contact.Domain.Services.Contracts", "4oito6.Contact.Domain.Services.Contracts\4oito6.Contact.Domain.Services.Contracts.csproj", "{913DBD67-17DC-4901-990D-DC03DD485F52}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "4oito6.Contact.Domain.Services.Contracts", "4oito6.Contact.Domain.Services.Contracts\4oito6.Contact.Domain.Services.Contracts.csproj", "{913DBD67-17DC-4901-990D-DC03DD485F52}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{90447132-2483-482A-B8E7-30EF42E82850}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "4oito6.Contact.Domain.Services.Implementation", "4oito6.Contact.Domain.Services.Implementation\4oito6.Contact.Domain.Services.Implementation.csproj", "{D4496617-CB67-435F-8E14-35CCDD4FDD38}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "4oito6.Contact.Domain.Services.Implementation", "4oito6.Contact.Domain.Services.Implementation\4oito6.Contact.Domain.Services.Implementation.csproj", "{D4496617-CB67-435F-8E14-35CCDD4FDD38}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infra", "Infra", "{A3F4713D-44C5-4ED0-BD25-FEA614A1F78B}"
 EndProject
@@ -137,9 +137,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{E4FAAEBA-8
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Bus", "Bus", "{5DFEC638-FB13-4623-BE60-9D60B9C3CDE8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "4oito6.Contact.Infra.Data.Bus.Contracts", "4oito6.Contact.Infra.Data.Bus.Contracts\4oito6.Contact.Infra.Data.Bus.Contracts.csproj", "{A47B8FE8-5B6B-43CC-9B1B-0CB7EE3F856F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "4oito6.Contact.Infra.Data.Bus.Contracts", "4oito6.Contact.Infra.Data.Bus.Contracts\4oito6.Contact.Infra.Data.Bus.Contracts.csproj", "{A47B8FE8-5B6B-43CC-9B1B-0CB7EE3F856F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "4oito6.Contact.Infra.Data.Bus.Implementation", "4oito6.Contact.Infra.Data.Bus.Implementation\4oito6.Contact.Infra.Data.Bus.Implementation.csproj", "{F9520DE8-01E6-4CD7-BE9B-88532CE8D96D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "4oito6.Contact.Infra.Data.Bus.Implementation", "4oito6.Contact.Infra.Data.Bus.Implementation\4oito6.Contact.Infra.Data.Bus.Implementation.csproj", "{F9520DE8-01E6-4CD7-BE9B-88532CE8D96D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application", "{47ECB6FB-0E6F-4A49-9F93-7649813CFC33}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "4oito6.Contact.Domain.Application.Contracts", "4oito6.Contact.Domain.Application.Contracts\4oito6.Contact.Domain.Application.Contracts.csproj", "{5E556AAC-0FB7-4034-8E9C-15F84DD955F8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "4oito6.Contact.Domain.Application.Implementation", "4oito6.Contact.Domain.Application.Implementation\4oito6.Contact.Domain.Application.Implementation.csproj", "{80CA3422-CB9D-46B0-8CB1-8F9A9DE825FC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -311,6 +317,14 @@ Global
 		{F9520DE8-01E6-4CD7-BE9B-88532CE8D96D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F9520DE8-01E6-4CD7-BE9B-88532CE8D96D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F9520DE8-01E6-4CD7-BE9B-88532CE8D96D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5E556AAC-0FB7-4034-8E9C-15F84DD955F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5E556AAC-0FB7-4034-8E9C-15F84DD955F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5E556AAC-0FB7-4034-8E9C-15F84DD955F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5E556AAC-0FB7-4034-8E9C-15F84DD955F8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{80CA3422-CB9D-46B0-8CB1-8F9A9DE825FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{80CA3422-CB9D-46B0-8CB1-8F9A9DE825FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{80CA3422-CB9D-46B0-8CB1-8F9A9DE825FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{80CA3422-CB9D-46B0-8CB1-8F9A9DE825FC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -382,6 +396,9 @@ Global
 		{5DFEC638-FB13-4623-BE60-9D60B9C3CDE8} = {E4FAAEBA-8F49-43AF-9C5C-47FBD7C328EB}
 		{A47B8FE8-5B6B-43CC-9B1B-0CB7EE3F856F} = {5DFEC638-FB13-4623-BE60-9D60B9C3CDE8}
 		{F9520DE8-01E6-4CD7-BE9B-88532CE8D96D} = {5DFEC638-FB13-4623-BE60-9D60B9C3CDE8}
+		{47ECB6FB-0E6F-4A49-9F93-7649813CFC33} = {10BBC3B5-C262-4DD9-9A40-B668340D2C8A}
+		{5E556AAC-0FB7-4034-8E9C-15F84DD955F8} = {47ECB6FB-0E6F-4A49-9F93-7649813CFC33}
+		{80CA3422-CB9D-46B0-8CB1-8F9A9DE825FC} = {47ECB6FB-0E6F-4A49-9F93-7649813CFC33}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {42819E7B-74A7-4FDD-8346-3B0D5B39A789}
