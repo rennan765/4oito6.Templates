@@ -139,6 +139,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Bus", "Bus", "{5DFEC638-FB1
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "4oito6.Contact.Infra.Data.Bus.Contracts", "4oito6.Contact.Infra.Data.Bus.Contracts\4oito6.Contact.Infra.Data.Bus.Contracts.csproj", "{A47B8FE8-5B6B-43CC-9B1B-0CB7EE3F856F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "4oito6.Contact.Infra.Data.Bus.Implementation", "4oito6.Contact.Infra.Data.Bus.Implementation\4oito6.Contact.Infra.Data.Bus.Implementation.csproj", "{F9520DE8-01E6-4CD7-BE9B-88532CE8D96D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -305,6 +307,10 @@ Global
 		{A47B8FE8-5B6B-43CC-9B1B-0CB7EE3F856F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A47B8FE8-5B6B-43CC-9B1B-0CB7EE3F856F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A47B8FE8-5B6B-43CC-9B1B-0CB7EE3F856F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F9520DE8-01E6-4CD7-BE9B-88532CE8D96D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F9520DE8-01E6-4CD7-BE9B-88532CE8D96D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F9520DE8-01E6-4CD7-BE9B-88532CE8D96D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F9520DE8-01E6-4CD7-BE9B-88532CE8D96D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -375,6 +381,7 @@ Global
 		{E4FAAEBA-8F49-43AF-9C5C-47FBD7C328EB} = {A3F4713D-44C5-4ED0-BD25-FEA614A1F78B}
 		{5DFEC638-FB13-4623-BE60-9D60B9C3CDE8} = {E4FAAEBA-8F49-43AF-9C5C-47FBD7C328EB}
 		{A47B8FE8-5B6B-43CC-9B1B-0CB7EE3F856F} = {5DFEC638-FB13-4623-BE60-9D60B9C3CDE8}
+		{F9520DE8-01E6-4CD7-BE9B-88532CE8D96D} = {5DFEC638-FB13-4623-BE60-9D60B9C3CDE8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {42819E7B-74A7-4FDD-8346-3B0D5B39A789}
