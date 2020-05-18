@@ -34,7 +34,7 @@ namespace _4oito6.Template.Api.Controllers
         [ProducesResponseType(typeof(ResponseMessage), (int)HttpStatusCode.InternalServerError)]
         [HttpPost]
         [AllowAnonymous]
-        public async Task<IActionResult> CreateUserAsync([FromBody]UserRequest request)
+        public async Task<IActionResult> CreateUserAsync([FromBody] UserRequest request)
         {
             var response = await _userAppService.CreateUserAsync(request).ConfigureAwait(false);
             return StatusCode(response.StatusCode, response);
@@ -52,12 +52,17 @@ namespace _4oito6.Template.Api.Controllers
         [ProducesResponseType(typeof(ResponseMessage<UserResponse>), (int)HttpStatusCode.Conflict)]
         [ProducesResponseType(typeof(ResponseMessage), (int)HttpStatusCode.InternalServerError)]
         [HttpPut]
-        public async Task<IActionResult> UpdateUserAsync([FromBody]UserRequest request)
+        public async Task<IActionResult> UpdateUserAsync([FromBody] UserRequest request)
         {
             var response = await _userAppService.UpdateUserAsync(request).ConfigureAwait(false);
             return StatusCode(response.StatusCode, response);
         }
 
+        /// <summary>
+        /// Efetua o login do usuário de acordo com o seu e-mail
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
         [ProducesResponseType(typeof(ResponseMessage<LoginResponse>), (int)HttpStatusCode.OK)]
         [ProducesResponseType(typeof(ResponseMessage<LoginResponse>), (int)HttpStatusCode.BadRequest)]
         [ProducesResponseType(typeof(ResponseMessage<LoginResponse>), (int)HttpStatusCode.NotFound)]
@@ -66,7 +71,7 @@ namespace _4oito6.Template.Api.Controllers
         [HttpPost]
         [AllowAnonymous]
         [Route("[controller]/login")]
-        public async Task<IActionResult> LoginAsync([FromBody]LoginRequest request)
+        public async Task<IActionResult> LoginAsync([FromBody] LoginRequest request)
         {
             var result = await _userAppService.LoginAsync(request).ConfigureAwait(false);
             return StatusCode(result.StatusCode, result);
