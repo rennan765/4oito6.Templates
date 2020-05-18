@@ -5,7 +5,7 @@ namespace _4oito6.Infra.Data.Cache.Core.Contracts
 {
     public interface ICacheRepository : IDisposable
     {
-        Task GetAsync(string key);
+        Task<string> GetAsync(string key);
 
         Task RemoveAsync(string key);
 

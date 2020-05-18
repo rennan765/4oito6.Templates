@@ -113,5 +113,17 @@ namespace _4oito6.Infra.CrossCutting.Token.Implementation
 
             return Task.FromResult((TokenModel)_httpContextAccessor.HttpContext.Items[typeof(TokenModel).ToString()]);
         }
+
+        public async Task<RefreshTokenModel> GetRefreshTokenAsync(string key)
+        {
+            var data = await _cacheRepository.GetAsync(key).ConfigureAwait(false);
+
+            if (string.IsNullOrEmpty(data))
+            {
+                return null;
+            }
+
+            return new RefreshTokenModel(key, data);
+        }
     }
 }

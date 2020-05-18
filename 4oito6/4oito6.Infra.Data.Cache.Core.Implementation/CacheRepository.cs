@@ -16,7 +16,7 @@ namespace _4oito6.Infra.Data.Cache.Core.Implementation
             _disposedValue = false;
         }
 
-        public Task GetAsync(string key) => _cache.GetStringAsync(key);
+        public Task<string> GetAsync(string key) => _cache.GetStringAsync(key);
 
         public Task RemoveAsync(string key) => _cache.RemoveAsync(key);
 
