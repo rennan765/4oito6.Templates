@@ -143,17 +143,21 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "4oito6.Contact.Infra.Data.B
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application", "{47ECB6FB-0E6F-4A49-9F93-7649813CFC33}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "4oito6.Contact.Domain.Application.Contracts", "4oito6.Contact.Domain.Application.Contracts\4oito6.Contact.Domain.Application.Contracts.csproj", "{5E556AAC-0FB7-4034-8E9C-15F84DD955F8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "4oito6.Contact.Domain.Application.Contracts", "4oito6.Contact.Domain.Application.Contracts\4oito6.Contact.Domain.Application.Contracts.csproj", "{5E556AAC-0FB7-4034-8E9C-15F84DD955F8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "4oito6.Contact.Domain.Application.Implementation", "4oito6.Contact.Domain.Application.Implementation\4oito6.Contact.Domain.Application.Implementation.csproj", "{80CA3422-CB9D-46B0-8CB1-8F9A9DE825FC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "4oito6.Contact.Domain.Application.Implementation", "4oito6.Contact.Domain.Application.Implementation\4oito6.Contact.Domain.Application.Implementation.csproj", "{80CA3422-CB9D-46B0-8CB1-8F9A9DE825FC}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CrossCutting", "CrossCutting", "{2DEDFD1A-AFA2-46B1-90D3-899259333AD1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "4oito6.Contact.Infra.CrossCutting.Ioc", "4oito6.Contact.Infra.CrossCutting.Ioc\4oito6.Contact.Infra.CrossCutting.Ioc.csproj", "{968269E7-58B1-4486-AEF0-C760F8E9EB38}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "4oito6.Contact.Infra.CrossCutting.Ioc", "4oito6.Contact.Infra.CrossCutting.Ioc\4oito6.Contact.Infra.CrossCutting.Ioc.csproj", "{968269E7-58B1-4486-AEF0-C760F8E9EB38}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "EntryPoint", "EntryPoint", "{CBC6846B-C1B2-4F23-8DC6-017580573E7F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "4oito6.Contact.Api", "4oito6.Contact.Api\4oito6.Contact.Api.csproj", "{B45A537E-31CC-4B3A-BC1F-EA9CBDD8F7F2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "4oito6.Contact.Api", "4oito6.Contact.Api\4oito6.Contact.Api.csproj", "{B45A537E-31CC-4B3A-BC1F-EA9CBDD8F7F2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{10ABAC3B-38E8-4909-8AA7-58A9F1E07167}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "4oito6.Contact.Tests", "4oito6.Contact.Tests\4oito6.Contact.Tests.csproj", "{86663B10-F8EB-49E8-987D-929521588B30}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -341,6 +345,10 @@ Global
 		{B45A537E-31CC-4B3A-BC1F-EA9CBDD8F7F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B45A537E-31CC-4B3A-BC1F-EA9CBDD8F7F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B45A537E-31CC-4B3A-BC1F-EA9CBDD8F7F2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{86663B10-F8EB-49E8-987D-929521588B30}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{86663B10-F8EB-49E8-987D-929521588B30}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{86663B10-F8EB-49E8-987D-929521588B30}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{86663B10-F8EB-49E8-987D-929521588B30}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -419,6 +427,8 @@ Global
 		{968269E7-58B1-4486-AEF0-C760F8E9EB38} = {2DEDFD1A-AFA2-46B1-90D3-899259333AD1}
 		{CBC6846B-C1B2-4F23-8DC6-017580573E7F} = {10BBC3B5-C262-4DD9-9A40-B668340D2C8A}
 		{B45A537E-31CC-4B3A-BC1F-EA9CBDD8F7F2} = {CBC6846B-C1B2-4F23-8DC6-017580573E7F}
+		{10ABAC3B-38E8-4909-8AA7-58A9F1E07167} = {10BBC3B5-C262-4DD9-9A40-B668340D2C8A}
+		{86663B10-F8EB-49E8-987D-929521588B30} = {10ABAC3B-38E8-4909-8AA7-58A9F1E07167}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {42819E7B-74A7-4FDD-8346-3B0D5B39A789}
