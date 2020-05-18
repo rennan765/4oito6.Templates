@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\4oito6.Infra.CrossCutting.Configuration.Token\4oito6.Infra.CrossCutting.Configuration.Token.csproj" />
+    <ProjectReference Include="..\4oito6.Infra.Data.Cache.Core.Contracts\4oito6.Infra.Data.Cache.Core.Contracts.csproj" />
   </ItemGroup>
 
 </Project>

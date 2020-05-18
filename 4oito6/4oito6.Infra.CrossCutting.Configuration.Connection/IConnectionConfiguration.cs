@@ -4,5 +4,6 @@
     {
         string DbConnectionString { get; }
         string CacheConnectionString { get; }
+        string CacheDbName { get; }
     }
 }

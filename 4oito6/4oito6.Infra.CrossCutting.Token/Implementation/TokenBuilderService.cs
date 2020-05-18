@@ -1,6 +1,7 @@
 ﻿using _4oito6.Infra.CrossCutting.Configuration.Token.Interfaces;
 using _4oito6.Infra.CrossCutting.Token.Interfaces;
 using _4oito6.Infra.CrossCutting.Token.Models;
+using _4oito6.Infra.Data.Cache.Core.Contracts;
 using Microsoft.AspNetCore.Http;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
@@ -9,6 +10,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Security.Principal;
+using System.Threading.Tasks;
 
 namespace _4oito6.Infra.CrossCutting.Token.Implementation
 {
@@ -17,12 +19,14 @@ namespace _4oito6.Infra.CrossCutting.Token.Implementation
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly ITokenConfiguration _tokenConfiguration;
         private readonly ISigningConfiguration _signingConfiguration;
+        private readonly ICacheRepository _cacheRepository;
 
-        public TokenBuilderService(IHttpContextAccessor httpContextAccessor, ITokenConfiguration tokenConfiguration, ISigningConfiguration signingConfiguration)
+        public TokenBuilderService(IHttpContextAccessor httpContextAccessor, ITokenConfiguration tokenConfiguration, ISigningConfiguration signingConfiguration, ICacheRepository cacheRepository)
         {
             _httpContextAccessor = httpContextAccessor ?? throw new ArgumentNullException(nameof(httpContextAccessor));
             _tokenConfiguration = tokenConfiguration ?? throw new ArgumentNullException(nameof(tokenConfiguration));
             _signingConfiguration = signingConfiguration ?? throw new ArgumentNullException(nameof(signingConfiguration));
+            _cacheRepository = cacheRepository ?? throw new ArgumentNullException(nameof(cacheRepository));
         }
 
         private string GenerateRefreshToken()
@@ -41,7 +45,7 @@ namespace _4oito6.Infra.CrossCutting.Token.Implementation
                 .Replace("/", string.Empty);
         }
 
-        public object BuildToken(int id, string email, string image)
+        public Task<object> BuildTokenAsync(int id, string email, string image)
         {
             var model = new TokenModel(id, email, image);
 
@@ -74,23 +78,27 @@ namespace _4oito6.Infra.CrossCutting.Token.Implementation
                 }
             );
 
-            return handler.WriteToken(securityToken);
+            return Task.FromResult((object)handler.WriteToken(securityToken));
         }
 
-        public RefreshTokenModel BuildRefreshToken(int id, string email, string image)
-            => new RefreshTokenModel
+        public async Task<RefreshTokenModel> BuildRefreshTokenAsync(int id)
+        {
+            var refreshToken = new RefreshTokenModel
             (
                 refreshToken: GenerateRefreshToken(),
                 data: new RefreshTokenData
                 (
                     id: id,
-                    email: email,
-                    image: image,
                     expiresOn: DateTime.UtcNow.AddSeconds(_tokenConfiguration.RefreshTokenTime)
                 )
             );
 
-        public TokenModel GetToken()
+            await _cacheRepository.SetAsync(refreshToken.RefreshToken, refreshToken.Data).ConfigureAwait(false);
+
+            return refreshToken;
+        }
+
+        public Task<TokenModel> GetTokenAsync()
         {
             if (_httpContextAccessor.HttpContext.Items[typeof(TokenModel).ToString()] == null)
             {
@@ -103,7 +111,19 @@ namespace _4oito6.Infra.CrossCutting.Token.Implementation
                 }
             }
 
-            return (TokenModel)_httpContextAccessor.HttpContext.Items[typeof(TokenModel).ToString()];
+            return Task.FromResult((TokenModel)_httpContextAccessor.HttpContext.Items[typeof(TokenModel).ToString()]);
+        }
+
+        public async Task<RefreshTokenModel> GetRefreshTokenAsync(string key)
+        {
+            var data = await _cacheRepository.GetAsync(key).ConfigureAwait(false);
+
+            if (string.IsNullOrEmpty(data))
+            {
+                return null;
+            }
+
+            return new RefreshTokenModel(key, data);
         }
     }
 }
