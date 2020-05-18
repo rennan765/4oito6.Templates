@@ -1,7 +1,7 @@
 ﻿using _4oito6.Infra.Data.Core.Connection;
 using _4oito6.Infra.Data.Transactions.Contracts.Enum;
 using _4oito6.Infra.Data.Transactions.Contracts.Interfaces;
-using Microsoft.EntityFrameworkCore;
+using _4oito6.Template.Infra.Data.Context;
 using System;
 using System.Threading.Tasks;
 
@@ -9,11 +9,11 @@ namespace _4oito6.Infra.Data.Transactions.Implementation
 {
     public class UnitOfWork : IUnitOfWork
     {
-        private DbContext _context;
+        private TemplateContext _context;
         private IAsyncDbConnection _conn;
         private bool _disposedValue;
 
-        public UnitOfWork(DbContext context, IAsyncDbConnection conn)
+        public UnitOfWork(TemplateContext context, IAsyncDbConnection conn)
         {
             _context = context ?? throw new ArgumentNullException(nameof(context));
             _conn = conn ?? throw new ArgumentNullException(nameof(conn));
