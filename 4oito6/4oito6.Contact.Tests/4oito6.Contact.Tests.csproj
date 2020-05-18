@@ -20,4 +20,9 @@
     <PackageReference Include="coverlet.collector" Version="1.2.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\4oito6.Contact.Domain.Services.Implementation\4oito6.Contact.Domain.Services.Implementation.csproj" />
+    <ProjectReference Include="..\4oito6.Template.Domain.Model\4oito6.Template.Domain.Model.csproj" />
+  </ItemGroup>
+
 </Project>
