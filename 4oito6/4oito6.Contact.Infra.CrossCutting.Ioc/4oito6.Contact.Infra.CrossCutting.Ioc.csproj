@@ -15,6 +15,7 @@
     <ProjectReference Include="..\4oito6.Contact.Domain.Application.Implementation\4oito6.Contact.Domain.Application.Implementation.csproj" />
     <ProjectReference Include="..\4oito6.Contact.Domain.Services.Contracts\4oito6.Contact.Domain.Services.Contracts.csproj" />
     <ProjectReference Include="..\4oito6.Contact.Domain.Services.Implementation\4oito6.Contact.Domain.Services.Implementation.csproj" />
+    <ProjectReference Include="..\4oito6.Contact.Infra.CrossCutting.PostalCode\4oito6.Contact.Infra.CrossCutting.PostalCode.csproj" />
     <ProjectReference Include="..\4oito6.Contact.Infra.Data.Bus.Contracts\4oito6.Contact.Infra.Data.Bus.Contracts.csproj" />
     <ProjectReference Include="..\4oito6.Contact.Infra.Data.Bus.Implementation\4oito6.Contact.Infra.Data.Bus.Implementation.csproj" />
     <ProjectReference Include="..\4oito6.Infra.CrossCutting.Ioc.Swagger\4oito6.Infra.CrossCutting.Ioc.Swagger.csproj" />

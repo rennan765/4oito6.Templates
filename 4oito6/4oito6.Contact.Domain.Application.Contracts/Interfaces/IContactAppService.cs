@@ -1,4 +1,5 @@
 ﻿using _4oito6.Contact.Domain.Services.Contracts.Arguments.Response;
+using _4oito6.Contact.Infra.CrossCutting.PostalCode.Contracts.Arguments;
 using _4oito6.Domain.Application.Core.Contracts.Arguments;
 using _4oito6.Domain.Application.Core.Contracts.Interfaces;
 using System.Collections.Generic;
@@ -15,5 +16,7 @@ namespace _4oito6.Contact.Domain.Application.Contracts.Interfaces
         Task<ResponseMessage<AddressResponse>> GetUserAddressAsync();
 
         Task<ResponseMessage<IList<AddressResponse>>> GetAddressByDistrictAndCityAsync(string district, string city);
+
+        Task<ResponseMessage<AddressFromPostalCodeResponse>> GetFromWebServiceByPostalCodeAsync(string postalCode);
     }
 }

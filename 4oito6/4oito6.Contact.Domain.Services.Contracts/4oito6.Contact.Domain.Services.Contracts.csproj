@@ -6,6 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\4oito6.Contact.Infra.CrossCutting.PostalCode\4oito6.Contact.Infra.CrossCutting.PostalCode.csproj" />
     <ProjectReference Include="..\4oito6.Domain.Services.Core.Contracts\4oito6.Domain.Services.Core.Contracts.csproj" />
     <ProjectReference Include="..\4oito6.Template.Domain.Model\4oito6.Template.Domain.Model.csproj" />
   </ItemGroup>
