@@ -2,9 +2,9 @@ name: .NET Core
 
 on:
   push:
-    branches: [ master ]
+    branches: [ trunk ]
   pull_request:
-    branches: [ master ]
+    branches: [ trunk ]
 
 jobs:
   build:
@@ -17,6 +17,8 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 3.1.101
+    - name: Go to folder
+      run: cd 4oito6
     - name: Install dependencies
       run: dotnet restore
     - name: Build
