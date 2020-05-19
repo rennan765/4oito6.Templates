@@ -1,6 +1,7 @@
 ﻿using _4oito6.Contact.Domain.Application.Contracts.Interfaces;
 using _4oito6.Contact.Domain.Services.Contracts.Arguments.Response;
 using _4oito6.Contact.Domain.Services.Contracts.Interfaces;
+using _4oito6.Contact.Infra.CrossCutting.PostalCode.Contracts.Arguments;
 using _4oito6.Domain.Application.Core.Contracts.Arguments;
 using _4oito6.Domain.Application.Core.Implementation.Base;
 using _4oito6.Infra.Data.Transactions.Contracts.Interfaces;
@@ -68,6 +69,17 @@ namespace _4oito6.Contact.Domain.Application.Implementation.Implmentation
                 Data = data,
                 StatusCode = (int)HttpStatusCode.OK,
                 TotalRows = data.Count()
+            };
+        }
+
+        public async Task<ResponseMessage<AddressFromPostalCodeResponse>> GetFromWebServiceByPostalCodeAsync(string postalCode)
+        {
+            var data = await _contactService.GetFromWebServiceByPostalCodeAsync(postalCode).ConfigureAwait(false);
+
+            return new ResponseMessage<AddressFromPostalCodeResponse>
+            {
+                Data = data,
+                StatusCode = (int)HttpStatusCode.OK
             };
         }
     }

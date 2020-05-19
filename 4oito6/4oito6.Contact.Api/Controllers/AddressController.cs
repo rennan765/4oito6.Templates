@@ -49,5 +49,21 @@ namespace _4oito6.Contact.Api.Controllers
             var result = await _contactAppService.GetAddressByDistrictAndCityAsync(district, city).ConfigureAwait(false);
             return StatusCode(result.StatusCode, result);
         }
+
+        /// <summary>
+        /// Obtém o endereço (rua, bairro, cidade e estado) de acordo com o CEP através de um webservice.
+        /// </summary>
+        /// <param name="postalCode"></param>
+        /// <returns></returns>
+        [ProducesResponseType(typeof(ResponseMessage<AddressResponse>), (int)HttpStatusCode.OK)]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType(typeof(ResponseMessage), (int)HttpStatusCode.InternalServerError)]
+        [HttpGet]
+        [Route("[controller]/ws/{postalCode}")]
+        public async Task<IActionResult> GetFromWebServiceByPostalCodeAsync(string postalCode)
+        {
+            var result = await _contactAppService.GetFromWebServiceByPostalCodeAsync(postalCode).ConfigureAwait(false);
+            return StatusCode(result.StatusCode, result);
+        }
     }
 }
