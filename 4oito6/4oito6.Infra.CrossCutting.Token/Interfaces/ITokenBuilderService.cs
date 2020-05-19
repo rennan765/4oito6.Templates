@@ -12,5 +12,7 @@ namespace _4oito6.Infra.CrossCutting.Token.Interfaces
         Task<TokenModel> GetTokenAsync();
 
         Task<RefreshTokenModel> GetRefreshTokenAsync(string key);
+
+        Task RemoveRefreshTokenAsync(string key);
     }
 }
