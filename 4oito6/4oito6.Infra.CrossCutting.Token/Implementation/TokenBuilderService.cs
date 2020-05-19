@@ -83,7 +83,7 @@ namespace _4oito6.Infra.CrossCutting.Token.Implementation
 
         public async Task<RefreshTokenModel> BuildRefreshTokenAsync(int id)
         {
-            var refreshToken = new RefreshTokenModel
+            var token = new RefreshTokenModel
             (
                 refreshToken: GenerateRefreshToken(),
                 data: new RefreshTokenData
@@ -93,9 +93,15 @@ namespace _4oito6.Infra.CrossCutting.Token.Implementation
                 )
             );
 
-            await _cacheRepository.SetAsync(refreshToken.RefreshToken, refreshToken.Data).ConfigureAwait(false);
+            await _cacheRepository
+                .SetAsync
+                (
+                    key: token.RefreshToken,
+                    value: JsonConvert.SerializeObject(token.Data)
+                )
+                .ConfigureAwait(false);
 
-            return refreshToken;
+            return token;
         }
 
         public Task<TokenModel> GetTokenAsync()
@@ -123,7 +129,13 @@ namespace _4oito6.Infra.CrossCutting.Token.Implementation
                 return null;
             }
 
-            return new RefreshTokenModel(key, data);
+            return new RefreshTokenModel
+            (
+                refreshToken: key,
+                data: JsonConvert.DeserializeObject<RefreshTokenData>(data)
+            );
         }
+
+        public Task RemoveRefreshTokenAsync(string key) => _cacheRepository.RemoveAsync(key);
     }
 }
