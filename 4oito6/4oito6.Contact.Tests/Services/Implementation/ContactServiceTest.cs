@@ -1,5 +1,7 @@
 ﻿using _4oito6.Contact.Domain.Services.Contracts.Mapper;
 using _4oito6.Contact.Domain.Services.Implementation;
+using _4oito6.Contact.Infra.CrossCutting.PostalCode.Contracts.Arguments;
+using _4oito6.Contact.Infra.CrossCutting.PostalCode.Contracts.Interfaces;
 using _4oito6.Contact.Infra.Data.Bus.Contracts.Interfaces;
 using _4oito6.Template.Domain.Model.Entities;
 using FluentAssertions;
@@ -131,6 +133,36 @@ namespace _4oito6.Contact.Tests.Services.Implementation
 
             //Act
             var result = await service.GetUserPhonesAsync().ConfigureAwait(false);
+
+            //Assert
+            new CompareLogic().Compare(expectedResult, result).AreEqual.Should().BeTrue();
+            mocker.Verify();
+        }
+
+        [Fact(DisplayName = "GetFromWebServiceByPostalCodeAsync_ShouldExecuteSuccessfully")]
+        [Trait("GetFromWebServiceByPostalCodeAsync", "ContactService")]
+        public async Task GetFromWebServiceByPostalCodeAsync_ShouldExecuteSuccessfully()
+        {
+            //Arrange
+            var mocker = new AutoMocker();
+            var service = mocker.CreateInstance<ContactService>();
+
+            var postalCode = "24030030";
+            var expectedResult = new AddressFromPostalCodeResponse
+            {
+                Street = "Rua Doutor Froes da Cruz",
+                District = "Centro",
+                City = "Niterói",
+                State = "RJ"
+            };
+
+            mocker.GetMock<IPostalCodeClientService>()
+                .Setup(cs => cs.GetAddressAsync(postalCode))
+                .ReturnsAsync(expectedResult)
+                .Verifiable();
+
+            //Act
+            var result = await service.GetFromWebServiceByPostalCodeAsync(postalCode).ConfigureAwait(false);
 
             //Assert
             new CompareLogic().Compare(expectedResult, result).AreEqual.Should().BeTrue();
