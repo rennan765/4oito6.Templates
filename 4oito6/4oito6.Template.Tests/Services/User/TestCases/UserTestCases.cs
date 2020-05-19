@@ -201,7 +201,7 @@ namespace _4oito6.Template.Tests.Services.User.TestCases
                 .Generate(1)
                 .First();
 
-        private static Entities.RefreshTokenModel GetRefreshTokenFromIdUser(int idUser)
+        public static Entities.RefreshTokenModel GetRefreshTokenFromIdUser(int idUser)
         {
             string refreshToken;
             var randomNumber = new byte[32];

@@ -85,7 +85,7 @@ namespace _4oito6.Template.Infra.Data.Bus.Implementation
             return new TokenModel(tokenModel.Id, user.Email, token, refreshToken.RefreshToken);
         }
 
-        public async Task<TokenModel> LoginByRefreshTokenAsync(string refreshToken, User user)
+        public async Task<TokenModel> RefreshLoginAsync(string refreshToken, User user)
         {
             await _tokenBuilderService.RemoveRefreshTokenAsync(refreshToken).ConfigureAwait(false);
 

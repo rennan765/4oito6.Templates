@@ -218,7 +218,6 @@ namespace _4oito6.Template.Domain.Services.Implementation
             }
 
             var refresh = await _userBus.GetRefreshTokenAsync(refreshToken).ConfigureAwait(false);
-
             var user = await _userBus.GetByIdAsync(refresh.IdUser).ConfigureAwait(false);
 
             if (user == null)
@@ -230,7 +229,7 @@ namespace _4oito6.Template.Domain.Services.Implementation
                 return null;
             }
 
-            var token = await _userBus.LoginByRefreshTokenAsync(refreshToken, user).ConfigureAwait(false);
+            var token = await _userBus.RefreshLoginAsync(refreshToken, user).ConfigureAwait(false);
 
             return new LoginResponse(token.Token, token.IdUser, token.Email, token.RefreshToken);
         }
