@@ -2,6 +2,7 @@
 using _4oito6.Contact.Domain.Application.Contracts.Interfaces;
 using _4oito6.Contact.Domain.Services.Contracts.Arguments.Response;
 using _4oito6.Domain.Application.Core.Contracts.Arguments;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Net;
@@ -60,6 +61,7 @@ namespace _4oito6.Contact.Api.Controllers
         [ProducesResponseType(typeof(ResponseMessage), (int)HttpStatusCode.InternalServerError)]
         [HttpGet]
         [Route("[controller]/ws/{postalCode}")]
+        [AllowAnonymous]
         public async Task<IActionResult> GetFromWebServiceByPostalCodeAsync(string postalCode)
         {
             var result = await _contactAppService.GetFromWebServiceByPostalCodeAsync(postalCode).ConfigureAwait(false);
