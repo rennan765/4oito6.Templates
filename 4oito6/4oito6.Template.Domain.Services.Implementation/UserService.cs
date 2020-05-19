@@ -203,7 +203,7 @@ namespace _4oito6.Template.Domain.Services.Implementation
 
             var token = await _userBus.LoginAsync(user).ConfigureAwait(false);
 
-            return new LoginResponse(token.Token, token.IdUser, token.Email);
+            return new LoginResponse(token.Token, token.IdUser, token.Email, token.RefreshToken);
         }
     }
 }

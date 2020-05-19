@@ -19,5 +19,9 @@ namespace _4oito6.Template.Infra.Data.Bus.Contracts.Interfaces
         Task<TokenModel> LoginAsync(User user);
 
         Task<TokenModel> GetTokenAsync();
+
+        Task<RefreshTokenModel> GetRefreshTokenAsync(string refreshToken);
+
+        Task<TokenModel> LoginByRefreshTokenAsync(string refreshToken, User user);
     }
 }
