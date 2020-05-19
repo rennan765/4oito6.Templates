@@ -136,6 +136,20 @@ namespace _4oito6.Infra.CrossCutting.Token.Implementation
             );
         }
 
+        public async Task<bool> IsRefreshTokenValid(string key)
+        {
+            var data = await _cacheRepository.GetAsync(key).ConfigureAwait(false);
+
+            if (string.IsNullOrEmpty(data))
+            {
+                return false;
+            }
+
+            return _tokenConfiguration.RefreshTokenTime >=
+                (DateTime.UtcNow - (JsonConvert.DeserializeObject<RefreshTokenData>(data)).ExpiresOn)
+                    .TotalSeconds;
+        }
+
         public Task RemoveRefreshTokenAsync(string key) => _cacheRepository.RemoveAsync(key);
     }
 }
