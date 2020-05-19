@@ -1,4 +1,5 @@
 ﻿using Dapper;
+using Npgsql;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -11,7 +12,13 @@ namespace _4oito6.Infra.Data.Core.Connection
         private bool _disposedValue;
         private IDbConnection _conn;
 
-        public AsyncDbConnection(IDbConnection conn)
+        //public AsyncDbConnection(IDbConnection conn)
+        //{
+        //    _conn = conn ?? throw new ArgumentNullException(nameof(conn));
+        //    _disposedValue = false;
+        //}
+
+        public AsyncDbConnection(NpgsqlConnection conn)
         {
             _conn = conn ?? throw new ArgumentNullException(nameof(conn));
             _disposedValue = false;
