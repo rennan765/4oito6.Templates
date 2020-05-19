@@ -208,18 +208,7 @@ namespace _4oito6.Template.Domain.Services.Implementation
 
         public async Task<LoginResponse> RefreshLoginAsync(string refreshToken)
         {
-            var refresh = await _userBus.GetRefreshTokenAsync(refreshToken).ConfigureAwait(false);
-
-            if (refresh == null)
-            {
-                var spec = new LoginSpec();
-                spec.AddMessage(BusinessSpecStatus.Unauthorized, "Este token não existe.");
-
-                AddSpec(spec);
-                return null;
-            }
-
-            if ((DateTime.UtcNow - refresh.ExpiresOn).TotalDays >= 30)
+            if (!await _userBus.IsRefreshTokenValid(refreshToken).ConfigureAwait(false))
             {
                 var spec = new LoginSpec();
                 spec.AddMessage(BusinessSpecStatus.Unauthorized, "Token expirado.");
@@ -227,6 +216,8 @@ namespace _4oito6.Template.Domain.Services.Implementation
                 AddSpec(spec);
                 return null;
             }
+
+            var refresh = await _userBus.GetRefreshTokenAsync(refreshToken).ConfigureAwait(false);
 
             var user = await _userBus.GetByIdAsync(refresh.IdUser).ConfigureAwait(false);
 

@@ -70,6 +70,9 @@ namespace _4oito6.Template.Infra.Data.Bus.Implementation
             return new TokenModel(tokenModel.Id, tokenModel.Email, null);
         }
 
+        public Task<bool> IsRefreshTokenValid(string refreshToken)
+            => _tokenBuilderService.IsRefreshTokenValid(refreshToken);
+
         public async Task<TokenModel> LoginAsync(User user)
         {
             var token = await _tokenBuilderService.BuildTokenAsync(user.Id, user.Email, string.Empty)

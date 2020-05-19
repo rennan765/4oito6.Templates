@@ -16,6 +16,8 @@ namespace _4oito6.Template.Infra.Data.Bus.Contracts.Interfaces
 
         Task<User> GetByEmailAsync(string email);
 
+        Task<bool> IsRefreshTokenValid(string refreshToken);
+
         Task<TokenModel> LoginAsync(User user);
 
         Task<TokenModel> GetTokenAsync();
