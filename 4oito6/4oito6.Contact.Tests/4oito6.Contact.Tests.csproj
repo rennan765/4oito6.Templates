@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <RootNamespace>_4oito6.Contact.Tests</RootNamespace>
+
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMoqCore" Version="1.0.0" />
+    <PackageReference Include="Bogus" Version="29.0.2" />
+    <PackageReference Include="CompareNETObjects" Version="4.66.0" />
+    <PackageReference Include="FluentAssertions" Version="5.10.3" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.5.0" />
+    <PackageReference Include="Moq" Version="4.14.1" />
+    <PackageReference Include="Moq.AutoMock" Version="2.0.0" />
+    <PackageReference Include="xunit" Version="2.4.0" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.0" />
+    <PackageReference Include="coverlet.collector" Version="1.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\4oito6.Contact.Domain.Services.Implementation\4oito6.Contact.Domain.Services.Implementation.csproj" />
+    <ProjectReference Include="..\4oito6.Template.Domain.Model\4oito6.Template.Domain.Model.csproj" />
+  </ItemGroup>
+
+</Project>
