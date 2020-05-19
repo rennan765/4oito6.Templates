@@ -2,8 +2,10 @@
 using _4oito6.Template.Domain.Services.Contracts.Arguments.Request;
 using _4oito6.Template.Domain.Services.Contracts.Arguments.Response;
 using Bogus;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using Entities = _4oito6.Template.Domain.Model.Entities;
 
 namespace _4oito6.Template.Tests.Services.User.TestCases
@@ -199,9 +201,31 @@ namespace _4oito6.Template.Tests.Services.User.TestCases
                 .Generate(1)
                 .First();
 
+        private static Entities.RefreshTokenModel GetRefreshTokenFromIdUser(int idUser)
+        {
+            string refreshToken;
+            var randomNumber = new byte[32];
+
+            using (var rng = RandomNumberGenerator.Create())
+            {
+                rng.GetBytes(randomNumber);
+                refreshToken = Convert.ToBase64String(randomNumber);
+            }
+
+            return new Entities.RefreshTokenModel
+            (
+                refreshToken: refreshToken.Replace("+", string.Empty)
+                    .Replace("=", string.Empty)
+                    .Replace("/", string.Empty),
+
+                idUser: idUser,
+                expiresOn: DateTime.UtcNow.AddDays(60)
+            );
+        }
+
         internal static Entities.TokenModel GetTokenFromUser(Entities.User user)
             => new Faker<Entities.TokenModel>()
-                .CustomInstantiator(f => new Entities.TokenModel(user.Id, user.Email, f.Random.String()))
+                .CustomInstantiator(f => new Entities.TokenModel(user.Id, user.Email, f.Random.String(), GetRefreshTokenFromIdUser(user.Id).RefreshToken))
                 .Generate(1)
                 .First();
     }

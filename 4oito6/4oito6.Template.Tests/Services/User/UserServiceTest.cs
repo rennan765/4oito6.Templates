@@ -921,7 +921,7 @@ namespace _4oito6.Template.Tests.Services.User
             var user = GetUserToLogin(request.Email);
             var tokenModel = GetTokenFromUser(user);
 
-            var expectedResult = new LoginResponse(tokenModel.Token, tokenModel.IdUser, tokenModel.Email);
+            var expectedResult = new LoginResponse(tokenModel.Token, tokenModel.IdUser, tokenModel.Email, tokenModel.RefreshToken);
 
             mocker.GetMock<IUserBus>()
                 .Setup(b => b.GetByEmailAsync(request.Email))

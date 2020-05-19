@@ -5,32 +5,25 @@ using _4oito6.Template.Domain.Model.Entities;
 using _4oito6.Template.Infra.Data.Bus.Contracts.Interfaces;
 using _4oito6.Template.Infra.Data.Bus.Contracts.Mapper;
 using _4oito6.Template.Infra.Data.Repositories.Contracts.Entity;
-using Newtonsoft.Json;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
-
-using DomainModel = _4oito6.Template.Domain.Model.Entities;
 
 namespace _4oito6.Template.Infra.Data.Bus.Implementation
 {
     public class UserBus : BusBase, IUserBus
     {
-        private IUserRepository _userRepository;
-        private IPhoneRepository _phoneRepository;
-        private IAddressRepository _addressRepository;
-        private ITokenBuilderService _tokenBuilderService;
+        private readonly IUserRepository _userRepository;
+        private readonly ITokenBuilderService _tokenBuilderService;
 
-        public UserBus(IUnitOfWork unit, IUserRepository userRepository, IPhoneRepository phoneRepository, IAddressRepository addressRepository, ITokenBuilderService tokenBuilderService)
-            : base(unit, new IDisposable[] { userRepository, phoneRepository, addressRepository })
+        public UserBus(IUnitOfWork unit, IUserRepository userRepository, ITokenBuilderService tokenBuilderService)
+            : base(unit, new IDisposable[] { userRepository })
         {
             _userRepository = userRepository ?? throw new ArgumentNullException(nameof(userRepository));
-            _phoneRepository = phoneRepository ?? throw new ArgumentNullException(nameof(phoneRepository));
-            _addressRepository = addressRepository ?? throw new ArgumentNullException(nameof(addressRepository));
             _tokenBuilderService = tokenBuilderService ?? throw new ArgumentNullException(nameof(tokenBuilderService));
         }
 
-        public async Task<User> CreateUserAsync(DomainModel.User user)
+        public async Task<User> CreateUserAsync(User user)
         {
             var newUser = await _userRepository.InsertAsync(user.ToDataModel()).ConfigureAwait(false);
 
@@ -65,7 +58,8 @@ namespace _4oito6.Template.Infra.Data.Bus.Implementation
             return new RefreshTokenModel
             (
                 refreshToken: refreshToken,
-                data: JsonConvert.DeserializeObject<RefreshTokenDataModel>(token.Data)
+                idUser: token.Data.Id,
+                expiresOn: token.Data.ExpiresOn
             );
         }
 
@@ -85,15 +79,14 @@ namespace _4oito6.Template.Infra.Data.Bus.Implementation
             var refreshToken = await _tokenBuilderService.BuildRefreshTokenAsync(user.Id)
                 .ConfigureAwait(false);
 
-            return new DomainModel.TokenModel(tokenModel.Id, user.Email, token, refreshToken.RefreshToken);
+            return new TokenModel(tokenModel.Id, user.Email, token, refreshToken.RefreshToken);
         }
 
         public async Task<TokenModel> LoginByRefreshTokenAsync(string refreshToken, User user)
         {
-            //var refresh = await _tokenBuilderService.GetRefreshTokenAsync(refreshToken)
-            //    .ConfigureAwait(false);
+            await _tokenBuilderService.RemoveRefreshTokenAsync(refreshToken).ConfigureAwait(false);
 
-            throw new NotImplementedException();
+            return await LoginAsync(user).ConfigureAwait(false);
         }
 
         public async Task<User> UpdateUserAsync(User user)
