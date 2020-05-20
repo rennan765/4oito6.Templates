@@ -15,7 +15,7 @@ namespace _4oito6.Infra.CrossCutting.Ioc.Swagger.Filters
 
             operation.Parameters.Add(new OpenApiParameter
             {
-                Name = "X-CustomHeader",
+                Name = "X-RefreshToken",
                 In = ParameterLocation.Header,
                 Required = false,
                 Schema = new OpenApiSchema
