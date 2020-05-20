@@ -47,6 +47,7 @@ namespace _4oito6.Template.Api.Controllers
         /// <returns></returns>
         [ProducesResponseType(typeof(ResponseMessage<UserResponse>), (int)HttpStatusCode.OK)]
         [ProducesResponseType(typeof(ResponseMessage<UserResponse>), (int)HttpStatusCode.BadRequest)]
+        [ProducesResponseType(typeof(ResponseMessage<LoginResponse>), (int)HttpStatusCode.Unauthorized)]
         [ProducesResponseType(typeof(ResponseMessage<UserResponse>), (int)HttpStatusCode.Forbidden)]
         [ProducesResponseType(typeof(ResponseMessage<UserResponse>), (int)HttpStatusCode.NotFound)]
         [ProducesResponseType(typeof(ResponseMessage<UserResponse>), (int)HttpStatusCode.Conflict)]
@@ -70,10 +71,28 @@ namespace _4oito6.Template.Api.Controllers
         [ProducesResponseType(typeof(ResponseMessage), (int)HttpStatusCode.InternalServerError)]
         [HttpPost]
         [AllowAnonymous]
-        [Route("[controller]/login")]
+        [Route("/login")]
         public async Task<IActionResult> LoginAsync([FromBody] LoginRequest request)
         {
             var result = await _userAppService.LoginAsync(request).ConfigureAwait(false);
+            return StatusCode(result.StatusCode, result);
+        }
+
+        /// <summary>
+        /// Efetua o login de acordo com o refresh token (obtido do header X-refreshToken).
+        /// </summary>
+        /// <returns></returns>
+        [ProducesResponseType(typeof(ResponseMessage<LoginResponse>), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(ResponseMessage<LoginResponse>), (int)HttpStatusCode.Unauthorized)]
+        [ProducesResponseType(typeof(ResponseMessage), (int)HttpStatusCode.InternalServerError)]
+        [HttpPost]
+        [AllowAnonymous]
+        [Route("/refresh")]
+        public async Task<IActionResult> RefreshLoginAsync()
+        {
+            Request.Headers.TryGetValue("X-RefreshToken", out var refreshToken);
+
+            var result = await _userAppService.RefreshLoginAsync(refreshToken).ConfigureAwait(false);
             return StatusCode(result.StatusCode, result);
         }
     }

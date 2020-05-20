@@ -203,7 +203,35 @@ namespace _4oito6.Template.Domain.Services.Implementation
 
             var token = await _userBus.LoginAsync(user).ConfigureAwait(false);
 
-            return new LoginResponse(token.Token, token.IdUser, token.Email);
+            return new LoginResponse(token.Token, token.IdUser, token.Email, token.RefreshToken);
+        }
+
+        public async Task<LoginResponse> RefreshLoginAsync(string refreshToken)
+        {
+            if (!await _userBus.IsRefreshTokenValid(refreshToken).ConfigureAwait(false))
+            {
+                var spec = new LoginSpec();
+                spec.AddMessage(BusinessSpecStatus.Unauthorized, "Token expirado.");
+
+                AddSpec(spec);
+                return null;
+            }
+
+            var refresh = await _userBus.GetRefreshTokenAsync(refreshToken).ConfigureAwait(false);
+            var user = await _userBus.GetByIdAsync(refresh.IdUser).ConfigureAwait(false);
+
+            if (user == null)
+            {
+                var spec = new LoginSpec();
+                spec.AddMessage(BusinessSpecStatus.Forbidden, "Nome de usuário inválido.");
+
+                AddSpec(spec);
+                return null;
+            }
+
+            var token = await _userBus.RefreshLoginAsync(refreshToken, user).ConfigureAwait(false);
+
+            return new LoginResponse(token.Token, token.IdUser, token.Email, token.RefreshToken);
         }
     }
 }

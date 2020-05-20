@@ -51,4 +51,14 @@ Para que o mesmo execute normalmente, será necessário inserir as variáveis ab
     <td>Json de configuração da doc. do swagger. Seguir o exemplo ao lado</td>
     <td>{ \"Title\": \"Template API\", \"Version\": \"1\", \"Description\": \"API REST de template\", \"ContactName\": \"Your Name\", \"ContactEmail\": \"your@mail.com\", \"ContactUrl\": \"http://yourwebpage.com/\" }</td>
   </tr>
+  <tr>
+    <td>CacheConnectionString</td>
+    <td>Connection string do REDIS, para armazenamento do refresh token</td>
+    <td>127.0.0.1:6379,ssl=False,allowAdmin=True,abortConnect=False,defaultDatabase=0,connectTimeout=500,connectRetry=3</td>
+  </tr>
+  <tr>
+    <td>CacheDbName</td>
+    <td>Nome do banco do REDIS, para armazenamento do refresh token</td>
+    <td>db1</td>
+  </tr>
 </table>

@@ -84,5 +84,23 @@ namespace _4oito6.Template.Domain.Application.Implementation
 
             return message;
         }
+
+        public async Task<ResponseMessage<LoginResponse>> RefreshLoginAsync(string refreshToken)
+        {
+            Unit.BeginTransaction(DataSource.EntityFramework);
+
+            var response = await _userService.RefreshLoginAsync(refreshToken).ConfigureAwait(false);
+
+            var message = new ResponseMessage<LoginResponse>
+            {
+                Data = response,
+                StatusCode = (int)_userService.GetStatusCode()
+            };
+
+            if (!_userService.IsSatisfied())
+                message.Errors = _userService.GetMessages();
+
+            return message;
+        }
     }
 }

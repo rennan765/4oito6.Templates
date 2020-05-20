@@ -13,7 +13,9 @@
 
   <ItemGroup>
     <ProjectReference Include="..\4oito6.Infra.CrossCutting.Configuration.Token\4oito6.Infra.CrossCutting.Configuration.Token.csproj" />
+    <ProjectReference Include="..\4oito6.Infra.CrossCutting.IoC.Cache\4oito6.Infra.CrossCutting.IoC.Cache.csproj" />
     <ProjectReference Include="..\4oito6.Infra.CrossCutting.Token\4oito6.Infra.CrossCutting.Token.csproj" />
+    <ProjectReference Include="..\4oito6.Infra.Data.Cache.Core.Implementation\4oito6.Infra.Data.Cache.Core.Implementation.csproj" />
   </ItemGroup>
 
 </Project>

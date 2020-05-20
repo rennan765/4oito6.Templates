@@ -13,5 +13,7 @@ namespace _4oito6.Template.Domain.Application.Contracts.Interfaces
         Task<ResponseMessage<UserResponse>> UpdateUserAsync(UserRequest request);
 
         Task<ResponseMessage<LoginResponse>> LoginAsync(LoginRequest request);
+
+        Task<ResponseMessage<LoginResponse>> RefreshLoginAsync(string refreshToken);
     }
 }

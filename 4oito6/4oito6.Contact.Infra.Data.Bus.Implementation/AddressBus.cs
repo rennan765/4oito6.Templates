@@ -31,7 +31,7 @@ namespace _4oito6.Contact.Infra.Data.Bus.Implementation
 
         public async Task<Address> GetByUserAsync()
         {
-            var token = _tokenBuilderService.GetToken();
+            var token = await _tokenBuilderService.GetTokenAsync().ConfigureAwait(false);
 
             var address = await _addressRepository.GetAsync(a => a.Users.Any(u => u.Id == token.Id)).ConfigureAwait(false);
 

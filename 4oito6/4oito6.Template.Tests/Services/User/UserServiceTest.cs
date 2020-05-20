@@ -921,7 +921,7 @@ namespace _4oito6.Template.Tests.Services.User
             var user = GetUserToLogin(request.Email);
             var tokenModel = GetTokenFromUser(user);
 
-            var expectedResult = new LoginResponse(tokenModel.Token, tokenModel.IdUser, tokenModel.Email);
+            var expectedResult = new LoginResponse(tokenModel.Token, tokenModel.IdUser, tokenModel.Email, tokenModel.RefreshToken);
 
             mocker.GetMock<IUserBus>()
                 .Setup(b => b.GetByEmailAsync(request.Email))
@@ -939,6 +939,118 @@ namespace _4oito6.Template.Tests.Services.User
             //Assert
             service.IsSatisfied().Should().BeTrue();
             comparison.Compare(expectedResult, result).AreEqual.Should().BeTrue();
+            mocker.Verify();
+        }
+
+        [Fact(DisplayName = "RefreshLoginAsync_ShouldReturnNull_DueToTokenExpired")]
+        [Trait("RefreshLoginAsync", "UserService")]
+        public async Task RefreshLoginAsync_ShouldReturnNull_DueToTokenExpired()
+        {
+            //Assert
+            var mocker = new AutoMocker();
+            var service = mocker.CreateInstance<UserService>();
+            var refreshToken = "abc";
+
+            mocker.GetMock<IUserBus>()
+                .Setup(b => b.IsRefreshTokenValid(refreshToken))
+                .ReturnsAsync(false)
+                .Verifiable();
+
+            var expectedMessages = new string[] { "Token expirado." };
+
+            //Act
+            var response = await service.RefreshLoginAsync(refreshToken).ConfigureAwait(false);
+
+            //Assert
+            response.Should().BeNull();
+            service.IsSatisfied().Should().BeFalse();
+            (service.GetStatusCode() == HttpStatusCode.Unauthorized).Should().BeTrue();
+            new CompareLogic().Compare(service.GetMessages(), expectedMessages).AreEqual.Should().BeTrue();
+            mocker.Verify();
+        }
+
+        [Fact(DisplayName = "RefreshLoginAsync_ShouldReturnNull_DueToUserNotFound")]
+        [Trait("RefreshLoginAsync", "UserService")]
+        public async Task RefreshLoginAsync_ShouldReturnNull_DueToUserNotFound()
+        {
+            //Assert
+            var mocker = new AutoMocker();
+            var service = mocker.CreateInstance<UserService>();
+
+            var user = GetUserToLogin("teste@gmail.com");
+            var token = GetRefreshTokenFromIdUser(user.Id);
+
+            mocker.GetMock<IUserBus>()
+                .Setup(b => b.IsRefreshTokenValid(token.RefreshToken))
+                .ReturnsAsync(true)
+                .Verifiable();
+
+            mocker.GetMock<IUserBus>()
+                .Setup(b => b.GetRefreshTokenAsync(token.RefreshToken))
+                .ReturnsAsync(token)
+                .Verifiable();
+
+            mocker.GetMock<IUserBus>()
+                .Setup(b => b.GetByIdAsync(user.Id))
+                .ReturnsAsync((Entities.User)null)
+                .Verifiable();
+
+            var expectedMessages = new string[] { "Nome de usuário inválido." };
+
+            //Act
+            var response = await service.RefreshLoginAsync(token.RefreshToken).ConfigureAwait(false);
+
+            //Assert
+            response.Should().BeNull();
+            service.IsSatisfied().Should().BeFalse();
+            (service.GetStatusCode() == HttpStatusCode.Forbidden).Should().BeTrue();
+            new CompareLogic().Compare(service.GetMessages(), expectedMessages).AreEqual.Should().BeTrue();
+            mocker.Verify();
+        }
+
+        [Fact(DisplayName = "RefreshLoginAsync_ShouldReturnResponse")]
+        [Trait("RefreshLoginAsync", "UserService")]
+        public async Task RefreshLoginAsync_ShouldReturnResponse()
+        {
+            //Assert
+            var comparison = new CompareLogic();
+            var mocker = new AutoMocker();
+            var service = mocker.CreateInstance<UserService>();
+
+            var user = GetUserToLogin("teste@gmail.com");
+            var refreshToken = GetRefreshTokenFromIdUser(user.Id);
+
+            mocker.GetMock<IUserBus>()
+                .Setup(b => b.IsRefreshTokenValid(refreshToken.RefreshToken))
+                .ReturnsAsync(true)
+                .Verifiable();
+
+            mocker.GetMock<IUserBus>()
+                .Setup(b => b.GetRefreshTokenAsync(refreshToken.RefreshToken))
+                .ReturnsAsync(refreshToken)
+                .Verifiable();
+
+            mocker.GetMock<IUserBus>()
+                .Setup(b => b.GetByIdAsync(refreshToken.IdUser))
+                .ReturnsAsync(user)
+                .Verifiable();
+
+            var token = GetTokenFromUser(user);
+
+            mocker.GetMock<IUserBus>()
+                .Setup(b => b.RefreshLoginAsync(refreshToken.RefreshToken, user))
+                .ReturnsAsync(token)
+                .Verifiable();
+
+            var expectedResult = new LoginResponse(token.Token, token.IdUser, token.Email, token.RefreshToken);
+
+            //Act
+            var result = await service.RefreshLoginAsync(refreshToken.RefreshToken).ConfigureAwait(false);
+
+            //Assert
+            comparison.Compare(expectedResult, result).AreEqual.Should().BeTrue();
+            service.IsSatisfied().Should().BeTrue();
+            (service.GetStatusCode() == HttpStatusCode.OK).Should().BeTrue();
             mocker.Verify();
         }
     }

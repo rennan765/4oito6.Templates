@@ -33,7 +33,7 @@ namespace _4oito6.Contact.Infra.Data.Bus.Implementation
 
         public async Task<IList<Phone>> GetByUserAsync()
         {
-            var token = _tokenBuilderService.GetToken();
+            var token = await _tokenBuilderService.GetTokenAsync().ConfigureAwait(false);
 
             return (await _phoneRepository.ListAsync(p => p.Users.Any(up => up.IdUser == token.Id)).ConfigureAwait(false))
                 .Select(p => p.ToDomainModel())
