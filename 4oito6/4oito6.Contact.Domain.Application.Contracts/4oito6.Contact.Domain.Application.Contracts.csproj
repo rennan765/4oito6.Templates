@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <RootNamespace>_4oito6.Contact.Domain.Application.Contracts</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\4oito6.Contact.Domain.Services.Contracts\4oito6.Contact.Domain.Services.Contracts.csproj" />
+    <ProjectReference Include="..\4oito6.Domain.Application.Core.Contracts\4oito6.Domain.Application.Core.Contracts.csproj" />
+  </ItemGroup>
+
+</Project>
