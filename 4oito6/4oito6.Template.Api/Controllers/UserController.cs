@@ -90,7 +90,7 @@ namespace _4oito6.Template.Api.Controllers
         [Route("/refresh")]
         public async Task<IActionResult> RefreshLoginAsync()
         {
-            Request.Headers.TryGetValue("X-refreshToken", out var refreshToken);
+            Request.Headers.TryGetValue("X-RefreshToken", out var refreshToken);
 
             var result = await _userAppService.RefreshLoginAsync(refreshToken).ConfigureAwait(false);
             return StatusCode(result.StatusCode, result);
