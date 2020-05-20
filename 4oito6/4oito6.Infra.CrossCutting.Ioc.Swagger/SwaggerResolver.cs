@@ -1,5 +1,6 @@
 ﻿using _4oito6.Infra.CrossCutting.Configuration.Swagger.Implementation;
 using _4oito6.Infra.CrossCutting.Configuration.Swagger.Interfaces;
+using _4oito6.Infra.CrossCutting.Ioc.Swagger.Filters;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.PlatformAbstractions;
 using Microsoft.OpenApi.Models;
@@ -70,6 +71,9 @@ namespace _4oito6.Infra.CrossCutting.Ioc.Swagger
                     new string[] {}
                     }
                 });
+
+                //Insert refresh token's parameter header
+                x.OperationFilter<RefreshTokenFilter>();
 
                 //Insert comment's XML
                 var xmlDocumentPath = Path.Combine(PlatformServices.Default.Application.ApplicationBasePath, $"{PlatformServices.Default.Application.ApplicationName}.xml");
