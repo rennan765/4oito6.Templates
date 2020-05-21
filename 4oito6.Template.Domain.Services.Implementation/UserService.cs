@@ -8,6 +8,7 @@ using _4oito6.Template.Domain.Services.Contracts.Interfaces;
 using _4oito6.Template.Domain.Services.Contracts.Mapper;
 using _4oito6.Template.Domain.Specs;
 using _4oito6.Template.Domain.Specs.User;
+using _4oito6.Template.Infra.CrossCutting.Messages.Domain.Services;
 using _4oito6.Template.Infra.Data.Bus.Contracts.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -35,7 +36,7 @@ namespace _4oito6.Template.Domain.Services.Implementation
             if (await _userBus.ExistsEmailAsync(request.Email).ConfigureAwait(false))
             {
                 var spec = new CreateUserSpec();
-                spec.AddMessage(BusinessSpecStatus.Conflict, "E-mail já cadastrado.");
+                spec.AddMessage(BusinessSpecStatus.Conflict, UserServiceMessages.EmailJaCadastrado);
 
                 AddSpec(spec);
                 return null;
@@ -99,7 +100,7 @@ namespace _4oito6.Template.Domain.Services.Implementation
             if (user == null)
             {
                 var spec = new CreateUserSpec();
-                spec.AddMessage(BusinessSpecStatus.ResourceNotFound, "Usuário não encontrado.");
+                spec.AddMessage(BusinessSpecStatus.ResourceNotFound, UserServiceMessages.UsuarioNaoEncontrado);
 
                 AddSpec(spec);
                 return null;
@@ -110,7 +111,7 @@ namespace _4oito6.Template.Domain.Services.Implementation
             if (token?.IdUser != user.Id)
             {
                 var spec = new CreateUserSpec();
-                spec.AddMessage(BusinessSpecStatus.Forbidden, "Só é possível editar o próprio usuário.");
+                spec.AddMessage(BusinessSpecStatus.Forbidden, UserServiceMessages.EditarProprioUsuario);
 
                 AddSpec(spec);
                 return null;
@@ -119,7 +120,7 @@ namespace _4oito6.Template.Domain.Services.Implementation
             if (await _userBus.ExistsEmailAsync(request.Email, request.Id).ConfigureAwait(false))
             {
                 var spec = new CreateUserSpec();
-                spec.AddMessage(BusinessSpecStatus.Conflict, "E-mail já cadastrado.");
+                spec.AddMessage(BusinessSpecStatus.Conflict, UserServiceMessages.EmailJaCadastrado);
 
                 AddSpec(spec);
                 return null;
@@ -195,7 +196,7 @@ namespace _4oito6.Template.Domain.Services.Implementation
             if (user == null)
             {
                 var spec = new LoginSpec();
-                spec.AddMessage(BusinessSpecStatus.Forbidden, "Nome de usuário inválido.");
+                spec.AddMessage(BusinessSpecStatus.Forbidden, UserServiceMessages.NomeUsuarioInvalido);
 
                 AddSpec(spec);
                 return null;
@@ -211,7 +212,7 @@ namespace _4oito6.Template.Domain.Services.Implementation
             if (!await _userBus.IsRefreshTokenValid(refreshToken).ConfigureAwait(false))
             {
                 var spec = new LoginSpec();
-                spec.AddMessage(BusinessSpecStatus.Unauthorized, "Token expirado.");
+                spec.AddMessage(BusinessSpecStatus.Unauthorized, UserServiceMessages.TokenExpirado);
 
                 AddSpec(spec);
                 return null;
@@ -223,7 +224,7 @@ namespace _4oito6.Template.Domain.Services.Implementation
             if (user == null)
             {
                 var spec = new LoginSpec();
-                spec.AddMessage(BusinessSpecStatus.Forbidden, "Nome de usuário inválido.");
+                spec.AddMessage(BusinessSpecStatus.Forbidden, UserServiceMessages.NomeUsuarioInvalido);
 
                 AddSpec(spec);
                 return null;
