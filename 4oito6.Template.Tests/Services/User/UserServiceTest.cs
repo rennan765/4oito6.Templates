@@ -1,6 +1,9 @@
 ﻿using _4oito6.Template.Domain.Services.Contracts.Arguments.Request;
 using _4oito6.Template.Domain.Services.Contracts.Arguments.Response;
 using _4oito6.Template.Domain.Services.Implementation;
+using _4oito6.Template.Infra.CrossCutting.Messages.Domain.Services;
+using _4oito6.Template.Infra.CrossCutting.Messages.Domain.Specs;
+using _4oito6.Template.Infra.CrossCutting.Messages.Domain.Specs.User;
 using _4oito6.Template.Infra.Data.Bus.Contracts.Interfaces;
 using FluentAssertions;
 using KellermanSoftware.CompareNetObjects;
@@ -29,7 +32,7 @@ namespace _4oito6.Template.Tests.Services.User
             var serviceMock = mocker.CreateInstance<UserService>();
 
             var request = GetRequest(TestCase.EmailExists);
-            var expectedMessages = new string[] { "E-mail já cadastrado." };
+            var expectedMessages = new string[] { UserServiceMessages.EmailJaCadastrado };
 
             mocker.GetMock<IUserBus>()
                 .Setup(b => b.ExistsEmailAsync(request.Email, null))
@@ -57,7 +60,7 @@ namespace _4oito6.Template.Tests.Services.User
             var serviceMock = mocker.CreateInstance<UserService>();
 
             var request = GetRequest(TestCase.InvalidAddress);
-            var expectedMessages = new string[] { "O bairro é obrigátório.", "O estado deve ser informado no  formato de sigla." };
+            var expectedMessages = new string[] { AddressSpecMessages.BairroObrigatorio, AddressSpecMessages.EstadoInvalido };
 
             mocker.GetMock<IUserBus>()
                 .Setup(b => b.ExistsEmailAsync(request.Email, null))
@@ -91,7 +94,7 @@ namespace _4oito6.Template.Tests.Services.User
 
             var request = GetRequest(TestCase.InvalidPhone);
             var tuples = request.Phones.Select(phone => new Tuple<string, string>(phone.LocalCode, phone.Number)).ToList();
-            var expectedMessages = new string[] { "O DDD precisa ter 2 caracteres.", "O DDD precisa ter 8 ou 9 caracteres.", "O DDD precisa ter 2 caracteres.", "O DDD precisa ter 8 ou 9 caracteres." };
+            var expectedMessages = new string[] { PhoneSpecMessages.DddInvalido, PhoneSpecMessages.NumeroInvalido, PhoneSpecMessages.DddInvalido, PhoneSpecMessages.NumeroInvalido };
 
             mocker.GetMock<IUserBus>()
                 .Setup(b => b.ExistsEmailAsync(request.Email, null))
@@ -124,7 +127,7 @@ namespace _4oito6.Template.Tests.Services.User
             var serviceMock = mocker.CreateInstance<UserService>();
 
             var request = GetRequest(TestCase.InvalidUser);
-            var expectedMessages = new string[] { "O primeiro nome é obrigatório." };
+            var expectedMessages = new string[] { UserSpecMessages.PrimeiroNomeObrigatorio };
 
             mocker.GetMock<IUserBus>()
                 .Setup(b => b.ExistsEmailAsync(request.Email, null))
@@ -366,7 +369,7 @@ namespace _4oito6.Template.Tests.Services.User
             var serviceMock = mocker.CreateInstance<UserService>();
 
             var request = GetRequestToUpdate(TestCase.EmailExists);
-            var expectedMessages = new string[] { "Usuário não encontrado." };
+            var expectedMessages = new string[] { UserServiceMessages.UsuarioNaoEncontrado };
 
             mocker.GetMock<IUserBus>()
                 .Setup(b => b.GetByIdAsync(request.Id ?? 0))
@@ -408,7 +411,7 @@ namespace _4oito6.Template.Tests.Services.User
                 .ReturnsAsync(token)
                 .Verifiable();
 
-            var expectedMessages = new string[] { "Só é possível editar o próprio usuário." };
+            var expectedMessages = new string[] { UserServiceMessages.EditarProprioUsuario };
 
             //Act
             var response = await serviceMock.UpdateUserAsync(request).ConfigureAwait(false);
@@ -432,7 +435,7 @@ namespace _4oito6.Template.Tests.Services.User
 
             var request = GetRequestToUpdate(TestCase.EmailExists);
             var userDb = GetUserToUpdate(TestCase.EmailExists);
-            var expectedMessages = new string[] { "E-mail já cadastrado." };
+            var expectedMessages = new string[] { UserServiceMessages.EmailJaCadastrado };
 
             mocker.GetMock<IUserBus>()
                 .Setup(b => b.GetByIdAsync(request.Id ?? 0))
@@ -473,7 +476,7 @@ namespace _4oito6.Template.Tests.Services.User
 
             var request = GetRequestToUpdate(TestCase.InvalidAddress);
             var userDb = GetUserToUpdate(TestCase.InvalidAddress);
-            var expectedMessages = new string[] { "O bairro é obrigátório.", "O estado deve ser informado no  formato de sigla." };
+            var expectedMessages = new string[] { AddressSpecMessages.BairroObrigatorio, AddressSpecMessages.EstadoInvalido };
 
             mocker.GetMock<IUserBus>()
                 .Setup(b => b.GetByIdAsync(request.Id ?? 0))
@@ -521,7 +524,7 @@ namespace _4oito6.Template.Tests.Services.User
             var userDb = GetUserToUpdate(TestCase.InvalidPhone);
 
             var tuples = request.Phones.Select(phone => new Tuple<string, string>(phone.LocalCode, phone.Number)).ToList();
-            var expectedMessages = new string[] { "O DDD precisa ter 2 caracteres.", "O DDD precisa ter 8 ou 9 caracteres.", "O DDD precisa ter 2 caracteres.", "O DDD precisa ter 8 ou 9 caracteres." };
+            var expectedMessages = new string[] { PhoneSpecMessages.DddInvalido, PhoneSpecMessages.NumeroInvalido, PhoneSpecMessages.DddInvalido, PhoneSpecMessages.NumeroInvalido };
 
             mocker.GetMock<IUserBus>()
                 .Setup(b => b.GetByIdAsync(request.Id ?? 0))
@@ -569,7 +572,7 @@ namespace _4oito6.Template.Tests.Services.User
             var userDb = GetUserToUpdate(TestCase.InvalidUser);
 
             var tuples = request.Phones.Select(phone => new Tuple<string, string>(phone.LocalCode, phone.Number)).ToList();
-            var expectedMessages = new string[] { "O primeiro nome é obrigatório." };
+            var expectedMessages = new string[] { UserSpecMessages.PrimeiroNomeObrigatorio };
 
             mocker.GetMock<IUserBus>()
                 .Setup(b => b.GetByIdAsync(request.Id ?? 0))
@@ -956,7 +959,7 @@ namespace _4oito6.Template.Tests.Services.User
                 .ReturnsAsync(false)
                 .Verifiable();
 
-            var expectedMessages = new string[] { "Token expirado." };
+            var expectedMessages = new string[] { UserServiceMessages.TokenExpirado };
 
             //Act
             var response = await service.RefreshLoginAsync(refreshToken).ConfigureAwait(false);
@@ -995,7 +998,7 @@ namespace _4oito6.Template.Tests.Services.User
                 .ReturnsAsync((Entities.User)null)
                 .Verifiable();
 
-            var expectedMessages = new string[] { "Nome de usuário inválido." };
+            var expectedMessages = new string[] { UserServiceMessages.NomeUsuarioInvalido };
 
             //Act
             var response = await service.RefreshLoginAsync(token.RefreshToken).ConfigureAwait(false);

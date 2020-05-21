@@ -9,6 +9,7 @@
     <ProjectReference Include="..\4oito6.Domain.Specs.Core\4oito6.Domain.Specs.Core.csproj" />
     <ProjectReference Include="..\4oito6.Infra.CrossCutting.Extensions\4oito6.Infra.CrossCutting.Extensions.csproj" />
     <ProjectReference Include="..\4oito6.Template.Domain.Model\4oito6.Template.Domain.Model.csproj" />
+    <ProjectReference Include="..\4oito6.Template.Infra.CrossCutting.Messages\4oito6.Template.Infra.CrossCutting.Messages.csproj" />
   </ItemGroup>
 
 </Project>

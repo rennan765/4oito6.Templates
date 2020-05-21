@@ -2,6 +2,7 @@
 using _4oito6.Domain.Specs.Core.Models;
 using _4oito6.Infra.CrossCutting.Extensions;
 using _4oito6.Template.Domain.Model.Entities;
+using _4oito6.Template.Infra.CrossCutting.Messages.Domain.Specs;
 
 namespace _4oito6.Template.Domain.Specs
 {
@@ -10,28 +11,28 @@ namespace _4oito6.Template.Domain.Specs
         public AddressSpec(Address entity) : base(entity)
         {
             if (string.IsNullOrEmpty(entity.Street))
-                AddMessage(BusinessSpecStatus.InvalidInputs, "O logradouro é obrigátório.");
+                AddMessage(BusinessSpecStatus.InvalidInputs, AddressSpecMessages.LogradouroObrigatorio);
 
             if (!string.IsNullOrEmpty(entity.Number) && !entity.Number.IsNumeric())
-                AddMessage(BusinessSpecStatus.InvalidInputs, "Existe algum caractere não numérico no campo número.");
+                AddMessage(BusinessSpecStatus.InvalidInputs, AddressSpecMessages.NumeroNaoNumerico);
 
             if (string.IsNullOrEmpty(entity.District))
-                AddMessage(BusinessSpecStatus.InvalidInputs, "O bairro é obrigátório.");
+                AddMessage(BusinessSpecStatus.InvalidInputs, AddressSpecMessages.BairroObrigatorio);
 
             if (string.IsNullOrEmpty(entity.City))
-                AddMessage(BusinessSpecStatus.InvalidInputs, "A cidade é obrigátória.");
+                AddMessage(BusinessSpecStatus.InvalidInputs, AddressSpecMessages.CidadeObrigatoria);
 
             if (string.IsNullOrEmpty(entity.State))
-                AddMessage(BusinessSpecStatus.InvalidInputs, "O estado é obrigátório.");
+                AddMessage(BusinessSpecStatus.InvalidInputs, AddressSpecMessages.EstadoObrigatorio);
             else if (entity.State.Length != 2)
-                AddMessage(BusinessSpecStatus.InvalidInputs, "O estado deve ser informado no  formato de sigla.");
+                AddMessage(BusinessSpecStatus.InvalidInputs, AddressSpecMessages.EstadoInvalido);
 
             if (string.IsNullOrEmpty(entity.PostalCode))
-                AddMessage(BusinessSpecStatus.InvalidInputs, "O CEP é obrigátório.");
+                AddMessage(BusinessSpecStatus.InvalidInputs, AddressSpecMessages.CepObrigatorio);
             else if (!entity.PostalCode.IsNumeric())
-                AddMessage(BusinessSpecStatus.InvalidInputs, "Existe algum caractere não numérico no campo CEP.");
+                AddMessage(BusinessSpecStatus.InvalidInputs, AddressSpecMessages.CepNaoNumerico);
             else if (entity.PostalCode.Length != 8)
-                AddMessage(BusinessSpecStatus.InvalidInputs, "O CEP precisa ter 8 caracteres.");
+                AddMessage(BusinessSpecStatus.InvalidInputs, AddressSpecMessages.CepInvalido);
         }
     }
 }
