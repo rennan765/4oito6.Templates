@@ -39,7 +39,7 @@ namespace _4oito6.Contact.Api
             });
 
             services
-                .ResolveContact(Configuration.GetSection("UrlPostalCode").Value)
+                .ResolveContact()
                 .AddControllers(config =>
                 {
                     var policy = new AuthorizationPolicyBuilder()
