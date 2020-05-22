@@ -98,7 +98,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infra", "Infra", "{A26D7C6F-7ABC-48D1-80A8-40A4950FC904}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Template", "Template", "{9A6EA10E-32C6-44AA-8BB8-BA59B5286B05}"
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "4oito6.Infra.Data.Cache.Core.Contracts", "4oito6.Infra.Data.Cache.Core.Contracts\4oito6.Infra.Data.Cache.Core.Contracts.csproj", "{D736402C-269C-43A6-9DD8-6EB2EAEE6611}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "EntryPoint", "EntryPoint", "{891DD5B9-960F-4197-992F-C5A5BBC39D80}"
 EndProject
@@ -162,7 +161,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "4oito6.Contact.Tests", "4oi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "4oito6.Contact.Infra.CrossCutting.PostalCode", "4oito6.Contact.Infra.CrossCutting.PostalCode\4oito6.Contact.Infra.CrossCutting.PostalCode.csproj", "{9610DD42-2D4F-48FB-AABD-C12A3C3C6950}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "4oito6.Infra.Data.Cache.Core.Contracts", "4oito6.Infra.Data.Cache.Core.Contracts\4oito6.Infra.Data.Cache.Core.Contracts.csproj", "{D736402C-269C-43A6-9DD8-6EB2EAEE6611}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "4oito6.Infra.Data.Cache.Core.Contracts", "4oito6.Infra.Data.Cache.Core.Contracts\4oito6.Infra.Data.Cache.Core.Contracts.csproj", "{A82DC29A-AE7F-4BC4-9D66-FDFE351DB8E3}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Cache", "Cache", "{8604EF74-7DDA-4D63-8A6C-777731C6B37A}"
 EndProject
@@ -171,11 +170,10 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "4oito6.Infra.CrossCutting.IoC.Cache", "4oito6.Infra.CrossCutting.IoC.Cache\4oito6.Infra.CrossCutting.IoC.Cache.csproj", "{2AA13CD7-8B60-402E-85AB-495B59DA4903}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "4oito6.Infra.Data.Repositories.Mongo.Core.Implementation", "4oito6.Infra.Data.Repositories.Mongo.Core.Implementation\4oito6.Infra.Data.Repositories.Mongo.Core.Implementation.csproj", "{6F154F41-6CA3-46B6-B26C-BA2BFD9CB690}"
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "4oito6.Infra.CrossCutting.IoC.Cache", "4oito6.Infra.CrossCutting.IoC.Cache\4oito6.Infra.CrossCutting.IoC.Cache.csproj", "{2AA13CD7-8B60-402E-85AB-495B59DA4903}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "4oito6.Template.Infra.CrossCutting.Messages", "4oito6.Template.Infra.CrossCutting.Messages\4oito6.Template.Infra.CrossCutting.Messages.csproj", "{A9D747A8-7190-4F7D-841D-BB1654D44064}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "4oito6.Contact.Infra.CrossCutting.Configuration", "4oito6.Contact.Infra.CrossCutting.Configuration\4oito6.Contact.Infra.CrossCutting.Configuration.csproj", "{9C28A56F-BDE1-414F-9872-1A27B652DE46}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "4oito6.Contact.Infra.CrossCutting.Configuration", "4oito6.Contact.Infra.CrossCutting.Configuration\4oito6.Contact.Infra.CrossCutting.Configuration.csproj", "{9C28A56F-BDE1-414F-9872-1A27B652DE46}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -371,10 +369,10 @@ Global
 		{9610DD42-2D4F-48FB-AABD-C12A3C3C6950}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9610DD42-2D4F-48FB-AABD-C12A3C3C6950}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9610DD42-2D4F-48FB-AABD-C12A3C3C6950}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D736402C-269C-43A6-9DD8-6EB2EAEE6611}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D736402C-269C-43A6-9DD8-6EB2EAEE6611}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D736402C-269C-43A6-9DD8-6EB2EAEE6611}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D736402C-269C-43A6-9DD8-6EB2EAEE6611}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A82DC29A-AE7F-4BC4-9D66-FDFE351DB8E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A82DC29A-AE7F-4BC4-9D66-FDFE351DB8E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A82DC29A-AE7F-4BC4-9D66-FDFE351DB8E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A82DC29A-AE7F-4BC4-9D66-FDFE351DB8E3}.Release|Any CPU.Build.0 = Release|Any CPU
 		{6993C0C6-5E65-4D36-B52E-32ED562211DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6993C0C6-5E65-4D36-B52E-32ED562211DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6993C0C6-5E65-4D36-B52E-32ED562211DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -476,7 +474,6 @@ Global
 		{10ABAC3B-38E8-4909-8AA7-58A9F1E07167} = {10BBC3B5-C262-4DD9-9A40-B668340D2C8A}
 		{86663B10-F8EB-49E8-987D-929521588B30} = {10ABAC3B-38E8-4909-8AA7-58A9F1E07167}
 		{9610DD42-2D4F-48FB-AABD-C12A3C3C6950} = {2DEDFD1A-AFA2-46B1-90D3-899259333AD1}
-		{D736402C-269C-43A6-9DD8-6EB2EAEE6611} = {8604EF74-7DDA-4D63-8A6C-777731C6B37A}
 		{8604EF74-7DDA-4D63-8A6C-777731C6B37A} = {D2CA4D1E-CDAC-4108-8347-25184B9EF1E6}
 		{6993C0C6-5E65-4D36-B52E-32ED562211DC} = {8604EF74-7DDA-4D63-8A6C-777731C6B37A}
 		{2AA13CD7-8B60-402E-85AB-495B59DA4903} = {B261FC16-19BE-43A7-8E31-EA5F535ADA4B}
