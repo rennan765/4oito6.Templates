@@ -9,5 +9,9 @@ namespace _4oito6.Infra.CrossCutting.Configuration.Connection
         public string CacheConnectionString => Environment.GetEnvironmentVariable("CacheConnectionString");
 
         public string CacheDbName => Environment.GetEnvironmentVariable("CacheDbName");
+
+        public string MongoConnectionString => Environment.GetEnvironmentVariable("MongoConnectionString");
+
+        public string MongoDbName => Environment.GetEnvironmentVariable("MongoDbName");
     }
 }

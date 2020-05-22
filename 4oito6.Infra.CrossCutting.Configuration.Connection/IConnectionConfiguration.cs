@@ -5,5 +5,7 @@
         string DbConnectionString { get; }
         string CacheConnectionString { get; }
         string CacheDbName { get; }
+        string MongoConnectionString { get; }
+        string MongoDbName { get; }
     }
 }
