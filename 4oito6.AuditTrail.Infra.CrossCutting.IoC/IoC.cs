@@ -7,7 +7,9 @@ namespace _4oito6.AuditTrail.Infra.CrossCutting.IoC
     {
         public static IServiceCollection ResolveAuditTrail(this IServiceCollection services)
         {
-            return services.ConfigureRepositories();
+            return services.ConfigureRepositories()
+                .ConfigureBus()
+                .ConfigureServices();
         }
     }
 }
