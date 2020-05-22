@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <RootNamespace>_4oito6.AuditTrail.Domain.Specs</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\4oito6.Domain.Specs.Core\4oito6.Domain.Specs.Core.csproj" />
+  </ItemGroup>
+
+</Project>
