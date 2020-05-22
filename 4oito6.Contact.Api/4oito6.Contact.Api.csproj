@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <RootNamespace>_4oito6.Contact.Api</RootNamespace>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>$(NoWarn);1591</NoWarn>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\4oito6.Contact.Infra.CrossCutting.Ioc\4oito6.Contact.Infra.CrossCutting.Ioc.csproj" />
+    <ProjectReference Include="..\4oito6.Middleware.Core\4oito6.Middleware.Core.csproj" />
+  </ItemGroup>
+</Project>
