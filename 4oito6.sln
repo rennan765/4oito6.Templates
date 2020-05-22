@@ -189,27 +189,33 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "4oito6.AuditTrail.Infra.Mon
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CrossCutting", "CrossCutting", "{8B0E9849-57F3-4808-A09A-2C6A6F305349}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "4oito6.AuditTrail.Infra.CrossCutting.IoC", "4oito6.AuditTrail.Infra.CrossCutting.IoC\4oito6.AuditTrail.Infra.CrossCutting.IoC.csproj", "{426A48FB-E990-4943-9CCC-11E8F086A315}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "4oito6.AuditTrail.Infra.CrossCutting.IoC", "4oito6.AuditTrail.Infra.CrossCutting.IoC\4oito6.AuditTrail.Infra.CrossCutting.IoC.csproj", "{426A48FB-E990-4943-9CCC-11E8F086A315}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{1D603271-4B10-4417-BAD9-089B8751E249}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "4oito6.AuditTrail.Domain", "4oito6.AuditTrail.Domain\4oito6.AuditTrail.Domain.csproj", "{C701C4F8-7842-4CA0-A925-BB177951509F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "4oito6.AuditTrail.Domain", "4oito6.AuditTrail.Domain\4oito6.AuditTrail.Domain.csproj", "{C701C4F8-7842-4CA0-A925-BB177951509F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{9DCBFD38-157A-4214-B5B2-CA9D0A51A713}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "4oito6.AuditTrail.Domain.Services.Contract", "4oito6.AuditTrail.Domain.Services.Contract\4oito6.AuditTrail.Domain.Services.Contract.csproj", "{ADAA4875-AFCD-478A-94D8-2FFBA247478C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "4oito6.AuditTrail.Domain.Services.Contract", "4oito6.AuditTrail.Domain.Services.Contract\4oito6.AuditTrail.Domain.Services.Contract.csproj", "{ADAA4875-AFCD-478A-94D8-2FFBA247478C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "4oito6.AuditTrail.Domain.Services.Implementation", "4oito6.AuditTrail.Domain.Services.Implementation\4oito6.AuditTrail.Domain.Services.Implementation.csproj", "{FF94FA86-5B39-4CA9-8083-68A3DCFC3C67}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "4oito6.AuditTrail.Domain.Services.Implementation", "4oito6.AuditTrail.Domain.Services.Implementation\4oito6.AuditTrail.Domain.Services.Implementation.csproj", "{FF94FA86-5B39-4CA9-8083-68A3DCFC3C67}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "4oito6.AuditTrail.Domain.Specs", "4oito6.AuditTrail.Domain.Specs\4oito6.AuditTrail.Domain.Specs.csproj", "{66A20A64-E5E0-4093-9DE1-CA426A86DB75}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "4oito6.AuditTrail.Domain.Specs", "4oito6.AuditTrail.Domain.Specs\4oito6.AuditTrail.Domain.Specs.csproj", "{66A20A64-E5E0-4093-9DE1-CA426A86DB75}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Bus", "Bus", "{7366B426-8167-4DFA-ACC4-8C12E133FFF7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "4oito6.AuditTrail.Infra.Data.Bus.Contracts", "4oito6.AuditTrail.Infra.Data.Bus.Contracts\4oito6.AuditTrail.Infra.Data.Bus.Contracts.csproj", "{112B3268-A0A9-41E4-B3DA-5BC3923F9C59}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "4oito6.AuditTrail.Infra.Data.Bus.Contracts", "4oito6.AuditTrail.Infra.Data.Bus.Contracts\4oito6.AuditTrail.Infra.Data.Bus.Contracts.csproj", "{112B3268-A0A9-41E4-B3DA-5BC3923F9C59}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "4oito6.AuditTrail.Infra.Data.Bus.Implementation", "4oito6.AuditTrail.Infra.Data.Bus.Implementation\4oito6.AuditTrail.Infra.Data.Bus.Implementation.csproj", "{A497F6E6-692C-4604-B12E-A2F972635617}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "4oito6.AuditTrail.Infra.Data.Bus.Implementation", "4oito6.AuditTrail.Infra.Data.Bus.Implementation\4oito6.AuditTrail.Infra.Data.Bus.Implementation.csproj", "{A497F6E6-692C-4604-B12E-A2F972635617}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "4oito6.AuditTrail.Infra.CrossCutting.Messages", "4oito6.AuditTrail.Infra.CrossCutting.Messages\4oito6.AuditTrail.Infra.CrossCutting.Messages.csproj", "{C3742800-046E-4DD1-AE4C-061C664F9585}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "4oito6.AuditTrail.Infra.CrossCutting.Messages", "4oito6.AuditTrail.Infra.CrossCutting.Messages\4oito6.AuditTrail.Infra.CrossCutting.Messages.csproj", "{C3742800-046E-4DD1-AE4C-061C664F9585}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application", "{93C147E3-FABE-4535-BE37-71186DE4984A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "4oito6.AuditTrail.Application.Contracts", "4oito6.AuditTrail.Application.Contracts\4oito6.AuditTrail.Application.Contracts.csproj", "{B3F74B0C-2960-41B7-A540-EDE477930FE2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "4oito6.AuditTrail.Application.Implementation", "4oito6.AuditTrail.Application.Implementation\4oito6.AuditTrail.Application.Implementation.csproj", "{55F22796-8A3F-4036-A590-22BC22743644}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -469,6 +475,14 @@ Global
 		{C3742800-046E-4DD1-AE4C-061C664F9585}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C3742800-046E-4DD1-AE4C-061C664F9585}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C3742800-046E-4DD1-AE4C-061C664F9585}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B3F74B0C-2960-41B7-A540-EDE477930FE2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B3F74B0C-2960-41B7-A540-EDE477930FE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B3F74B0C-2960-41B7-A540-EDE477930FE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B3F74B0C-2960-41B7-A540-EDE477930FE2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{55F22796-8A3F-4036-A590-22BC22743644}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{55F22796-8A3F-4036-A590-22BC22743644}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{55F22796-8A3F-4036-A590-22BC22743644}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{55F22796-8A3F-4036-A590-22BC22743644}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -574,6 +588,9 @@ Global
 		{112B3268-A0A9-41E4-B3DA-5BC3923F9C59} = {7366B426-8167-4DFA-ACC4-8C12E133FFF7}
 		{A497F6E6-692C-4604-B12E-A2F972635617} = {7366B426-8167-4DFA-ACC4-8C12E133FFF7}
 		{C3742800-046E-4DD1-AE4C-061C664F9585} = {8B0E9849-57F3-4808-A09A-2C6A6F305349}
+		{93C147E3-FABE-4535-BE37-71186DE4984A} = {CC35635F-75D1-4DAE-B331-11E3D3917EA5}
+		{B3F74B0C-2960-41B7-A540-EDE477930FE2} = {93C147E3-FABE-4535-BE37-71186DE4984A}
+		{55F22796-8A3F-4036-A590-22BC22743644} = {93C147E3-FABE-4535-BE37-71186DE4984A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {42819E7B-74A7-4FDD-8346-3B0D5B39A789}

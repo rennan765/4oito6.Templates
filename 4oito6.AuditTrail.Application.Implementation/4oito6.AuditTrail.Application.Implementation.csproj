@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <RootNamespace>_4oito6.AuditTrail.Application.Implementation</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\4oito6.AuditTrail.Application.Contracts\4oito6.AuditTrail.Application.Contracts.csproj" />
+    <ProjectReference Include="..\4oito6.Domain.Application.Core.Implementation\4oito6.Domain.Application.Core.Implementation.csproj" />
+  </ItemGroup>
+</Project>
