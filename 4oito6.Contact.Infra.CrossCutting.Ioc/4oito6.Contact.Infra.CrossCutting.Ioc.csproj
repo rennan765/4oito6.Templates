@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <RootNamespace>_4oito6.Contact.Infra.CrossCutting.Ioc</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.2.2" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.1.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\4oito6.Contact.Domain.Application.Contracts\4oito6.Contact.Domain.Application.Contracts.csproj" />
+    <ProjectReference Include="..\4oito6.Contact.Domain.Application.Implementation\4oito6.Contact.Domain.Application.Implementation.csproj" />
+    <ProjectReference Include="..\4oito6.Contact.Domain.Services.Contracts\4oito6.Contact.Domain.Services.Contracts.csproj" />
+    <ProjectReference Include="..\4oito6.Contact.Domain.Services.Implementation\4oito6.Contact.Domain.Services.Implementation.csproj" />
+    <ProjectReference Include="..\4oito6.Contact.Infra.CrossCutting.Configuration\4oito6.Contact.Infra.CrossCutting.Configuration.csproj" />
+    <ProjectReference Include="..\4oito6.Contact.Infra.CrossCutting.PostalCode\4oito6.Contact.Infra.CrossCutting.PostalCode.csproj" />
+    <ProjectReference Include="..\4oito6.Contact.Infra.Data.Bus.Contracts\4oito6.Contact.Infra.Data.Bus.Contracts.csproj" />
+    <ProjectReference Include="..\4oito6.Contact.Infra.Data.Bus.Implementation\4oito6.Contact.Infra.Data.Bus.Implementation.csproj" />
+    <ProjectReference Include="..\4oito6.Infra.CrossCutting.Ioc.Swagger\4oito6.Infra.CrossCutting.Ioc.Swagger.csproj" />
+    <ProjectReference Include="..\4oito6.Infra.CrossCutting.IoC.Token\4oito6.Infra.CrossCutting.IoC.Token.csproj" />
+    <ProjectReference Include="..\4oito6.Infra.Data.Transactions.Contracts\4oito6.Infra.Data.Transactions.Contracts.csproj" />
+    <ProjectReference Include="..\4oito6.Infra.Data.Transactions.Implementation\4oito6.Infra.Data.Transactions.Implementation.csproj" />
+    <ProjectReference Include="..\4oito6.Template.Infra.Data.Repositories.Contracts\4oito6.Template.Infra.Data.Repositories.Contracts.csproj" />
+    <ProjectReference Include="..\4oito6.Template.Infra.Data.Repositories.Implementation\4oito6.Template.Infra.Data.Repositories.Implementation.csproj" />
+  </ItemGroup>
+
+</Project>
