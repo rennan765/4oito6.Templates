@@ -20,6 +20,14 @@ namespace _4oito6.Middleware.Core
 
         protected async Task TreatExceptionAsync(HttpContext context, Exception ex)
         {
+            var message = string.Empty;
+
+#if DEBUG
+            message = ex.Message;
+#else
+            message = "Internal Server Error";
+#endif
+
             using var writer = new StreamWriter(context.Response.Body, Encoding.UTF8, 2048, true);
             var response = new ResponseMessage(ex.Message, (int)HttpStatusCode.InternalServerError);
 
