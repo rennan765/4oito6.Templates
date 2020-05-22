@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <RootNamespace>_4oito6.AuditTrail.Infra.Mongo.Repositories.Implementation</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\4oito6.AuditTrail.Infra.Mongo.Repositories.Contracts\4oito6.AuditTrail.Infra.Mongo.Repositories.Contracts.csproj" />
+    <ProjectReference Include="..\4oito6.Infra.Data.Repositories.Mongo.Core.Implementation\4oito6.Infra.Data.Repositories.Mongo.Core.Implementation.csproj" />
+  </ItemGroup>
+
+</Project>
