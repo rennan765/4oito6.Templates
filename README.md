@@ -67,7 +67,7 @@ Para que o mesmo execute normalmente, será necessário inserir as variáveis ab
     <td>mongodb+srv://{db}:{password}@my-server.com?retryWrites=true&w=majority</td>
   </tr>
   <tr>
-    <td></td>
+    <td>MongoDbName</td>
     <td>Nome da coleção do MongoDB, para armazenamento de exceção</td>
     <td>Exception</td>
   </tr>
