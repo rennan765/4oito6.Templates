@@ -1,4 +1,5 @@
-﻿using _4oito6.Contact.Infra.CrossCutting.Configuration;
+﻿using _4oito6.AuditTrail.Infra.CrossCutting.IoC;
+using _4oito6.Contact.Infra.CrossCutting.Configuration;
 using _4oito6.Contact.Infra.CrossCutting.Ioc.Resolvers;
 using _4oito6.Contact.Infra.CrossCutting.PostalCode.Contracts.Interfaces;
 using _4oito6.Contact.Infra.CrossCutting.PostalCode.Implementation;
@@ -36,6 +37,7 @@ namespace _4oito6.Contact.Infra.CrossCutting.Ioc
                 .AddSingleton<IContactConfiguration, ContactConfiguration>()
                 .AddSingleton<IConnectionConfiguration, ConnectionConfiguration>()
                 .AddSingleton<IHttpContextAccessor, HttpContextAccessor>()
+                .ResolveAuditTrail()
                 .ResolvePostalCode()
                 .ResolveDatabase()
                 .ResolveRepositories()

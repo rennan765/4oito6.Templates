@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <RootNamespace>_4oito6.AuditTrail.Infra.Mongo.Repositories.Contracts</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MongoDB.Bson" Version="2.10.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\4oito6.AuditTrail.Domain\4oito6.AuditTrail.Domain.csproj" />
+    <ProjectReference Include="..\4oito6.Infra.Data.Repositories.Core.Contracts\4oito6.Infra.Data.Repositories.Core.Contracts.csproj" />
+  </ItemGroup>
+
+</Project>

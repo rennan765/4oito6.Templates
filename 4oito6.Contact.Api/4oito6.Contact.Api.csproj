@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\4oito6.AuditTrail.Middleware\4oito6.AuditTrail.Middleware.csproj" />
     <ProjectReference Include="..\4oito6.Contact.Infra.CrossCutting.Ioc\4oito6.Contact.Infra.CrossCutting.Ioc.csproj" />
     <ProjectReference Include="..\4oito6.Middleware.Core\4oito6.Middleware.Core.csproj" />
   </ItemGroup>

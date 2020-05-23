@@ -1,4 +1,4 @@
-using _4oito6.Template.Api.Middleware;
+using _4oito6.AuditTrail.Middleware;
 using _4oito6.Template.Infra.CrossCutting.Ioc;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
@@ -57,7 +57,7 @@ namespace _4oito6.Template.Api
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseMiddleware<ExceptionHandlerMiddleware>();
+            app.UseMiddleware<AuditTrailMiddleware>();
             app.UseHttpsRedirection();
 
             app.UseRouting();

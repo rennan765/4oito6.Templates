@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <RootNamespace>_4oito6.AuditTrail.Infra.CrossCutting.IoC</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.1.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\4oito6.AuditTrail.Application.Contracts\4oito6.AuditTrail.Application.Contracts.csproj" />
+    <ProjectReference Include="..\4oito6.AuditTrail.Application.Implementation\4oito6.AuditTrail.Application.Implementation.csproj" />
+    <ProjectReference Include="..\4oito6.AuditTrail.Domain.Services.Contract\4oito6.AuditTrail.Domain.Services.Contract.csproj" />
+    <ProjectReference Include="..\4oito6.AuditTrail.Domain.Services.Implementation\4oito6.AuditTrail.Domain.Services.Implementation.csproj" />
+    <ProjectReference Include="..\4oito6.AuditTrail.Infra.Data.Bus.Contracts\4oito6.AuditTrail.Infra.Data.Bus.Contracts.csproj" />
+    <ProjectReference Include="..\4oito6.AuditTrail.Infra.Data.Bus.Implementation\4oito6.AuditTrail.Infra.Data.Bus.Implementation.csproj" />
+    <ProjectReference Include="..\4oito6.AuditTrail.Infra.Mongo.Repositories.Contracts\4oito6.AuditTrail.Infra.Mongo.Repositories.Contracts.csproj" />
+    <ProjectReference Include="..\4oito6.AuditTrail.Infra.Mongo.Repositories.Implementation\4oito6.AuditTrail.Infra.Mongo.Repositories.Implementation.csproj" />
+    <ProjectReference Include="..\4oito6.Infra.CrossCutting.Configuration.Connection\4oito6.Infra.CrossCutting.Configuration.Connection.csproj" />
+  </ItemGroup>
+</Project>

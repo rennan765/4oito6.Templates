@@ -13,6 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\4oito6.AuditTrail.Infra.CrossCutting.IoC\4oito6.AuditTrail.Infra.CrossCutting.IoC.csproj" />
     <ProjectReference Include="..\4oito6.Infra.CrossCutting.Configuration.Connection\4oito6.Infra.CrossCutting.Configuration.Connection.csproj" />
     <ProjectReference Include="..\4oito6.Infra.CrossCutting.Ioc.Swagger\4oito6.Infra.CrossCutting.Ioc.Swagger.csproj" />
     <ProjectReference Include="..\4oito6.Infra.CrossCutting.IoC.Token\4oito6.Infra.CrossCutting.IoC.Token.csproj" />
