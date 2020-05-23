@@ -61,4 +61,14 @@ Para que o mesmo execute normalmente, será necessário inserir as variáveis ab
     <td>Nome do banco do REDIS, para armazenamento do refresh token</td>
     <td>db1</td>
   </tr>
+  <tr>
+    <td>MongoConnectionString</td>
+    <td>Connection string do MongoDB, para armazenamento de exceção</td>
+    <td>mongodb+srv://{db}:{password}@my-server.com?retryWrites=true&w=majority</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td>Nome da coleção do MongoDB, para armazenamento de exceção</td>
+    <td>Exception</td>
+  </tr>
 </table>
