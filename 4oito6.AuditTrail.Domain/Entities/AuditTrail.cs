@@ -30,6 +30,7 @@ namespace _4oito6.AuditTrail.Domain.Entities
         /// <param name="exception"></param>
         public AuditTrail(Exception exception, DateTime? date = null)
         {
+            Id = new Random().Next().ToString();
             Date = date ?? DateTime.UtcNow;
             Message = exception.Message;
             StackTrace = exception.StackTrace;
