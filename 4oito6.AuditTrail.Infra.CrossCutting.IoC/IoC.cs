@@ -9,7 +9,8 @@ namespace _4oito6.AuditTrail.Infra.CrossCutting.IoC
         {
             return services.ConfigureRepositories()
                 .ConfigureBus()
-                .ConfigureServices();
+                .ConfigureServices()
+                .ConfigureAppServices();
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using _4oito6.Infra.CrossCutting.Configuration.Connection;
+﻿using _4oito6.AuditTrail.Infra.CrossCutting.IoC;
+using _4oito6.Infra.CrossCutting.Configuration.Connection;
 using _4oito6.Infra.CrossCutting.Ioc.Swagger;
 using _4oito6.Infra.CrossCutting.IoC.Token;
 using _4oito6.Template.Infra.CrossCutting.Ioc.Resolvers;
@@ -14,6 +15,7 @@ namespace _4oito6.Template.Infra.CrossCutting.Ioc
             return services
                 .AddSingleton<IConnectionConfiguration, ConnectionConfiguration>()
                 .AddSingleton<IHttpContextAccessor, HttpContextAccessor>()
+                .ResolveAuditTrail()
                 .ResolveDatabase()
                 .ResolveRepositories()
                 .ResolveBus()
