@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <RootNamespace>_4oito6.AuditTrail.Tests</RootNamespace>
+
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Bogus" Version="29.0.2" />
+    <PackageReference Include="CompareNETObjects" Version="4.66.0" />
+    <PackageReference Include="FluentAssertions" Version="5.10.3" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.5.0" />
+    <PackageReference Include="Moq.AutoMock" Version="2.0.0" />
+    <PackageReference Include="xunit" Version="2.4.0" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.0" />
+    <PackageReference Include="coverlet.collector" Version="1.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\4oito6.AuditTrail.Domain.Services.Contract\4oito6.AuditTrail.Domain.Services.Contract.csproj" />
+    <ProjectReference Include="..\4oito6.AuditTrail.Domain.Services.Implementation\4oito6.AuditTrail.Domain.Services.Implementation.csproj" />
+    <ProjectReference Include="..\4oito6.AuditTrail.Domain\4oito6.AuditTrail.Domain.csproj" />
+    <ProjectReference Include="..\4oito6.AuditTrail.Infra.CrossCutting.Messages\4oito6.AuditTrail.Infra.CrossCutting.Messages.csproj" />
+  </ItemGroup>
+
+</Project>
