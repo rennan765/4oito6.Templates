@@ -213,9 +213,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "4oito6.AuditTrail.Infra.Cro
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application", "{93C147E3-FABE-4535-BE37-71186DE4984A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "4oito6.AuditTrail.Application.Contracts", "4oito6.AuditTrail.Application.Contracts\4oito6.AuditTrail.Application.Contracts.csproj", "{B3F74B0C-2960-41B7-A540-EDE477930FE2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "4oito6.AuditTrail.Application.Contracts", "4oito6.AuditTrail.Application.Contracts\4oito6.AuditTrail.Application.Contracts.csproj", "{B3F74B0C-2960-41B7-A540-EDE477930FE2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "4oito6.AuditTrail.Application.Implementation", "4oito6.AuditTrail.Application.Implementation\4oito6.AuditTrail.Application.Implementation.csproj", "{55F22796-8A3F-4036-A590-22BC22743644}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "4oito6.AuditTrail.Application.Implementation", "4oito6.AuditTrail.Application.Implementation\4oito6.AuditTrail.Application.Implementation.csproj", "{55F22796-8A3F-4036-A590-22BC22743644}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "EntryPoint", "EntryPoint", "{916A29AF-7060-46DF-8E82-8CCE2C28740C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Middleware", "Middleware", "{9FBC9FE3-089E-4D2D-BD12-9994C3E86B20}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "4oito6.AuditTrail.Middleware", "4oito6.AuditTrail.Middleware\4oito6.AuditTrail.Middleware.csproj", "{7C981607-E725-4B3A-B6E6-0DF876A2FAD0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -483,6 +489,10 @@ Global
 		{55F22796-8A3F-4036-A590-22BC22743644}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{55F22796-8A3F-4036-A590-22BC22743644}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{55F22796-8A3F-4036-A590-22BC22743644}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7C981607-E725-4B3A-B6E6-0DF876A2FAD0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C981607-E725-4B3A-B6E6-0DF876A2FAD0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C981607-E725-4B3A-B6E6-0DF876A2FAD0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C981607-E725-4B3A-B6E6-0DF876A2FAD0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -591,6 +601,9 @@ Global
 		{93C147E3-FABE-4535-BE37-71186DE4984A} = {CC35635F-75D1-4DAE-B331-11E3D3917EA5}
 		{B3F74B0C-2960-41B7-A540-EDE477930FE2} = {93C147E3-FABE-4535-BE37-71186DE4984A}
 		{55F22796-8A3F-4036-A590-22BC22743644} = {93C147E3-FABE-4535-BE37-71186DE4984A}
+		{916A29AF-7060-46DF-8E82-8CCE2C28740C} = {CC35635F-75D1-4DAE-B331-11E3D3917EA5}
+		{9FBC9FE3-089E-4D2D-BD12-9994C3E86B20} = {916A29AF-7060-46DF-8E82-8CCE2C28740C}
+		{7C981607-E725-4B3A-B6E6-0DF876A2FAD0} = {9FBC9FE3-089E-4D2D-BD12-9994C3E86B20}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {42819E7B-74A7-4FDD-8346-3B0D5B39A789}
