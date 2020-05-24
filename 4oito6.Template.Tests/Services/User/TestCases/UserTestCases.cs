@@ -75,7 +75,8 @@ namespace _4oito6.Template.Tests.Services.User.TestCases
         {
             var request = new UserRequest
             {
-                Email = "teste@teste.com"
+                Email = "teste@teste.com",
+                Cpf = "80824941748'"
             };
 
             if (testCase == TestCase.EmailExists)
