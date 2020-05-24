@@ -50,6 +50,76 @@ namespace _4oito6.Template.Tests.Services.User
             mocker.Verify();
         }
 
+        [Fact(DisplayName = "CreateUserAsync_InvalidEmail")]
+        [Trait("CreateUserAsync", "UserService")]
+        public async Task CreateUserAsync_InvalidEmail()
+        {
+            //Arrange
+            var comparison = new CompareLogic();
+            var mocker = new AutoMocker();
+            var serviceMock = mocker.CreateInstance<UserService>();
+
+            var request = new UserRequest
+            {
+                Email = "invalid email",
+                Cpf = "45237248063",
+
+                FirstName = "Fulano",
+                MiddleName = "de Tal",
+                LastName = "da Silva",
+            };
+
+            mocker.GetMock<IUserBus>()
+                .Setup(b => b.ExistsEmailAsync(request.Email, null))
+                .ReturnsAsync(false)
+                .Verifiable();
+
+            var expectedMessages = new string[] { UserSpecMessages.EmailInvalido };
+
+            //Act
+            var result = await serviceMock.CreateUserAsync(request).ConfigureAwait(false);
+
+            //Assert
+            result.Should().BeNull();
+            serviceMock.GetStatusCode().Should().BeEquivalentTo(HttpStatusCode.BadRequest);
+            comparison.Compare(expectedMessages, serviceMock.GetMessages()).AreEqual.Should().BeTrue();
+        }
+
+        [Fact(DisplayName = "CreateUserAsync_InvalidCpf")]
+        [Trait("CreateUserAsync", "UserService")]
+        public async Task CreateUserAsync_InvalidCpf()
+        {
+            //Arrange
+            var comparison = new CompareLogic();
+            var mocker = new AutoMocker();
+            var serviceMock = mocker.CreateInstance<UserService>();
+
+            var request = new UserRequest
+            {
+                Email = "teste@teste.com",
+                Cpf = "0",
+
+                FirstName = "Fulano",
+                MiddleName = "de Tal",
+                LastName = "da Silva",
+            };
+
+            mocker.GetMock<IUserBus>()
+                .Setup(b => b.ExistsEmailAsync(request.Email, null))
+                .ReturnsAsync(false)
+                .Verifiable();
+
+            var expectedMessages = new string[] { UserSpecMessages.CpfInvalido };
+
+            //Act
+            var result = await serviceMock.CreateUserAsync(request).ConfigureAwait(false);
+
+            //Assert
+            result.Should().BeNull();
+            serviceMock.GetStatusCode().Should().BeEquivalentTo(HttpStatusCode.BadRequest);
+            comparison.Compare(expectedMessages, serviceMock.GetMessages()).AreEqual.Should().BeTrue();
+        }
+
         [Fact(DisplayName = "CreateUserAsync_InvalidAddress")]
         [Trait("CreateUserAsync", "UserService")]
         public async Task CreateUserAsync_InvalidAddress()
@@ -463,6 +533,104 @@ namespace _4oito6.Template.Tests.Services.User
             Assert.True(serviceMock.GetStatusCode() == HttpStatusCode.Conflict);
             Assert.True(comparison.Compare(serviceMock.GetMessages(), expectedMessages).AreEqual);
             mocker.Verify();
+        }
+
+        [Fact(DisplayName = "UpdateUserAsync_InvalidEmail")]
+        [Trait("UpdateUserAsync", "UserService")]
+        public async Task UpdateUserAsync_InvalidEmail()
+        {
+            //Arrange
+            var mocker = new AutoMocker();
+            var service = mocker.CreateInstance<UserService>();
+
+            var request = new UserRequest
+            {
+                Id = 8,
+                Email = "invalid email",
+                Cpf = "45237248063",
+
+                FirstName = "Fulano",
+                MiddleName = "de Tal",
+                LastName = "da Silva",
+            };
+
+            var userDb = GetUserToUpdate(TestCase.EmailExists);
+
+            mocker.GetMock<IUserBus>()
+                .Setup(b => b.GetByIdAsync(request.Id ?? 0))
+                .ReturnsAsync(userDb)
+                .Verifiable();
+
+            var token = new Entities.TokenModel(userDb.Id, userDb.Email, null);
+
+            mocker.GetMock<IUserBus>()
+                .Setup(b => b.GetTokenAsync())
+                .ReturnsAsync(token)
+                .Verifiable();
+
+            mocker.GetMock<IUserBus>()
+                .Setup(b => b.ExistsEmailAsync(request.Email, request.Id))
+                .ReturnsAsync(false)
+                .Verifiable();
+
+            var expectedMessages = new string[] { UserSpecMessages.EmailInvalido };
+
+            //Act
+            var result = await service.UpdateUserAsync(request).ConfigureAwait(false);
+
+            //Assert
+            result.Should().BeNull();
+            service.GetStatusCode().Should().BeEquivalentTo(HttpStatusCode.BadRequest);
+            new CompareLogic().Compare(expectedMessages, service.GetMessages()).AreEqual.Should().BeTrue();
+        }
+
+        [Fact(DisplayName = "UpdateUserAsync_InvalidCpf")]
+        [Trait("UpdateUserAsync", "UserService")]
+        public async Task UpdateUserAsync_InvalidCpf()
+        {
+            //Arrange
+            var mocker = new AutoMocker();
+            var service = mocker.CreateInstance<UserService>();
+
+            var request = new UserRequest
+            {
+                Id = 8,
+                Email = "teste@teste.com",
+                Cpf = "0",
+
+                FirstName = "Fulano",
+                MiddleName = "de Tal",
+                LastName = "da Silva",
+            };
+
+            var userDb = GetUserToUpdate(TestCase.EmailExists);
+
+            mocker.GetMock<IUserBus>()
+                .Setup(b => b.GetByIdAsync(request.Id ?? 0))
+                .ReturnsAsync(userDb)
+                .Verifiable();
+
+            var token = new Entities.TokenModel(userDb.Id, userDb.Email, null);
+
+            mocker.GetMock<IUserBus>()
+                .Setup(b => b.GetTokenAsync())
+                .ReturnsAsync(token)
+                .Verifiable();
+
+            mocker.GetMock<IUserBus>()
+                .Setup(b => b.ExistsEmailAsync(request.Email, request.Id))
+                .ReturnsAsync(false)
+                .Verifiable();
+
+            var expectedMessages = new string[] { UserSpecMessages.CpfInvalido };
+
+            //Act
+            var result = await service.UpdateUserAsync(request).ConfigureAwait(false);
+
+            //Assert
+            result.Should().BeNull();
+            service.GetStatusCode().Should().BeEquivalentTo(HttpStatusCode.BadRequest);
+            new CompareLogic().Compare(expectedMessages, service.GetMessages()).AreEqual.Should().BeTrue();
         }
 
         [Fact(DisplayName = "UpdateUserAsync_InvalidAddress")]
