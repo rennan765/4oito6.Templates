@@ -44,7 +44,7 @@ namespace _4oito6.Contact.Api.Controllers
         [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
         [ProducesResponseType(typeof(ResponseMessage), (int)HttpStatusCode.InternalServerError)]
         [HttpGet]
-        [Route("[controller]/{district}/{city}")]
+        [Route("{district}/{city}")]
         public async Task<IActionResult> GetByDistrictAndCity(string district, string city)
         {
             var result = await _contactAppService.GetAddressByDistrictAndCityAsync(district, city).ConfigureAwait(false);
@@ -60,7 +60,7 @@ namespace _4oito6.Contact.Api.Controllers
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         [ProducesResponseType(typeof(ResponseMessage), (int)HttpStatusCode.InternalServerError)]
         [HttpGet]
-        [Route("[controller]/ws/{postalCode}")]
+        [Route("ws/{postalCode}")]
         [AllowAnonymous]
         public async Task<IActionResult> GetFromWebServiceByPostalCodeAsync(string postalCode)
         {

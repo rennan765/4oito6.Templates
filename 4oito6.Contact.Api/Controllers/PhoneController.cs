@@ -4,7 +4,6 @@ using _4oito6.Contact.Domain.Services.Contracts.Arguments.Response;
 using _4oito6.Domain.Application.Core.Contracts.Arguments;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
@@ -46,7 +45,7 @@ namespace _4oito6.Contact.Api.Controllers
         [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
         [ProducesResponseType(typeof(ResponseMessage), (int)HttpStatusCode.InternalServerError)]
         [HttpGet]
-        [Route("[controller]/{localCode}")]
+        [Route("{localCode}")]
         public async Task<IActionResult> GetFromLocalCode(string localCode)
         {
             var result = await _contactAppService.GetPhonesByLocalCodeAsync(localCode).ConfigureAwait(false);
