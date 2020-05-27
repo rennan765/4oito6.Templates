@@ -27,6 +27,6 @@ jobs:
     - name: 'Run Azure webapp deploy action using publish profile credentials'
       uses: azure/webapps-deploy@v1
       with: 
-        app-name: contact-test # Replace with your app name
+        app-name: contact-test 
         publish-profile: ${{secrets.contact_publishprofile}} # secret variable
-        package: './4oito6.Contact.Api' #todo change this
+        package: './4oito6.Contact.Api' 
