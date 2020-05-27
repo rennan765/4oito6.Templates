@@ -27,6 +27,6 @@ jobs:
     - name: 'Run Azure webapp deploy action using publish profile credentials'
       uses: azure/webapps-deploy@v1
       with: 
-        app-name: template-test # Replace with your app name
+        app-name: template-test 
         publish-profile: ${{secrets.template_publishprofile}} # secret variable
         package: './4oito6.Template.Api' 
