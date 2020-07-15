@@ -16,6 +16,7 @@ namespace _4oito6.Infra.Data.Transactions.Contracts.Interfaces
 
         void CloseDapperConnection();
 
-        Task SaveEntityChangesAsync();
+        //TODO este parâmetro deve ser obrigatório, não opcional.
+        Task SaveEntityChangesAsync(DataSource dataSource = DataSource.TemplateContext);
     }
 }

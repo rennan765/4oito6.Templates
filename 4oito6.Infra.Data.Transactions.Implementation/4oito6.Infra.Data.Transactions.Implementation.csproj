@@ -10,6 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\4oito6.Contact.Infra.Data.Context\4oito6.Contact.Infra.Data.Context.csproj" />
     <ProjectReference Include="..\4oito6.Infra.CrossCutting.Configuration.Connection\4oito6.Infra.CrossCutting.Configuration.Connection.csproj" />
     <ProjectReference Include="..\4oito6.Infra.Data.Transactions.Contracts\4oito6.Infra.Data.Transactions.Contracts.csproj" />
     <ProjectReference Include="..\4oito6.Template.Infra.Data.Context\4oito6.Template.Infra.Data.Context.csproj" />

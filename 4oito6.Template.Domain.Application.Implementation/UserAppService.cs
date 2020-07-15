@@ -23,7 +23,7 @@ namespace _4oito6.Template.Domain.Application.Implementation
 
         public async Task<ResponseMessage<UserResponse>> CreateUserAsync(UserRequest request)
         {
-            Unit.BeginTransaction(DataSource.EntityFramework);
+            Unit.BeginTransaction(DataSource.TemplateContext);
 
             var response = await _userService.CreateUserAsync(request).ConfigureAwait(false);
 
@@ -37,16 +37,16 @@ namespace _4oito6.Template.Domain.Application.Implementation
                 message.Errors = _userService.GetMessages();
 
             if (_userService.IsSatisfied())
-                Unit.Commit(DataSource.EntityFramework);
+                Unit.Commit(DataSource.TemplateContext);
             else
-                Unit.Rollback(DataSource.EntityFramework);
+                Unit.Rollback(DataSource.TemplateContext);
 
             return message;
         }
 
         public async Task<ResponseMessage<LoginResponse>> LoginAsync(LoginRequest request)
         {
-            Unit.BeginTransaction(DataSource.EntityFramework);
+            Unit.BeginTransaction(DataSource.TemplateContext);
 
             var response = await _userService.LoginAsync(request).ConfigureAwait(false);
 
@@ -64,7 +64,7 @@ namespace _4oito6.Template.Domain.Application.Implementation
 
         public async Task<ResponseMessage<UserResponse>> UpdateUserAsync(UserRequest request)
         {
-            Unit.BeginTransaction(DataSource.EntityFramework);
+            Unit.BeginTransaction(DataSource.TemplateContext);
 
             var response = await _userService.UpdateUserAsync(request).ConfigureAwait(false);
 
@@ -78,16 +78,16 @@ namespace _4oito6.Template.Domain.Application.Implementation
                 message.Errors = _userService.GetMessages();
 
             if (_userService.IsSatisfied())
-                Unit.Commit(DataSource.EntityFramework);
+                Unit.Commit(DataSource.TemplateContext);
             else
-                Unit.Rollback(DataSource.EntityFramework);
+                Unit.Rollback(DataSource.TemplateContext);
 
             return message;
         }
 
         public async Task<ResponseMessage<LoginResponse>> RefreshLoginAsync(string refreshToken)
         {
-            Unit.BeginTransaction(DataSource.EntityFramework);
+            Unit.BeginTransaction(DataSource.TemplateContext);
 
             var response = await _userService.RefreshLoginAsync(refreshToken).ConfigureAwait(false);
 

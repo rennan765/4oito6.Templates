@@ -1,4 +1,5 @@
-﻿using _4oito6.Infra.Data.Core.Connection;
+﻿using _4oito6.Contact.Infra.Data.Context;
+using _4oito6.Infra.Data.Core.Connection;
 using _4oito6.Infra.Data.Transactions.Contracts.Enum;
 using _4oito6.Infra.Data.Transactions.Contracts.Interfaces;
 using _4oito6.Template.Infra.Data.Context;
@@ -9,13 +10,20 @@ namespace _4oito6.Infra.Data.Transactions.Implementation
 {
     public class UnitOfWork : IUnitOfWork
     {
-        private TemplateContext _context;
+        private TemplateContext _templateContext;
+        private ContactContext _contactContext;
         private IAsyncDbConnection _conn;
         private bool _disposedValue;
 
-        public UnitOfWork(TemplateContext context, IAsyncDbConnection conn)
+        public UnitOfWork(TemplateContext templateContext, ContactContext contactContext, IAsyncDbConnection conn)
+            : this(templateContext, conn)
         {
-            _context = context ?? throw new ArgumentNullException(nameof(context));
+            _contactContext = contactContext ?? throw new ArgumentNullException(nameof(contactContext));
+        }
+
+        public UnitOfWork(TemplateContext templateContext, IAsyncDbConnection conn)
+        {
+            _templateContext = templateContext ?? throw new ArgumentNullException(nameof(templateContext));
             _conn = conn ?? throw new ArgumentNullException(nameof(conn));
             _disposedValue = false;
         }
@@ -24,13 +32,20 @@ namespace _4oito6.Infra.Data.Transactions.Implementation
         {
             switch (dataSource)
             {
-                case DataSource.EntityFramework:
-                    _context.Database.BeginTransaction();
+                case DataSource.TemplateContext:
+                    _templateContext.Database.BeginTransaction();
+                    break;
+
+                case DataSource.ContactContext:
+                    _contactContext.Database.BeginTransaction();
                     break;
 
                 case DataSource.Dapper:
                     _conn.BeginTransaction();
                     break;
+
+                default:
+                    throw new ArgumentException($"{nameof(dataSource)} is invalid.");
             }
         }
 
@@ -43,13 +58,20 @@ namespace _4oito6.Infra.Data.Transactions.Implementation
         {
             switch (dataSource)
             {
-                case DataSource.EntityFramework:
-                    _context.Database.CommitTransaction();
+                case DataSource.TemplateContext:
+                    _templateContext.Database.CommitTransaction();
+                    break;
+
+                case DataSource.ContactContext:
+                    _contactContext.Database.BeginTransaction();
                     break;
 
                 case DataSource.Dapper:
                     _conn.Transaction.Commit();
                     break;
+
+                default:
+                    throw new ArgumentException($"{nameof(dataSource)} is invalid.");
             }
         }
 
@@ -62,13 +84,20 @@ namespace _4oito6.Infra.Data.Transactions.Implementation
         {
             switch (dataSource)
             {
-                case DataSource.EntityFramework:
-                    _context.Database.RollbackTransaction();
+                case DataSource.TemplateContext:
+                    _templateContext.Database.RollbackTransaction();
+                    break;
+
+                case DataSource.ContactContext:
+                    _contactContext.Database.BeginTransaction();
                     break;
 
                 case DataSource.Dapper:
                     _conn.Transaction.Rollback();
                     break;
+
+                default:
+                    throw new ArgumentException($"{nameof(dataSource)} is invalid.");
             }
         }
 
@@ -78,8 +107,11 @@ namespace _4oito6.Infra.Data.Transactions.Implementation
             {
                 if (disposing)
                 {
-                    _context?.Dispose();
-                    _context = null;
+                    _templateContext?.Dispose();
+                    _templateContext = null;
+
+                    _contactContext?.Dispose();
+                    _contactContext = null;
 
                     _conn?.Dispose();
                     _conn = null;
@@ -100,9 +132,19 @@ namespace _4oito6.Infra.Data.Transactions.Implementation
             GC.SuppressFinalize(this);
         }
 
-        public async Task SaveEntityChangesAsync()
+        public Task SaveEntityChangesAsync(DataSource dataSource = DataSource.TemplateContext)
         {
-            await _context.SaveChangesAsync().ConfigureAwait(false);
+            switch (dataSource)
+            {
+                case DataSource.TemplateContext:
+                    return _templateContext.SaveChangesAsync();
+
+                case DataSource.ContactContext:
+                    return _contactContext.SaveChangesAsync();
+
+                default:
+                    throw new ArgumentException($"{nameof(dataSource)} is invalid.");
+            }
         }
     }
 }
