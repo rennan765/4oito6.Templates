@@ -22,7 +22,7 @@ namespace _4oito6.Contact.Infra.CrossCutting.Ioc.Resolvers
                         var contactContext = sp.GetService<ContactContext>();
                         var conn = sp.GetService<IAsyncDbConnection>();
 
-                        return new UnitOfWork(templateContext, contactContext, conn);
+                        return new UnitOfWork(contactContext, conn);
                     }
                 )
                 .AddScoped<IViewAddressRepository, ViewAddressRepository>()

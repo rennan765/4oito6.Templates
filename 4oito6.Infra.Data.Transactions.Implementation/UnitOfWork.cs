@@ -10,22 +10,26 @@ namespace _4oito6.Infra.Data.Transactions.Implementation
 {
     public class UnitOfWork : IUnitOfWork
     {
-        private TemplateContext _templateContext;
-        private ContactContext _contactContext;
+        private TemplateContext _template;
+        private ContactContext _contact;
         private IAsyncDbConnection _conn;
         private bool _disposedValue;
 
-        public UnitOfWork(TemplateContext templateContext, ContactContext contactContext, IAsyncDbConnection conn)
-            : this(templateContext, conn)
+        private UnitOfWork()
         {
-            _contactContext = contactContext ?? throw new ArgumentNullException(nameof(contactContext));
+            _disposedValue = false;
         }
 
-        public UnitOfWork(TemplateContext templateContext, IAsyncDbConnection conn)
+        public UnitOfWork(TemplateContext template, IAsyncDbConnection conn) : this()
         {
-            _templateContext = templateContext ?? throw new ArgumentNullException(nameof(templateContext));
+            _template = template ?? throw new ArgumentNullException(nameof(template));
             _conn = conn ?? throw new ArgumentNullException(nameof(conn));
-            _disposedValue = false;
+        }
+
+        public UnitOfWork(ContactContext contact, IAsyncDbConnection conn) : this()
+        {
+            _contact = contact ?? throw new ArgumentNullException(nameof(contact));
+            _conn = conn ?? throw new ArgumentNullException(nameof(conn));
         }
 
         public void BeginTransaction(DataSource dataSource)
@@ -33,11 +37,11 @@ namespace _4oito6.Infra.Data.Transactions.Implementation
             switch (dataSource)
             {
                 case DataSource.TemplateContext:
-                    _templateContext.Database.BeginTransaction();
+                    _template?.Database.BeginTransaction();
                     break;
 
                 case DataSource.ContactContext:
-                    _contactContext.Database.BeginTransaction();
+                    _contact?.Database.BeginTransaction();
                     break;
 
                 case DataSource.Dapper:
@@ -59,11 +63,11 @@ namespace _4oito6.Infra.Data.Transactions.Implementation
             switch (dataSource)
             {
                 case DataSource.TemplateContext:
-                    _templateContext.Database.CommitTransaction();
+                    _template?.Database.CommitTransaction();
                     break;
 
                 case DataSource.ContactContext:
-                    _contactContext.Database.BeginTransaction();
+                    _contact?.Database.BeginTransaction();
                     break;
 
                 case DataSource.Dapper:
@@ -85,11 +89,11 @@ namespace _4oito6.Infra.Data.Transactions.Implementation
             switch (dataSource)
             {
                 case DataSource.TemplateContext:
-                    _templateContext.Database.RollbackTransaction();
+                    _template?.Database.RollbackTransaction();
                     break;
 
                 case DataSource.ContactContext:
-                    _contactContext.Database.BeginTransaction();
+                    _contact?.Database.BeginTransaction();
                     break;
 
                 case DataSource.Dapper:
@@ -107,11 +111,11 @@ namespace _4oito6.Infra.Data.Transactions.Implementation
             {
                 if (disposing)
                 {
-                    _templateContext?.Dispose();
-                    _templateContext = null;
+                    _template?.Dispose();
+                    _template = null;
 
-                    _contactContext?.Dispose();
-                    _contactContext = null;
+                    _contact?.Dispose();
+                    _contact = null;
 
                     _conn?.Dispose();
                     _conn = null;
@@ -137,11 +141,12 @@ namespace _4oito6.Infra.Data.Transactions.Implementation
             switch (dataSource)
             {
                 case DataSource.TemplateContext:
-                    return _templateContext.SaveChangesAsync();
+                    return _template?.SaveChangesAsync();
 
                 case DataSource.ContactContext:
-                    return _contactContext.SaveChangesAsync();
+                    return _contact?.SaveChangesAsync();
 
+                case DataSource.Dapper:
                 default:
                     throw new ArgumentException($"{nameof(dataSource)} is invalid.");
             }
