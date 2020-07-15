@@ -20,12 +20,12 @@
     <ProjectReference Include="..\4oito6.Contact.Infra.CrossCutting.PostalCode\4oito6.Contact.Infra.CrossCutting.PostalCode.csproj" />
     <ProjectReference Include="..\4oito6.Contact.Infra.Data.Bus.Contracts\4oito6.Contact.Infra.Data.Bus.Contracts.csproj" />
     <ProjectReference Include="..\4oito6.Contact.Infra.Data.Bus.Implementation\4oito6.Contact.Infra.Data.Bus.Implementation.csproj" />
+    <ProjectReference Include="..\4oito6.Contact.Infra.Data.Context\4oito6.Contact.Infra.Data.Context.csproj" />
+    <ProjectReference Include="..\4oito6.Contact.Infra.Data.Repositories\4oito6.Contact.Infra.Data.Repositories.csproj" />
     <ProjectReference Include="..\4oito6.Infra.CrossCutting.Ioc.Swagger\4oito6.Infra.CrossCutting.Ioc.Swagger.csproj" />
     <ProjectReference Include="..\4oito6.Infra.CrossCutting.IoC.Token\4oito6.Infra.CrossCutting.IoC.Token.csproj" />
     <ProjectReference Include="..\4oito6.Infra.Data.Transactions.Contracts\4oito6.Infra.Data.Transactions.Contracts.csproj" />
     <ProjectReference Include="..\4oito6.Infra.Data.Transactions.Implementation\4oito6.Infra.Data.Transactions.Implementation.csproj" />
-    <ProjectReference Include="..\4oito6.Template.Infra.Data.Repositories.Contracts\4oito6.Template.Infra.Data.Repositories.Contracts.csproj" />
-    <ProjectReference Include="..\4oito6.Template.Infra.Data.Repositories.Implementation\4oito6.Template.Infra.Data.Repositories.Implementation.csproj" />
   </ItemGroup>
 
 </Project>

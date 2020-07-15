@@ -1,7 +1,7 @@
-﻿using _4oito6.Infra.Data.Transactions.Contracts.Interfaces;
+﻿using _4oito6.Contact.Infra.Data.Repositories;
+using _4oito6.Contact.Infra.Data.Repositories.Contracts.Interfaces.Repositories;
+using _4oito6.Infra.Data.Transactions.Contracts.Interfaces;
 using _4oito6.Infra.Data.Transactions.Implementation;
-using _4oito6.Template.Infra.Data.Repositories.Contracts.Entity;
-using _4oito6.Template.Infra.Data.Repositories.Implementation.Entity;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace _4oito6.Contact.Infra.CrossCutting.Ioc.Resolvers
@@ -12,8 +12,8 @@ namespace _4oito6.Contact.Infra.CrossCutting.Ioc.Resolvers
         {
             return services
                 .AddScoped<IUnitOfWork, UnitOfWork>()
-                .AddScoped<IAddressRepository, AddressRepository>()
-                .AddScoped<IPhoneRepository, PhoneRepository>();
+                .AddScoped<IViewAddressRepository, ViewAddressRepository>()
+                .AddScoped<IViewPhoneRepository, ViewPhoneRepository>();
         }
     }
 }
