@@ -1,18 +1,20 @@
 ﻿using _4oito6.Contact.Api.Controllers.Base;
 using _4oito6.Contact.Domain.Application.Contracts.Interfaces;
-using _4oito6.Contact.Domain.Services.Contracts.Arguments.Response;
+using _4oito6.Contact.Domain.Model.Views;
+using _4oito6.Contact.Infra.CrossCutting.PostalCode.Contracts.Arguments;
 using _4oito6.Domain.Application.Core.Contracts.Arguments;
+using Microsoft.AspNet.OData;
+using Microsoft.AspNet.OData.Routing;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 
 namespace _4oito6.Contact.Api.Controllers
 {
-    [ApiController]
-    [Route("[controller]")]
-    public class AddressController : BaseController
+    public class AddressController : ODataBaseController
     {
         private readonly IContactAppService _contactAppService;
 
@@ -26,29 +28,30 @@ namespace _4oito6.Contact.Api.Controllers
         /// Obtém o endereço do usuário logado
         /// </summary>
         /// <returns></returns>
-        [ProducesResponseType(typeof(ResponseMessage<AddressResponse>), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(IQueryable<ViewAddress>), (int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
         [ProducesResponseType(typeof(ResponseMessage), (int)HttpStatusCode.InternalServerError)]
+        [EnableQuery]
         [HttpGet]
+        [ODataRoute("address")]
         public async Task<IActionResult> GetFromUser()
         {
-            var result = await _contactAppService.GetUserAddressAsync().ConfigureAwait(false);
-            return StatusCode(result.StatusCode, result);
+            return Ok(await _contactAppService.GetUserAddressAsync().ConfigureAwait(false));
         }
 
         /// <summary>
         /// Obtém todos os telefones com o bairro e cidade informados
         /// </summary>
         /// <returns></returns>
-        [ProducesResponseType(typeof(ResponseMessage<AddressResponse>), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(IQueryable<ViewAddress>), (int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.Unauthorized)]
         [ProducesResponseType(typeof(ResponseMessage), (int)HttpStatusCode.InternalServerError)]
         [HttpGet]
-        [Route("{district}/{city}")]
-        public async Task<IActionResult> GetByDistrictAndCity(string district, string city)
+        [EnableQuery]
+        [ODataRoute("address/{district}/{city}")]
+        public async Task<IActionResult> GetByDistrictAndCity([FromODataUri] string district, [FromODataUri] string city)
         {
-            var result = await _contactAppService.GetAddressByDistrictAndCityAsync(district, city).ConfigureAwait(false);
-            return StatusCode(result.StatusCode, result);
+            return Ok(await _contactAppService.GetAddressByDistrictAndCityAsync(district, city).ConfigureAwait(false));
         }
 
         /// <summary>
@@ -56,16 +59,16 @@ namespace _4oito6.Contact.Api.Controllers
         /// </summary>
         /// <param name="postalCode"></param>
         /// <returns></returns>
-        [ProducesResponseType(typeof(ResponseMessage<AddressResponse>), (int)HttpStatusCode.OK)]
+        [ProducesResponseType(typeof(AddressFromPostalCodeResponse), (int)HttpStatusCode.OK)]
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         [ProducesResponseType(typeof(ResponseMessage), (int)HttpStatusCode.InternalServerError)]
         [HttpGet]
-        [Route("ws/{postalCode}")]
+        [EnableQuery]
+        [Route("address/ws/{postalCode}")]
         [AllowAnonymous]
-        public async Task<IActionResult> GetFromWebServiceByPostalCodeAsync(string postalCode)
+        public async Task<IActionResult> GetFromWebServiceByPostalCodeAsync([FromODataUri] string postalCode)
         {
-            var result = await _contactAppService.GetFromWebServiceByPostalCodeAsync(postalCode).ConfigureAwait(false);
-            return StatusCode(result.StatusCode, result);
+            return Ok(await _contactAppService.GetFromWebServiceByPostalCodeAsync(postalCode).ConfigureAwait(false));
         }
     }
 }

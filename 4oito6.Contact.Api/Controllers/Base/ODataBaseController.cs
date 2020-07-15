@@ -1,21 +1,21 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNet.OData;
 using System;
 using System.Linq;
 
 namespace _4oito6.Contact.Api.Controllers.Base
 {
-    public abstract class BaseController : Controller, IDisposable
+    public abstract class ODataBaseController : ODataController, IDisposable
     {
-        private bool _disposedValue;
         private IDisposable[] _appServices;
+        private bool _disposedValue;
 
-        public BaseController(IDisposable[] appServices)
+        public ODataBaseController(IDisposable[] appServices)
         {
             _appServices = appServices ?? throw new ArgumentNullException(nameof(appServices));
             _disposedValue = false;
         }
 
-        protected override void Dispose(bool disposing)
+        protected virtual void Dispose(bool disposing)
         {
             if (!_disposedValue)
             {
@@ -25,20 +25,18 @@ namespace _4oito6.Contact.Api.Controllers.Base
                     _appServices = null;
                 }
 
-                base.Dispose(disposing);
-
                 _disposedValue = true;
             }
         }
 
-        ~BaseController()
+        ~ODataBaseController()
         {
-            Dispose(false);
+            Dispose(disposing: false);
         }
 
-        public new void Dispose()
+        public void Dispose()
         {
-            Dispose(true);
+            Dispose(disposing: true);
             GC.SuppressFinalize(this);
         }
     }

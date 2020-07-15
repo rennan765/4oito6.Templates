@@ -1,5 +1,8 @@
 using _4oito6.AuditTrail.Middleware;
+using _4oito6.Contact.Api.Configuration;
 using _4oito6.Contact.Infra.CrossCutting.Ioc;
+using Microsoft.AspNet.OData.Extensions;
+using Microsoft.AspNet.OData.Formatter;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
@@ -9,7 +12,9 @@ using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Net.Http.Headers;
 using System;
+using System.Linq;
 
 namespace _4oito6.Contact.Api
 {
@@ -48,6 +53,18 @@ namespace _4oito6.Contact.Api
                         .Build();
 
                     config.Filters.Add(new AuthorizeFilter(policy));
+
+                    foreach (var outputFormatter in config.OutputFormatters.OfType<ODataOutputFormatter>().Where(f => f.SupportedMediaTypes.Count == 0))
+                    {
+                        outputFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("application/prs.odatatestxx-odata"));
+                    }
+
+                    foreach (var inputFormatter in config.InputFormatters.OfType<ODataOutputFormatter>().Where(f => f.SupportedMediaTypes.Count == 0))
+                    {
+                        inputFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("application/prs.odatatestxx-odata"));
+                    }
+
+                    config.EnableEndpointRouting = false;
                 });
         }
 
@@ -72,6 +89,8 @@ namespace _4oito6.Contact.Api
 
             app.UseSwagger();
             app.UseSwaggerUI(c => c.SwaggerEndpoint($"{(string.IsNullOrEmpty(c.RoutePrefix) ? "." : "..")}/swagger/v1/swagger.json", "Template Web API v1"));
+
+            app.UseOData("odata", "", EdmModelBuilder.BuildEdmModel());
         }
     }
 }
