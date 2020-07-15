@@ -1,14 +1,11 @@
-﻿using _4oito6.Contact.Domain.Services.Contracts.Mapper;
-using _4oito6.Contact.Domain.Services.Implementation;
+﻿using _4oito6.Contact.Domain.Services.Implementation;
 using _4oito6.Contact.Infra.CrossCutting.PostalCode.Contracts.Arguments;
 using _4oito6.Contact.Infra.CrossCutting.PostalCode.Contracts.Interfaces;
 using _4oito6.Contact.Infra.Data.Bus.Contracts.Interfaces;
-using _4oito6.Template.Domain.Model.Entities;
 using FluentAssertions;
 using KellermanSoftware.CompareNetObjects;
 using Moq;
 using Moq.AutoMock;
-using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
 using static _4oito6.Contact.Tests.TestCases.AddressTestCases;
@@ -29,12 +26,12 @@ namespace _4oito6.Contact.Tests.Services.Implementation
             var district = "Barreto";
             var city = "Niterói";
 
-            var addresses = GetAddresses(district, city);
-            var expectedResult = addresses.Select(a => a.ToAddressResponse()).ToList();
+            var expectedResult = GetAddresses(district, city);
 
             mocker.GetMock<IAddressBus>()
                 .Setup(b => b.GetByDistrictAndCityAsync(district, city))
-                .ReturnsAsync(addresses);
+                .ReturnsAsync(expectedResult)
+                .Verifiable();
 
             //Act
             var result = await service.GetAddressByDistrictAndCityAsync(district, city).ConfigureAwait(false);
@@ -53,12 +50,11 @@ namespace _4oito6.Contact.Tests.Services.Implementation
             var service = mocker.CreateInstance<ContactService>();
 
             var localCode = "21";
-            var phones = GetPhones(localCode);
-            var expectedResult = phones.Select(p => p.ToPhoneResponse()).ToList();
+            var expectedResult = GetPhones(localCode);
 
             mocker.GetMock<IPhoneBus>()
                 .Setup(p => p.GetByLocalCodeAsync(localCode))
-                .ReturnsAsync(phones)
+                .ReturnsAsync(expectedResult)
                 .Verifiable();
 
             //Act
@@ -69,41 +65,19 @@ namespace _4oito6.Contact.Tests.Services.Implementation
             mocker.Verify();
         }
 
-        [Fact(DisplayName = "GetUserAddressAsync_ShouldReturnNull")]
+        [Fact(DisplayName = "GetUserAddressAsync_ShouldExecuteSuccessfully")]
         [Trait("GetUserAddressAsync", "ContactService")]
-        public async Task GetUserAddressAsync_ShouldReturnNull()
+        public async Task GetUserAddressAsync_ShouldExecuteSuccessfully()
         {
             //Arrange
             var mocker = new AutoMocker();
             var service = mocker.CreateInstance<ContactService>();
 
-            mocker.GetMock<IAddressBus>()
-                .Setup(b => b.GetByUserAsync())
-                .ReturnsAsync((Address)null)
-                .Verifiable();
-
-            //Act
-            var result = await service.GetUserAddressAsync().ConfigureAwait(false);
-
-            //Assert
-            result.Should().BeNull();
-            mocker.Verify();
-        }
-
-        [Fact(DisplayName = "GetUserAddressAsync_ShouldReturnResponse")]
-        [Trait("GetUserAddressAsync", "ContactService")]
-        public async Task GetUserAddressAsync_ShouldReturnResponse()
-        {
-            //Arrange
-            var mocker = new AutoMocker();
-            var service = mocker.CreateInstance<ContactService>();
-
-            var address = GetAddresses(quantity: 1).FirstOrDefault();
-            var expectedResult = address.ToAddressResponse();
+            var expectedResult = GetAddresses(quantity: 1);
 
             mocker.GetMock<IAddressBus>()
                 .Setup(b => b.GetByUserAsync())
-                .ReturnsAsync(address)
+                .ReturnsAsync(expectedResult)
                 .Verifiable();
 
             //Act
@@ -123,12 +97,11 @@ namespace _4oito6.Contact.Tests.Services.Implementation
             var service = mocker.CreateInstance<ContactService>();
 
             var localCode = "21";
-            var phones = GetPhones(localCode);
-            var expectedResult = phones.Select(p => p.ToPhoneResponse()).ToList();
+            var expectedResult = GetPhones(localCode);
 
             mocker.GetMock<IPhoneBus>()
                 .Setup(p => p.GetByUserAsync())
-                .ReturnsAsync(phones)
+                .ReturnsAsync(expectedResult)
                 .Verifiable();
 
             //Act

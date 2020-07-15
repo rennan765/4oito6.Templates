@@ -1,14 +1,14 @@
-﻿using _4oito6.Infra.Data.Bus.Core.Contracts;
-using _4oito6.Template.Domain.Model.Entities;
-using System.Collections.Generic;
+﻿using _4oito6.Contact.Domain.Model.Views;
+using _4oito6.Infra.Data.Bus.Core.Contracts;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace _4oito6.Contact.Infra.Data.Bus.Contracts.Interfaces
 {
     public interface IPhoneBus : IBusBase
     {
-        Task<IList<Phone>> GetByUserAsync();
+        Task<IQueryable<ViewPhone>> GetByUserAsync();
 
-        Task<IList<Phone>> GetByLocalCodeAsync(string localCode);
+        Task<IQueryable<ViewPhone>> GetByLocalCodeAsync(string localCode);
     }
 }

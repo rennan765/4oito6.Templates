@@ -7,8 +7,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\4oito6.Contact.Infra.Data.Bus.Contracts\4oito6.Contact.Infra.Data.Bus.Contracts.csproj" />
+    <ProjectReference Include="..\4oito6.Contact.Infra.Data.Repositories.Contracts\4oito6.Contact.Infra.Data.Repositories.Contracts.csproj" />
     <ProjectReference Include="..\4oito6.Infra.CrossCutting.Token\4oito6.Infra.CrossCutting.Token.csproj" />
     <ProjectReference Include="..\4oito6.Infra.Data.Bus.Core.Implementation\4oito6.Infra.Data.Bus.Core.Implementation.csproj" />
-    <ProjectReference Include="..\4oito6.Template.Infra.Data.Repositories.Contracts\4oito6.Template.Infra.Data.Repositories.Contracts.csproj" />
   </ItemGroup>
   </Project>

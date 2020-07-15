@@ -1,20 +1,20 @@
-﻿using _4oito6.Contact.Domain.Services.Contracts.Arguments.Response;
+﻿using _4oito6.Contact.Domain.Model.Views;
 using _4oito6.Contact.Infra.CrossCutting.PostalCode.Contracts.Arguments;
 using _4oito6.Domain.Services.Core.Contracts.Interfaces;
-using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace _4oito6.Contact.Domain.Services.Contracts.Interfaces
 {
     public interface IContactService : IServiceBase
     {
-        Task<IList<AddressResponse>> GetAddressByDistrictAndCityAsync(string district, string city);
+        Task<IQueryable<ViewAddress>> GetAddressByDistrictAndCityAsync(string district, string city);
 
-        Task<IList<PhoneResponse>> GetPhonesByLocalCodeAsync(string localCode);
+        Task<IQueryable<ViewPhone>> GetPhonesByLocalCodeAsync(string localCode);
 
-        Task<IList<PhoneResponse>> GetUserPhonesAsync();
+        Task<IQueryable<ViewPhone>> GetUserPhonesAsync();
 
-        Task<AddressResponse> GetUserAddressAsync();
+        Task<IQueryable<ViewAddress>> GetUserAddressAsync();
 
         Task<AddressFromPostalCodeResponse> GetFromWebServiceByPostalCodeAsync(string postalCode);
     }
