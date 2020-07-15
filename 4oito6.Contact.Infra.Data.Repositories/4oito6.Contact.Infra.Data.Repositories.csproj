@@ -6,8 +6,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\4oito6.Contact.Domain\4oito6.Contact.Domain.csproj" />
     <ProjectReference Include="..\4oito6.Contact.Infra.Data.Context\4oito6.Contact.Infra.Data.Context.csproj" />
+    <ProjectReference Include="..\4oito6.Contact.Infra.Data.Repositories.Contracts\4oito6.Contact.Infra.Data.Repositories.Contracts.csproj" />
   </ItemGroup>
 
 </Project>

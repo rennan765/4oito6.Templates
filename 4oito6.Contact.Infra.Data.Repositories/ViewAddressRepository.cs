@@ -1,7 +1,7 @@
-﻿using _4oito6.Contact.Domain.Interfaces.Repositories;
-using _4oito6.Contact.Domain.Views;
+﻿using _4oito6.Contact.Domain.Model.Views;
 using _4oito6.Contact.Infra.Data.Context;
 using _4oito6.Contact.Infra.Data.Context.Command;
+using _4oito6.Contact.Infra.Data.Repositories.Contracts.Interfaces.Repositories;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;

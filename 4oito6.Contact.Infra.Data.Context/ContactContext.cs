@@ -1,4 +1,4 @@
-﻿using _4oito6.Contact.Domain.Views;
+﻿using _4oito6.Contact.Domain.Model.Views;
 using _4oito6.Contact.Infra.Data.Context.Mapper;
 using _4oito6.Template.Infra.Data.Context;
 using Microsoft.EntityFrameworkCore;
