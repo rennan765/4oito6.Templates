@@ -23,7 +23,7 @@ namespace _4oito6.Contact.Infra.Data.Repositories
         public Task<IQueryable<ViewAddress>> GetAsync(Expression<Func<ViewAddress, bool>> where)
             => Task.FromResult
             (
-                _context.ViewAddress.FromSqlRaw(SqlCommandSource.Phone).AsNoTracking().Where(where)
+                _context.ViewAddress.FromSqlRaw(SqlCommandSource.Address).AsNoTracking().Where(where)
             );
 
         protected virtual void Dispose(bool disposing)

@@ -10,6 +10,7 @@ namespace _4oito6.Contact.Infra.Data.Context.Mapper.Configuration
         {
             builder.HasNoKey();
 
+            builder.Property(e => e.Id).HasColumnName("id");
             builder.Property(e => e.District).HasColumnName("bairro");
             builder.Property(e => e.PostalCode).HasColumnName("cep");
 
