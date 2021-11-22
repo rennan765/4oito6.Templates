@@ -1,6 +1,7 @@
 name: Template Deploy on AWS Beanstalk
 
 on:
+  workflow_dispatch:
   push:
     branches: [ master ]
 
